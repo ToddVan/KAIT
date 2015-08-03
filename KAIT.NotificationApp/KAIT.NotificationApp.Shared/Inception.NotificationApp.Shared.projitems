@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="SharedProjectFile_SccProperties">
+    <SharedProjectFile_ProjectGuid>{8c24cd2f-c922-4f5e-8730-4ce95022d5cd}</SharedProjectFile_ProjectGuid>
+    <SharedProjectFile_SccProjectName>
+    </SharedProjectFile_SccProjectName>
+    <SharedProjectFile_SccAuxPath>
+    </SharedProjectFile_SccAuxPath>
+    <SharedProjectFile_SccLocalPath>
+    </SharedProjectFile_SccLocalPath>
+    <SharedProjectFile_SccProvider>
+    </SharedProjectFile_SccProvider>
+  </PropertyGroup>
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>431eac29-abe0-4f71-89a7-c9d993c806bd</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Inception.NotificationApp</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="$(MSBuildThisFileDirectory)App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)PushNotificationHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PushNotificationMessage.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Assets\inception.png" />
+  </ItemGroup>
+</Project>
