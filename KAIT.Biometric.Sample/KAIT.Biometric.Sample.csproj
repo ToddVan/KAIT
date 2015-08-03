@@ -59,10 +59,6 @@
     <Reference Include="Microsoft.Kinect.Face, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=AMD64">
       <HintPath>..\packages\Microsoft.Kinect.Face.x64.2.0.1410.19000\lib\net45\Microsoft.Kinect.Face.dll</HintPath>
     </Reference>
-    <Reference Include="NEC.NeoFace.Interop, Version=1.0.5383.23520, Culture=neutral, processorArchitecture=AMD64">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Core\NEC.Biometrics\Dependencies\NEC.NeoFace.Interop.dll</HintPath>
-    </Reference>
     <Reference Include="NLog">
       <HintPath>D:\FAWrapper\bin\Debug\NLog.dll</HintPath>
     </Reference>
@@ -332,15 +328,15 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core\Inception.Biometric.Services\KAIT.Biometric.Services.csproj">
+    <ProjectReference Include="..\Core\KAIT.Biometric.Services\KAIT.Biometric.Services.csproj">
       <Project>{021a6988-292d-45a7-95ef-e50edbdbcd34}</Project>
       <Name>KAIT.Biometric.Services</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Core\Inception.Common\KAIT.Common.csproj">
+    <ProjectReference Include="..\Core\KAIT.Common\KAIT.Common.csproj">
       <Project>{2347b7df-3bd4-4ac0-b2fa-8a0052b1f15e}</Project>
       <Name>KAIT.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Core\Inception.Kinect.Service\KAIT.Kinect.Service.csproj">
+    <ProjectReference Include="..\Core\KAIT.Kinect.Service\KAIT.Kinect.Service.csproj">
       <Project>{efcf0dbb-faaa-4405-a67b-16573fb5e20c}</Project>
       <Name>KAIT.Kinect.Service</Name>
     </ProjectReference>
