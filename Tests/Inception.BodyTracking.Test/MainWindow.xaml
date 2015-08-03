@@ -1,0 +1,149 @@
+﻿<Window x:Class="KAIT.BodyTracking.Test.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="KAIT Body Tracking" 
+        Height="1000" Width="1400" 
+        Loaded="MainWindow_Loaded"
+        Closing="MainWindow_Closing">
+    <Window.Resources>
+        <SolidColorBrush x:Key="MediumGreyBrush" Color="#ff6e6e6e" />
+        <SolidColorBrush x:Key="KinectPurpleBrush" Color="#ff52318f" />
+        <SolidColorBrush x:Key="KinectBlueBrush" Color="#ff00BCF2" />
+    </Window.Resources>
+    <Grid Margin="10 0 10 0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Image Grid.Row="0" Source="Images\Logo.png" HorizontalAlignment="Left" Stretch="Fill" Height="32" Width="81" Margin="0 10 0 5" />
+
+        <StackPanel Grid.Row="0" Margin="0 0 0 160" Orientation="Horizontal" HorizontalAlignment="Right" >
+            <TextBlock Grid.Row="0" Margin="0 0 0 0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="14">Active Body Id:</TextBlock>
+            <TextBox Text="{Binding ActiveBodyId, Mode=OneWay}" Margin="0 0 0 0" Width="150"  HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="14"></TextBox>            
+        </StackPanel>
+        <StackPanel Grid.Row="0" Margin="0 0 0 140" Orientation="Horizontal" HorizontalAlignment="Right" >
+            <TextBlock Margin="0 0 0 0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="14">Correlation Id:</TextBlock>
+            <TextBox Text="{Binding ActiveBodyCorrelationId, Mode=OneWay}" Margin="0 0 0 0" Width="150"  HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="14"></TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="0" Margin="0 0 0 120" Orientation="Horizontal" HorizontalAlignment="Right" >
+            <TextBlock Margin="0 0 0 0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="14">Missing Body Count:</TextBlock>
+            <TextBox Text="{Binding MissingBodyCount, Mode=OneWay}" Margin="0 0 0 0" Width="150"  HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="14"></TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="0" Margin="0 0 0 100" Orientation="Horizontal" HorizontalAlignment="Right" >
+            <TextBlock Margin="0 0 0 0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="14">Snatched Body Count:</TextBlock>
+            <TextBox Text="{Binding HijackedBodyCount, Mode=OneWay}" Margin="0 0 0 0" Width="150"  HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="14"></TextBox>
+        </StackPanel>
+
+        <StackPanel Grid.Row="0" Margin="0 0 0 80" Orientation="Horizontal" HorizontalAlignment="Right" >
+            <TextBlock Margin="0 0 0 0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="14">Missing Body Id:</TextBlock>
+            <TextBox Text="{Binding MissingBodyId, Mode=OneWay}" Margin="0 0 0 0" Width="150"  HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="14"></TextBox>
+        </StackPanel>
+
+        <StackPanel Grid.Row="0" Margin="0 0 0 60" Orientation="Horizontal" HorizontalAlignment="Right" >
+            <TextBlock Margin="0 0 0 0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="14">Snatched Body Id:</TextBlock>
+            <TextBox Text="{Binding HijackedBodyId, Mode=OneWay}" Margin="0 0 0 0" Width="150"  HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="14"></TextBox>
+        </StackPanel>
+
+        <StackPanel Grid.Row="0" Margin="0 0 0 40" Orientation="Horizontal" HorizontalAlignment="Right" >
+            <TextBlock Margin="0 0 0 0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="14">Tracked Kinect Body  Count:</TextBlock>
+            <TextBox Text="{Binding TrackedKinectBodyCount, Mode=OneWay}" Margin="0 0 0 0" Width="150"  HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="14"></TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="0" Margin="0 0 0 20" Orientation="Horizontal" HorizontalAlignment="Right" >
+            <TextBlock Margin="0 0 0 0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="14">Active Body Tracked Joints:</TextBlock>
+            <TextBox Text="{Binding ActiveBodyTrackedJointsCount, Mode=OneWay}" Margin="0 0 0 0" Width="150"  HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="14"></TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="0" Margin="0 0 0 0" Orientation="Horizontal" HorizontalAlignment="Right" >
+            <Button Content="Load Configuration" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="Button_LoadConfigurationClick" /> <!--Command="{Binding LoadConfiguration}" />-->
+            <Button Content="Save Configuration" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="Button_SaveConfigurationClick" /> <!--Command="{Binding SaveCalibration}"  />-->
+        </StackPanel>
+
+        <Image Grid.Row="0" Source="Images\Status.png" Stretch="None" HorizontalAlignment="Center" Margin="0 0 0 5" />
+
+        <Viewbox Grid.Row="1" HorizontalAlignment="Center">
+            <Image Source="{Binding ImageSource}" Stretch="UniformToFill" />
+        </Viewbox>
+
+        <StackPanel Grid.Row="2" Orientation="Vertical" HorizontalAlignment="Left" >
+
+            <StackPanel Orientation="Horizontal" >
+                <TextBlock Width="180" Margin="0 0 -1 0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="14">Body Joint To Track:</TextBlock>
+                <ComboBox ItemsSource="{Binding BodyJointTypes}" SelectedItem="{Binding BodyPositionJoint}" Width="80"></ComboBox>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" >
+                <TextBlock ToolTip="If a body was last tracked within the area defined by these setting and then disappears, the body will be considered a Missing Body" Width="180" Margin="0 0 -1 0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="14">Missing Body Settings:</TextBlock>            
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" >
+                <TextBlock Width="210" Margin="0 0 -1 0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="14">Left Edge Buffer:</TextBlock>
+                <TextBox Text="{Binding MissingBodyLeftEdgeBoundary, Mode=TwoWay}" Width="50"  Margin="0 0 -1 0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="14"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" >
+                <TextBlock Width="210" Margin="0 0 -1 0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="14">Right Edge Buffer:</TextBlock>
+                <TextBox Text="{Binding MissingBodyRightEdgeBoundary, Mode=TwoWay}" Width="50"  Margin="0 0 -1 0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="14"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" >
+                <TextBlock Width="210" Margin="0 0 -1 0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="14">Rear Depth Buffer:</TextBlock>
+                <TextBox Text="{Binding MissingBodyBackDepthBoundary, Mode=TwoWay}" Width="50"  Margin="0 0 -1 0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="14"></TextBox>
+            </StackPanel>
+
+            <TextBlock ToolTip="If a body position jumps greater than the Jump Tolerance setting, the body is a candidate as a hijacked body" Width="180" Margin="0 0 -1 0" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="14">Hijacked Body Settings:</TextBlock>
+            <StackPanel Orientation="Horizontal" >
+                <TextBlock ToolTip="if a body position jumps this amount or more the body is a candidate for a hijacked body" Width="210" Margin="0 0 -1 0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="14">Hijacked Body Jump Tolerance:</TextBlock>
+                <TextBox Text="{Binding HijackedBodyJumpTolerance, Mode=TwoWay}" Width="50"  Margin="0 0 -1 0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="14"></TextBox>                
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" >
+                <TextBlock ToolTip="if a Players movements jump this amount or more, the player is considered a High Velocity Player" Width="210" Margin="0 0 -1 0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="14">High Velocity Player Threshold:</TextBlock>
+                <TextBox Text="{Binding HighVelocityPlayerJumpThreshold, Mode=TwoWay}" Width="50"  Margin="0 0 -1 0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="14"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" >
+                <TextBlock ToolTip="if a Player is a High Velocity player, the hijacked body jump tolerance is multiplied by this factor" Width="210" Margin="0 0 -1 0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="14">High Velocity Player Multiplier:</TextBlock>
+                <TextBox Text="{Binding HighVelocityPlayerJumpMultiplier, Mode=TwoWay}" Width="50"  Margin="0 0 -1 0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="14"></TextBox>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Orientation="Vertical" HorizontalAlignment="Right" >
+            <StackPanel Orientation="Horizontal" >
+                <TextBlock ToolTip="If a new body appears within the area defined by these setting, the new body will be considered a candidate for any Missing or Hijacked Bodies" Width="180" Margin="0 0 -1 0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="14">New Body Settings:</TextBlock>
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal" >
+                <TextBlock Width="210" Margin="0 0 -1 0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="14">Left Edge Buffer:</TextBlock>
+                <TextBox Text="{Binding NewBodyLeftEdgeBoundary, Mode=TwoWay}" Width="50"  Margin="0 0 -1 0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="14"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" >
+                <TextBlock Width="210" Margin="0 0 -1 0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="14">Right Edge Buffer:</TextBlock>
+                <TextBox Text="{Binding NewBodyRightEdgeBoundary, Mode=TwoWay}" Width="50"  Margin="0 0 -1 0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="14"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" >
+                <TextBlock Width="210" Margin="0 0 -1 0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="14">Rear Depth Buffer:</TextBlock>
+                <TextBox Text="{Binding NewBodyBackDepthBoundary, Mode=TwoWay}" Width="50"  Margin="0 0 -1 0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="14"></TextBox>
+            </StackPanel>
+
+            <TextBlock ToolTip="If a player is closer to the Kiosk than the Active Player the player is a candidate to become the active player based on these settings" Width="180" Margin="0 0 -1 0" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="14">Select Active Player Settings:</TextBlock>
+            <StackPanel Orientation="Horizontal" >
+                <TextBlock ToolTip="If a bodies Z Position is closer to the kiosk than the Active player by this amount or more then this body will become the active player" Width="210" Margin="0 0 -1 0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="14">Switch Active Body Variance:</TextBlock>
+                <TextBox Text="{Binding SwitchActiveBodyZPositionVariance, Mode=TwoWay}" Width="50"  Margin="0 0 -1 0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="14"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" >
+                <TextBlock ToolTip="Defines the area - left edge in which a player will be tracked as the Active Player" Width="210" Margin="0 0 -1 0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="14">LeftBodySelectionTrackLimit:</TextBlock>
+                <TextBox Text="{Binding LeftBodySelectionTrackLimit, Mode=TwoWay}" Width="50"  Margin="0 0 -1 0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="14"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" >
+                <TextBlock ToolTip="Defines the area - right edge in which a player will be tracked as the Active Player" Width="210" Margin="0 0 -1 0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="14">RightBodySelectionTrackLimit:</TextBlock>
+                <TextBox Text="{Binding RightBodySelectionTrackLimit, Mode=TwoWay}" Width="50"  Margin="0 0 -1 0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="14"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" >
+                <TextBlock ToolTip="To ensure we aren't tracking a Ghost as the Active Player, we'll require this amount of joints (Head, Neck, ShoulderLeft-Right and WristLeft-Right) to be tracked and not inferred" Width="210" Margin="0 0 -1 0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="14">Required Tracked Joint Cnt(of8):</TextBlock>
+                <TextBox Text="{Binding RequiredJointsTrackedCount, Mode=TwoWay}" Width="50"  Margin="0 0 -1 0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="14"></TextBox>
+            </StackPanel>
+        </StackPanel>
+
+        <StatusBar Grid.Row="3" HorizontalAlignment="Stretch" Name="statusBar" VerticalAlignment="Bottom" Background="White"  Foreground="{StaticResource MediumGreyBrush}">
+            <StatusBarItem Content="{Binding StatusText}" />
+        </StatusBar>
+    </Grid>
+</Window>

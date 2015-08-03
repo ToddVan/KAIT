@@ -1,0 +1,26 @@
+﻿{
+    "RootDirectory": "c:\\Kiosk",
+    "Categories": {
+        "female": {
+            "Name": "female",
+            "Path": "c:\\Kiosk\\female",
+            "Groups": {
+					"20": { "Metadata": { "Age": 20 } },
+                    "30": { "Metadata": { "Age": 30 } },
+                    "40": { "Metadata": { "Age": 40 } },
+                    "50": { "Metadata": { "Age": 50 } }
+                }
+        },
+        "male": {
+            "Name": "male",
+            "Path": "c:\\Kiosk\\male",
+            "Groups": {
+                "20": { "Metadata": { "Age": 20 } },
+                "30": { "Metadata": { "Age": 30 } },
+                "40": { "Metadata": { "Age": 40 } },
+                "50": { "Metadata": { "Age": 50 } }
+            }
+        }
+    }
+}
+

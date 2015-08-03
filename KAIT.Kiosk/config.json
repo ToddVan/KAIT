@@ -1,0 +1,28 @@
+{
+  "RootContentDirectory": "C:\\Kiosk",
+  "ShowJpgFiles": true,
+  "ShowPngFiles": true,
+  "ShowGifFiles": true,
+  "ShowWmvFiles": true,
+  "ShowMp4Files": true,
+  "ZoneDefinitions": [
+    {
+      "Name": "PassiveAttract",
+      "MaximumRange": 3.0
+    },
+    {
+      "Name": "ActiveAttract",
+      "MaximumRange": 2.5
+    },
+    {
+      "Name": "PassiveEngage",
+      "MaximumRange": 1.5
+    },
+    {
+      "Name": "ActiveEngage",
+      "MaximumRange": 0.1
+    }
+  ],
+  "EnableTouchScreen": false,
+  "EnableDiagnostics": false
+}

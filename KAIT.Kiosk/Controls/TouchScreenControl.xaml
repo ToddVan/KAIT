@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="KAIT.Kiosk.Controls.TouchScreenControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+			 xmlns:Helpers="clr-namespace:KAIT.Kiosk.ViewModel"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300" DataContext="{Binding TouchScreenControl, Mode=OneWay, Source={StaticResource Locator}}">
+    
+    <UserControl.Resources>
+    </UserControl.Resources>
+
+
+    <Grid>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Text="Touch Screen Content Goes Here!!" FontSize="24" Foreground="Blue"/>
+    </Grid>
+</UserControl>

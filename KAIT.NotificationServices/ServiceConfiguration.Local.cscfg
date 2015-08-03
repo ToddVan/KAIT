@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ServiceConfiguration serviceName="KAIT.NotificationServices" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="4" osVersion="*" schemaVersion="2014-06.2.4">
+  <Role name="Inception.PushNotificationService">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.Enabled" value="true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountUsername" value="administrator" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountEncryptedPassword" value="MIIBnQYJKoZIhvcNAQcDoIIBjjCCAYoCAQAxggFOMIIBSgIBADAyMB4xHDAaBgNVBAMME1dpbmRvd3MgQXp1cmUgVG9vbHMCEH38sxBxTy20Svk1OHN6yYgwDQYJKoZIhvcNAQEBBQAEggEAOZ0mGFDlNXtcitowms/S4E+zu22dyIu+OSBuMDRz2OnGkegRF86rNpPmUBXgxDf9i0UlMw6PiD7XGAG4z+Xp8lnYyozDvEg/qlUByTLxhkvfZTO6lBHU1dMgh0KCEGD/yH9rE1/eXGlUTTG7qSVYdsZGtUDyMYVDkH6XzCSjJFQsdJsdicTj5KMN+dX4ArW1IIqD6Tu2NIwkXI3XAZBVK/RImDJ5S7Gjxb3n/hqBuHLH03b2Cmp6+kW+rnAeQnQGpoIFSBUqpEzmUKbClkJTjNx0e5yoUJo6Gn5zuIGfs+35T48DwWBelM5UoPTAJswJAKFCNwyk6L5t1q9eZy1KgTAzBgkqhkiG9w0BBwEwFAYIKoZIhvcNAwcECPezYtCmj6UKgBBUFfMzVqFKVO83b/rOfMkU" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountExpiration" value="2016-04-27T23:59:59.0000000-05:00" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteForwarder.Enabled" value="true" />
+    </ConfigurationSettings>
+    <Certificates>
+      <Certificate name="Microsoft.WindowsAzure.Plugins.RemoteAccess.PasswordEncryption" thumbprint="E60E3FC92D5993B82932DB145A3406FB12580729" thumbprintAlgorithm="sha1" />
+    </Certificates>
+  </Role>
+</ServiceConfiguration>

@@ -1,0 +1,21 @@
+<FaceAnalysis>
+  <Licenses>
+    <fa_est_global>S54UbGG4Gm9C79Qn9j5Gt5KG</fa_est_global>
+  </Licenses>
+  <DefaultParams>
+    <KnownFacesFolder>photos</KnownFacesFolder>
+    <!-- relative to the executable -->
+    <EyeDistanceMin>15</EyeDistanceMin>
+    <EyeDistanceMax>200</EyeDistanceMax>
+    <FaceReliability>.3</FaceReliability>
+    <MaxFaces>10</MaxFaces>
+    <EyesRoll>15</EyesRoll>
+    <MatchThreshold>.5</MatchThreshold>
+  </DefaultParams>
+  <Test mode="false">
+    <Gender>M</Gender>
+    <Age>33</Age>
+    <Match>True</Match>
+    <Name>TestName</Name>
+  </Test>
+</FaceAnalysis>

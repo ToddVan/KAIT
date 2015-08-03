@@ -1,0 +1,194 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:KAIT.Kiosk.Controls"                 
+        xmlns:Helpers="clr-namespace:KAIT.Kiosk.ViewModel"        
+        xmlns:KAIT.Kiosk="clr-namespace:KAIT.Kiosk"
+        xmlns:Converters="clr-namespace:KAIT.Kiosk.Converters"
+        x:Class="KAIT.Kiosk.MainWindow"
+        x:Name="KAITKioskMainWindow"
+        Title="MainWindow" Height="350" Width="525" 
+        WindowStartupLocation="CenterScreen" 
+        WindowStyle="None" 
+        ResizeMode="NoResize" 
+        WindowState="Maximized"
+        DataContext="{Binding Main, Mode=OneWay, Source={StaticResource Locator}}"        
+    >
+
+    <Window.Resources>
+        <Converters:BooleanVisibilityConverter x:Key="BooleanVisibilityConverter"/>
+    </Window.Resources>
+
+    <Grid x:Name="mainGrid"  Helpers:VisualStateHelper.VisualState="{Binding KioskState}" >
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="KioskStates">
+                <VisualState x:Name="Tracking">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="mediaContent">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="touchScreen">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Collapsed}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="Touch">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="mediaContent">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Collapsed}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="touchScreen">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="NoTrack">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="mediaContent">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+            
+            <VisualStateGroup x:Name="SensorStates">
+                <VisualState x:Name="NoSensor">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="NoSensorGrid">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="SensorReady"/>
+            </VisualStateGroup>
+            
+            <VisualStateGroup x:Name="SpecialStates">
+                <VisualState x:Name="Special">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="photo">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="CloseSpecial"/>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="10"/>
+        </Grid.RowDefinitions>
+        <Controls:MediaContent x:Name="mediaContent" Visibility="Hidden" Grid.Row="1" Grid.RowSpan="2"/>
+        <Controls:TouchScreenControl x:Name="touchScreen" Visibility="Hidden" Grid.Row="1" Grid.RowSpan="2"/>
+
+        <StackPanel Orientation="Horizontal" Visibility="{Binding EnableDiagnostics, Converter={StaticResource BooleanVisibilityConverter}}">
+            <Button x:Name="button" Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Click="button_Click"/>
+            <Button x:Name="button_Copy" Content="Demographic" HorizontalAlignment="Left" VerticalAlignment="Top" Width="95" Click="button_Copy_Click"/>
+            <Button Grid.Row="0" Content="Object Detection" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0.5,100,0.5" Command="{Binding OpenObjectDetection}" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="0" x:Name="ApplicationInformation" Orientation="Vertical" Visibility="{Binding EnableDiagnostics, Converter={StaticResource BooleanVisibilityConverter}}">
+            <TextBlock x:Name="ApplicationState" Text="Application State" HorizontalAlignment="Right" TextWrapping="Wrap" VerticalAlignment="Center" Visibility="Visible"  Margin="0,0.5,150,0.5"/>
+            <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right"  Margin="0,0.5,0,0.5">
+                <TextBlock Text="Object Detection Service State" HorizontalAlignment="Right" TextWrapping="Wrap" VerticalAlignment="Center" Visibility="Visible" Margin="0,0.5,40,0.5"/>
+                <TextBox x:Name="ObjectDetectionServiceState" Text="{Binding ObjectDetectionServiceState, Mode=OneWay}" HorizontalAlignment="Right" TextWrapping="Wrap" VerticalAlignment="Center" Visibility="Visible" Margin="0,0.5,5,0.5"/>                
+            </StackPanel>
+            <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right"  Margin="0,0.5,0,0.5">
+                <TextBlock Text="Object Detection Count" HorizontalAlignment="Right" TextWrapping="Wrap" VerticalAlignment="Center" Visibility="Visible" Margin="0,0.5,95,0.5"/>
+                <TextBox x:Name="ObjectDetectionCount" Text="{Binding ObjectCount, Mode=OneWay}" HorizontalAlignment="Right" TextWrapping="Wrap" VerticalAlignment="Center" Visibility="Visible" Margin="0,0.5,5,0.5"/>
+            </StackPanel>
+        </StackPanel>
+
+        <Grid x:Name="NoSensorGrid" Grid.RowSpan="3" Background="Gray" Visibility="Collapsed">
+            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="No Sensor Present" VerticalAlignment="Center" FontSize="29.333"/>
+        </Grid>
+        <KAIT.Kiosk:Photo x:Name="photo" Grid.Row="1" Visibility="Collapsed" DataContext="{Binding Photo, Mode=OneWay, Source={StaticResource Locator}}" Grid.RowSpan="2"/>
+        <Grid x:Name="CylonBar" Grid.RowSpan="2" Grid.Row="2" Background="#FF363636">
+            <Ellipse x:Name="ActivePlayer" HorizontalAlignment="Left" Height="10" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.5,0.5" >
+                <Ellipse.RenderTransform>
+                    <TransformGroup>
+                  
+                        <TranslateTransform X="{Binding BodyTrack[0]}"/>
+                    </TransformGroup>
+                </Ellipse.RenderTransform>
+                <Ellipse.Fill>
+                    <RadialGradientBrush>
+                        <GradientStop Color="#FF363636" Offset="1"/>
+                        <GradientStop Color="#FF00FD2E"/>
+                    </RadialGradientBrush>
+                </Ellipse.Fill>
+            </Ellipse>
+            <Ellipse x:Name="Track1" HorizontalAlignment="Left" Height="10" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.5,0.5" >
+            	<Ellipse.RenderTransform>
+            		<TransformGroup>
+                  
+            			<TranslateTransform X="{Binding BodyTrack[1]}"/>
+            		</TransformGroup>
+            	</Ellipse.RenderTransform>
+            	<Ellipse.Fill>
+            		<RadialGradientBrush>
+            			<GradientStop Color="#FF363636" Offset="1"/>
+            			<GradientStop Color="White"/>
+            		</RadialGradientBrush>
+            	</Ellipse.Fill>
+            </Ellipse>
+            <Ellipse x:Name="Track2" HorizontalAlignment="Left" Height="10" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.5,0.5" >
+            	<Ellipse.RenderTransform>
+            		<TransformGroup>
+                  
+            			<TranslateTransform X="{Binding BodyTrack[2]}"/>
+            		</TransformGroup>
+            	</Ellipse.RenderTransform>
+            	<Ellipse.Fill>
+            		<RadialGradientBrush>
+            			<GradientStop Color="#FF363636" Offset="1"/>
+            			<GradientStop Color="White"/>
+            		</RadialGradientBrush>
+            	</Ellipse.Fill>
+            </Ellipse>
+            <Ellipse x:Name="Track3" HorizontalAlignment="Left" Height="10" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.5,0.5" >
+            	<Ellipse.RenderTransform>
+            		<TransformGroup>
+                  
+            			<TranslateTransform X="{Binding BodyTrack[3]}"/>
+            		</TransformGroup>
+            	</Ellipse.RenderTransform>
+            	<Ellipse.Fill>
+            		<RadialGradientBrush>
+            			<GradientStop Color="#FF363636" Offset="1"/>
+            			<GradientStop Color="White"/>
+            		</RadialGradientBrush>
+            	</Ellipse.Fill>
+            </Ellipse>
+            <Ellipse x:Name="Track4" HorizontalAlignment="Left" Height="10" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.5,0.5" >
+            	<Ellipse.RenderTransform>
+            		<TransformGroup>
+                  
+            			<TranslateTransform X="{Binding BodyTrack[4]}"/>
+            		</TransformGroup>
+            	</Ellipse.RenderTransform>
+            	<Ellipse.Fill>
+            		<RadialGradientBrush>
+            			<GradientStop Color="#FF363636" Offset="1"/>
+            			<GradientStop Color="White"/>
+            		</RadialGradientBrush>
+            	</Ellipse.Fill>
+            </Ellipse>
+            <Ellipse x:Name="Track5" HorizontalAlignment="Left" Height="10" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.5,0.5" >
+            	<Ellipse.RenderTransform>
+            		<TransformGroup>
+                  
+            			<TranslateTransform X="{Binding BodyTrack[5]}"/>
+            		</TransformGroup>
+            	</Ellipse.RenderTransform>
+            	<Ellipse.Fill>
+            		<RadialGradientBrush>
+            			<GradientStop Color="#FF363636" Offset="1"/>
+            			<GradientStop Color="White"/>
+            		</RadialGradientBrush>
+            	</Ellipse.Fill>
+            </Ellipse>
+        </Grid>
+
+    </Grid>
+</Window>

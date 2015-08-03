@@ -1,0 +1,192 @@
+﻿<Window x:Class="KAIT.ObjectDetection.UI.Calibration"
+        x:Name="CalibrationConfigurationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:Converters="clr-namespace:KAIT.ObjectDetection.Converters"
+        mc:Ignorable="d" 
+        d:DesignHeight="1080"    
+        d:DesignWidth="1920"
+        WindowStartupLocation="CenterScreen"         
+        WindowState="Maximized"
+        Title="Calibration" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+        DataContext="{Binding Source={StaticResource Locator}, Path=Configuration}" >
+
+    <Window.Resources>
+
+        <!--<Converters:BooleanVisibilityConverter x:Key="BooleanVisibilityConverter"/>-->
+        <Converters:BooleanInverter x:Key="boolInverter"/>
+        <!--<local:BooleanInverter x:Key="boolInverter"/>-->
+        
+
+        <SolidColorBrush x:Key="MediumGreyBrush" Color="#ff6e6e6e" />
+        <SolidColorBrush x:Key="KinectPurpleBrush" Color="#ff52318f" />
+        <SolidColorBrush x:Key="KinectBlueBrush" Color="#ff00BCF2" />
+        <Style TargetType="{x:Type Image}">
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+        </Style>
+        <Style TargetType="{x:Type Button}" x:Key="ScreenshotButton" >
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <StackPanel Orientation="Horizontal" Background="Transparent">
+                                <TextBlock x:Name="ScreenshotText" Text="{TemplateBinding Content}" TextAlignment="Left"  VerticalAlignment="Center" Foreground="{StaticResource KinectPurpleBrush}" FontSize="15" />
+                                <Grid Margin="9,0,0,0">
+                                    <Image x:Name="ScreenshotNormal" Source="Images\ScreenshotNormal.png" Stretch="None" HorizontalAlignment="Center" />
+                                    <Image x:Name="ScreenshotHover" Source="Images\ScreenshotHover.png" Stretch="None" HorizontalAlignment="Center" Visibility="Collapsed" />
+                                </Grid>
+                            </StackPanel>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Visibility" Value="Collapsed" TargetName="ScreenshotNormal" />
+                                <Setter Property="Visibility" Value="Visible" TargetName="ScreenshotHover" />
+                                <Setter Property="Foreground" Value="{StaticResource KinectBlueBrush}" TargetName="ScreenshotText" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Border Margin="0" Background="#FFB0B0B0" BorderBrush="#FF7C7C7C">
+
+        <Viewbox HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Column="2" Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">
+                    <TextBox x:Name="ObjectDetectionServiceState" Text="{Binding ObjectDetectionServiceState, Mode=OneWay}" HorizontalAlignment="Right" TextWrapping="Wrap" VerticalAlignment="Center" Visibility="Visible" Background="#FFB0B0B0" Foreground="{StaticResource MediumGreyBrush}" Height="24" Width="60" Margin="0,0,40,0"/>
+                    <TextBox x:Name="IsCalibratingState" Text="{Binding IsCalibrating, Mode=OneWay}" HorizontalAlignment="Right" TextWrapping="Wrap" VerticalAlignment="Center" Visibility="Visible" Background="#FFB0B0B0" Foreground="{StaticResource MediumGreyBrush}" Height="24" Width="40"/>
+                </StackPanel>
+                <StackPanel Grid.Column="2" Margin="0,0,40,0" Orientation="Horizontal" HorizontalAlignment="Right">
+
+                    <Button Style="{StaticResource ScreenshotButton}" Content="Stop Service" Height="32" HorizontalAlignment="Right" VerticalAlignment="Center" Command="{Binding StopService}" Margin="0,0,20,0" />
+                    <Button Style="{StaticResource ScreenshotButton}" Content="Start Service" Height="32" HorizontalAlignment="Right" VerticalAlignment="Center" Command="{Binding StartService}" Margin="0,0,20,0" />
+                    <Button Style="{StaticResource ScreenshotButton}" Content="Take Screenshot" Height="32" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,20,0" />
+                    <Button Style="{StaticResource ScreenshotButton}" Content="Close" Height="32" HorizontalAlignment="Right" VerticalAlignment="Center" Command="{Binding CloseCommand}" CommandParameter="{Binding ElementName=CalibrationConfigurationWindow}" Margin="0" />
+                </StackPanel>
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" Margin="0,0,40,20">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center">
+                    <TextBlock HorizontalAlignment="Right"  TextWrapping="Wrap" Text="Objects Detected:" VerticalAlignment="Top"   Foreground="#FF20DC20" FontSize="24" FontWeight="Bold" Margin="0,0,10,0"/>
+                    <TextBlock x:Name="objectsDetectedCnt"  HorizontalAlignment="Left"  TextWrapping="Wrap" VerticalAlignment="Top"  Text="{Binding ObjectCount}"  Foreground="#FF20DC20" FontSize="24" Background="{x:Null}" FontWeight="Bold"/>
+                </StackPanel>
+                    <Image Source="{Binding DepthBitmap}" Grid.Row="0" VerticalAlignment="Top" Width="920px" Height="940px"/>
+
+            </Grid>
+            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" Margin="20,0,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+
+                <Image Source="{Binding TopViewDepthBitmap}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="512px" Height="424px" />
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,25,0">
+                        <Button Style="{StaticResource ScreenshotButton}" Content="Load Calibration" Height="32" HorizontalAlignment="Right" VerticalAlignment="Center" Command="{Binding LoadCalibration}" Margin="0,0,20,0" />
+                        <Button Style="{StaticResource ScreenshotButton}" Content="Save Calibration" HorizontalAlignment="Right" VerticalAlignment="Center" Command="{Binding SaveCalibration}" Margin="0" />
+                    </StackPanel>
+                    <ListBox Height="82" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" Grid.Row="3" ItemsSource="{Binding Interactions}" FontSize="18" VerticalAlignment="Top"/>
+                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="115*"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Orientation="Horizontal" Grid.ColumnSpan="3" Margin="0,0,0,20">
+                            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Depth Threshhold" VerticalAlignment="Top" Width="100" Margin="0,0,20,0"/>
+                            <Slider x:Name="DepthSlider" IsEnabled="{Binding ElementName=chkZeroDepth, Path=IsChecked, Converter={StaticResource ResourceKey=boolInverter}}" HorizontalAlignment="Left" VerticalAlignment="Top" Maximum="4000" LargeChange="100" SmallChange="10" Value="{Binding ObjectDetectionDepthThreshold}" Height="19" Width="300" Margin="0,0,20,0"/>
+                            <TextBox HorizontalAlignment="Left" IsEnabled="{Binding ElementName=chkZeroDepth, Path=IsChecked, Converter={StaticResource ResourceKey=boolInverter}}" Height="22" TextWrapping="Wrap" VerticalAlignment="Top" Width="37" Text="{Binding Value, ElementName=DepthSlider}" Margin="0,0,20,0"/>
+                        </StackPanel>
+                        <StackPanel VerticalAlignment="Top" Grid.Row="1" Orientation="Horizontal" Grid.ColumnSpan="3" Margin="0,0,0,20">
+                            <TextBlock HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="Sample Row" VerticalAlignment="Top" Width="100" Margin="0,0,20,0"/>
+                            <Slider x:Name="RowSlider" HorizontalAlignment="Left" VerticalAlignment="Top" Maximum="424" LargeChange="5" SmallChange="1" Value="{Binding SamplingRow}" Height="19" Width="300" Margin="0,0,20,0"/>
+                            <TextBox HorizontalAlignment="Left" Height="24" TextWrapping="Wrap" VerticalAlignment="Top" Width="37" Text="{Binding Value, ElementName=RowSlider}" Margin="0,0,20,0"/>
+                        </StackPanel>
+                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="2" Grid.RowSpan="3" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="20"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="Sample Start Col" VerticalAlignment="Top" Width="98" Margin="0,0,0,20"/>
+                            <TextBox x:Name="StartSamplingCol" HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="{Binding StartColSamplingIndex}" VerticalAlignment="Top" Width="37" TextAlignment="Right" Grid.Column="2" Margin="0,0,0,20"/>
+                            <TextBlock HorizontalAlignment="Left" Height="22" Grid.Row="1" TextWrapping="Wrap" Text="Sample End Col" VerticalAlignment="Top" Width="98" Margin="0,0,0,20"/>
+                            <TextBox x:Name="EndSamplingCol" HorizontalAlignment="Left" Height="22" Grid.Row="1" TextWrapping="Wrap" Text="{Binding EndColSamplingIndex}" VerticalAlignment="Top" Width="37" TextAlignment="Right" Grid.Column="2" Margin="0,0,0,20"/>
+                            <TextBlock HorizontalAlignment="Left" Height="22" Grid.Row="2" TextWrapping="Wrap" Text="Object Size Threshold" VerticalAlignment="Top" Width="120" Margin="0,0,0,20"/>
+                            <TextBox x:Name="ObjectSizeThreshold" HorizontalAlignment="Left" Height="22" Grid.Row="2" TextWrapping="Wrap" Text="{Binding ObjectSizeThreshold}" VerticalAlignment="Top" Width="37" TextAlignment="Right" Grid.Column="2" Margin="0,0,0,20"/>
+                            <TextBlock HorizontalAlignment="Left" Height="22" Grid.Row="3" TextWrapping="Wrap" Text="Depth Tolerance (+/-)" VerticalAlignment="Top" Width="120" Margin="0,0,0,20"/>
+                            <TextBox x:Name="ObjectDepthTolerance" IsEnabled="{Binding ElementName=chkZeroDepth, Path=IsChecked, Converter={StaticResource ResourceKey=boolInverter}}" HorizontalAlignment="Left" Height="22" Grid.Row="3" TextWrapping="Wrap" Text="{Binding ObjectDepthTolerance}" VerticalAlignment="Top" Width="37" TextAlignment="Right" Grid.Column="2" Margin="0,0,0,20"/>
+                            <CheckBox x:Name="chkZeroDepth" Content="Close Proximity Mode" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="4" IsChecked="{Binding IsZeroDepth}" VerticalAlignment="Top" Margin="0,0,0,0"/>
+                            <CheckBox x:Name="chkCalibrate" Content="Calibrate" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="4" IsChecked="{Binding IsCalibrating}" VerticalAlignment="Top"   Margin="0,40,0,0"/>
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.RowSpan="3" Grid.Column="2" Grid.Row="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="20"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="Interaction Front Buffer+" VerticalAlignment="Top" Width="133" Margin="0,0,0,20"/>
+                            <TextBox x:Name="InteractionFrontBuffer" HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="{Binding InteractionFrontBuffer}" VerticalAlignment="Top" Width="37" TextAlignment="Right" Grid.Column="2" Margin="0,0,0,20"/>
+                            <TextBlock HorizontalAlignment="Left" Height="22" Grid.Row="1" TextWrapping="Wrap" Text="Interaction Back Buffer-" VerticalAlignment="Top" Width="135" Margin="0,0,0,20"/>
+                            <TextBox x:Name="InteractionBackBuffer" IsEnabled="{Binding ElementName=chkZeroDepth, Path=IsChecked, Converter={StaticResource ResourceKey=boolInverter}}" HorizontalAlignment="Left" Height="22" Grid.Row="1" TextWrapping="Wrap" Text="{Binding InteractionBackBuffer}" VerticalAlignment="Top" Width="37" TextAlignment="Right" Grid.Column="2" Margin="0,0,0,20"/>
+                            <TextBlock HorizontalAlignment="Left" Height="22" Grid.Row="2" TextWrapping="Wrap" Text="Object Parimeter Buffer" VerticalAlignment="Top" Width="135" Margin="0,0,0,20"/>
+                            <TextBox x:Name="ObjectParimeterBuffer" HorizontalAlignment="Left" Height="22" Grid.Row="2" TextWrapping="Wrap" Text="{Binding ObjectParimeterBuffer}" VerticalAlignment="Top" Width="37" TextAlignment="Right" Grid.Column="2" Margin="0,0,0,20"/>
+                            <TextBlock HorizontalAlignment="Left" Height="22" Grid.Row="3" TextWrapping="Wrap" Text="Missing Data Tolerance" VerticalAlignment="Top" Width="135" Margin="0,0,0,20"/>
+                            <TextBox x:Name="MissingDataTolerance" HorizontalAlignment="Left" Height="22" Grid.Row="3" TextWrapping="Wrap" Text="{Binding MissingDataTolerance}" VerticalAlignment="Top" Width="37" TextAlignment="Right" Grid.Column="2" Margin="0,0,0,20"/>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
+
+        </Viewbox>
+
+    </Border>
+</Window>
+

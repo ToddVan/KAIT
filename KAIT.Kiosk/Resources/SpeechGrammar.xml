@@ -1,0 +1,24 @@
+﻿<grammar version="1.0" xml:lang="en-US" root="rootRule" tag-format="semantics/1.0-literals" xmlns="http://www.w3.org/2001/06/grammar">
+  <rule id="rootRule">
+    <one-of>
+      <item>
+        <tag>START CALIBRATION</tag>
+        <one-of>
+          <item> start calibration </item>
+          <item> begin calibration </item>
+          <item> initalize calibration </item>
+        </one-of>
+      </item>
+      <item>
+        <tag>CALIBRATION COMPLETE</tag>
+        <one-of>
+          <item> complete calibration </item>
+          <item> calibration completed </item>
+          <item> calibration finished </item>
+          <item> finsh calibration </item>
+          <item> calibration done </item>
+        </one-of>
+      </item>
+    </one-of>
+  </rule>
+</grammar>

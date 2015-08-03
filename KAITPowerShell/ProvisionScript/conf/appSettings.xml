@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<appSettings>
+  <add key="Microsoft.Azure.Storage.inceptiondata" value="DefaultEndpointsProtocol=https;AccountName=inceptiondata;AccountKey=HmHQDsAovCSpKglNFoWHOTtQwG5dPHG0IlZXUw1ouMparwxxmJKTpmvXRptLyNIQodTgAdksN31gFfW4wO0Q6A==" />
+  <add key="Microsoft.Azure.Storage.inceptionhdi" value="DefaultEndpointsProtocol=https;AccountName=inceptionhdi;AccountKey=wFCFRAAd9vnOjX4I+12UqG2qxuAvIjLrbbjP6jigJq+i8zsA7TVePd52GM2T2XeAXVc0hTprhr8ALRm++FTlDw==" />
+  <add key="Microsoft.Azure.Storage.inceptionasamonitoring" value="DefaultEndpointsProtocol=https;AccountName=inceptionasamonitoring;AccountKey=EO+I0zh+u5NeWCqjIFUH29Z4qkkQe5ae78i64oWihaPXfIilFmg8Wetu72xyhK4nB3O2b7ARnxvxH/h31xBo3w==" />
+  <add key="Inception.EventHub.Demographics.SendPolicy" value="Endpoint=sb://inceptioningess-ns.servicebus.windows.net/;SharedAccessKeyName=SendPolicy;SharedAccessKey=fK4ERknatZRIwnlfkwj9xMuEw9OX3yQABkDSpHtuU4M=;EntityPath=demographics" />
+  <add key="Inception.EventHub.Demographics.ListenPolicy" value="Endpoint=sb://inceptioningess-ns.servicebus.windows.net/;SharedAccessKeyName=ListenPolicy;SharedAccessKey=sW70XVSId6b3UyQ4Ymp9yqOBFD5kZ1LmpSkbLVEc0mU=;EntityPath=demographics" />
+  <add key="Inception.EventHub.Demographics.ASAManagePolicy" value="Endpoint=sb://inceptioningess-ns.servicebus.windows.net/;SharedAccessKeyName=ASAManagePolicy;SharedAccessKey=mUw03E+SZXBxr23KRzoXPhJ3Ap7B3Yu0mAkANnA/0Pk=;EntityPath=demographics" />
+  <add key="Inception.EventHub.Interactions.SendPolicy" value="Endpoint=sb://inceptioningess-ns.servicebus.windows.net/;SharedAccessKeyName=SendPolicy;SharedAccessKey=dqJdX7sC3Sap/3DPf9LrNuLguBFaU1STNxLv75nnwSU=;EntityPath=interactions" />
+  <add key="Inception.EventHub.Interactions.ListenPolicy" value="Endpoint=sb://inceptioningess-ns.servicebus.windows.net/;SharedAccessKeyName=ListenPolicy;SharedAccessKey=ICmR6yXW2ib96D/SxWpvhiE12QdJXcioaEZy+egsVTU=;EntityPath=interactions" />
+  <add key="Inception.EventHub.Interactions.ASAManagePolicy" value="Endpoint=sb://inceptioningess-ns.servicebus.windows.net/;SharedAccessKeyName=ASAManagePolicy;SharedAccessKey=aRF1QjDRx2XRLa2EcwePusCi+VIltk0WZWPi3TVr0Xo=;EntityPath=interactions" />
+  <add key="Inception.EventHub.Skeletal.SendPolicy" value="Endpoint=sb://inceptioningess-ns.servicebus.windows.net/;SharedAccessKeyName=SendPolicy;SharedAccessKey=Qn+2GWfIACPW8gkrYeCX42Nu2iGRYy2k521Yf9octQw=;EntityPath=skeletal" />
+  <add key="Inception.EventHub.Skeletal.ListenPolicy" value="Endpoint=sb://inceptioningess-ns.servicebus.windows.net/;SharedAccessKeyName=ListenPolicy;SharedAccessKey=1c0wZWY6w4RXcde0eUZ4XpDvr8fUUwoX5gHBjQXrrlc=;EntityPath=skeletal" />
+  <add key="Inception.EventHub.Skeletal.ASAManagePolicy" value="Endpoint=sb://inceptioningess-ns.servicebus.windows.net/;SharedAccessKeyName=ASAManagePolicy;SharedAccessKey=u21TEYANz/slvOrjdkJq57sCsEsfBmMLot/4vD0GUkA=;EntityPath=skeletal" />
+  <add key="Inception.EventHub.Interactionsnotifications.SendPolicy" value="Endpoint=sb://inceptioningess-ns.servicebus.windows.net/;SharedAccessKeyName=SendPolicy;SharedAccessKey=cK2YrZ8oeR9QZrqN9mOBEdY/FXMUmhv4txH6yMm4occ=;EntityPath=interactionsnotifications" />
+  <add key="Inception.EventHub.Interactionsnotifications.ListenPolicy" value="Endpoint=sb://inceptioningess-ns.servicebus.windows.net/;SharedAccessKeyName=ListenPolicy;SharedAccessKey=VWgjb1TFDcZ1uQscrDTg+tVleWw/S5IeTFb5S+3YY7M=;EntityPath=interactionsnotifications" />
+  <add key="Inception.EventHub.Interactionsnotifications.ASAManagePolicy" value="Endpoint=sb://inceptioningess-ns.servicebus.windows.net/;SharedAccessKeyName=ASAManagePolicy;SharedAccessKey=9cvfrfpk3Rs/38omyn5IY5EAJg9IUOnKnsyqF+sUslc=;EntityPath=interactionsnotifications" />
+</appSettings>

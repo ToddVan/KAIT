@@ -1,0 +1,475 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{75528905-A8BA-412D-A586-089E43A11A59}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>InceptionPowerShell</RootNamespace>
+    <AssemblyName>InceptionPowerShell</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>InceptionPowerShell.Program</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="BuildTools\Invoke-PSScriptSigning.ps1" />
+    <None Include="DataModels\Inception Analytics.xlsx" />
+    <None Include="DataModels\Kinect Top View.xlsx" />
+    <None Include="packages.config" />
+    <None Include="ProvisionScript\bin\ASAHelper.exe.lnk" />
+    <None Include="ProvisionScript\bin\ASAHelper\.nuget\NuGet.Config" />
+    <None Include="ProvisionScript\bin\ASAHelper\.nuget\NuGet.targets" />
+    <None Include="ProvisionScript\bin\ASAHelper\ASAHelper.v11.suo" />
+    <None Include="ProvisionScript\bin\ASAHelper\ASAHelper\App.config" />
+    <None Include="ProvisionScript\bin\ASAHelper\ASAHelper\bin\Debug\ASAHelper.exe.config" />
+    <None Include="ProvisionScript\bin\ASAHelper\ASAHelper\bin\Debug\ASAHelper.vshost.exe.config" />
+    <None Include="ProvisionScript\bin\ASAHelper\ASAHelper\bin\Debug\ASAHelper.vshost.exe.manifest" />
+    <None Include="ProvisionScript\bin\ASAHelper\ASAHelper\obj\Debug\ASAHelper.csproj.App.config" />
+    <None Include="ProvisionScript\bin\ASAHelper\ASAHelper\obj\Debug\ASAHelper.csprojResolveAssemblyReference.cache" />
+    <None Include="ProvisionScript\bin\ASAHelper\ASAHelper\obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="ProvisionScript\bin\ASAHelper\ASAHelper\packages.config" />
+    <None Include="ProvisionScript\bin\ASAHelper\packages\Hyak.Common.1.0.2\Hyak.Common.1.0.2.nupkg" />
+    <None Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Azure.Common.2.0.4\Microsoft.Azure.Common.2.0.4.nupkg" />
+    <None Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Azure.Common.Dependencies.1.0.0\Microsoft.Azure.Common.Dependencies.1.0.0.nupkg" />
+    <None Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Azure.Management.StreamAnalytics.0.17.0-preview\Microsoft.Azure.Management.StreamAnalytics.0.17.0-preview.nupkg" />
+    <None Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\content\monoandroid\_._" />
+    <None Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\content\monotouch\_._" />
+    <None Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\content\net45\_._" />
+    <None Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\content\portable-net45+win8+wp8+wpa81\_._" />
+    <None Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\content\portable-net45+win8+wpa81\_._" />
+    <None Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\content\portable-net451+win81+wpa81\_._" />
+    <None Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\content\portable-net451+win81\_._" />
+    <None Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\content\portable-win81+wp81+wpa81\_._" />
+    <None Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\content\sl4\_._" />
+    <None Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\content\sl5\_._" />
+    <None Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\content\win8\_._" />
+    <None Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\content\wp8\_._" />
+    <None Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\content\wpa81\_._" />
+    <None Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\monoandroid\_._" />
+    <None Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\monotouch\_._" />
+    <None Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\net45\_._" />
+    <None Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\portable-net45+win8+wp8+wpa81\_._" />
+    <None Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\portable-net45+win8+wpa81\_._" />
+    <None Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\portable-net451+win81+wpa81\_._" />
+    <None Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\portable-net451+win81\_._" />
+    <None Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\portable-win81+wp81+wpa81\_._" />
+    <None Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\win8\_._" />
+    <None Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\wp8\_._" />
+    <None Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\wpa81\_._" />
+    <None Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\License-Stable.rtf" />
+    <None Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\Microsoft.Bcl.1.1.9.nupkg" />
+    <None Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Async.1.0.168\License-Stable.rtf" />
+    <None Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Async.1.0.168\Microsoft.Bcl.Async.1.0.168.nupkg" />
+    <None Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Build.1.0.14\content\net40\_._" />
+    <None Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Build.1.0.14\content\netcore45\_._" />
+    <None Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Build.1.0.14\content\portable-net40+win8+sl4+wp71+wpa81\_._" />
+    <None Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Build.1.0.14\content\sl4-windowsphone71\_._" />
+    <None Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Build.1.0.14\content\sl4\_._" />
+    <None Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Build.1.0.14\License-Stable.rtf" />
+    <None Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Build.1.0.14\Microsoft.Bcl.Build.1.0.14.nupkg" />
+    <None Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Build.1.0.14\tools\Install.ps1" />
+    <None Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" />
+    <None Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Build.1.0.14\tools\Uninstall.ps1" />
+    <None Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.IdentityModel.Clients.ActiveDirectory.2.15.204151539\lib\netcore45\Microsoft.IdentityModel.Clients.ActiveDirectory.winmd" />
+    <None Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.IdentityModel.Clients.ActiveDirectory.2.15.204151539\lib\wpa\Microsoft.IdentityModel.Clients.ActiveDirectory.winmd" />
+    <None Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.IdentityModel.Clients.ActiveDirectory.2.15.204151539\Microsoft.IdentityModel.Clients.ActiveDirectory.2.15.204151539.nupkg" />
+    <None Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Net.Http.2.2.22\License-Stable.rtf" />
+    <None Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Net.Http.2.2.22\Microsoft.Net.Http.2.2.22.nupkg" />
+    <None Include="ProvisionScript\bin\ASAHelper\packages\Newtonsoft.Json.6.0.4\Newtonsoft.Json.6.0.4.nupkg" />
+    <None Include="ProvisionScript\bin\ASAHelper\packages\Newtonsoft.Json.6.0.4\tools\install.ps1" />
+    <None Include="ProvisionScript\bin\ASAHelper\packages\repositories.config" />
+    <None Include="ProvisionScript\conf\azureprovisionsettings.json" />
+    <None Include="ProvisionScript\diagrams\Azure PowerShell Automation.pptx" />
+    <None Include="ProvisionScript\diagrams\Flowcharts.vsdx" />
+    <None Include="ProvisionScript\Invoke-AzureInceptionProvision.ps1" />
+    <None Include="ProvisionScript\upload\hive\CreateViews.hql" />
+    <None Include="ProvisionScript\upload\hive\DemographicsRaw.Transform.DemographicsBase.hql" />
+    <None Include="ProvisionScript\upload\hive\InteractionFull.Analytics.InteractionTrends.hql" />
+    <None Include="ProvisionScript\upload\hive\InteractionsBase.Transform.InteractionsFull.hql" />
+    <None Include="ProvisionScript\upload\hive\InteractionsRaw.Transform.InteractionsBase.hql" />
+    <None Include="ProvisionScript\upload\hive\SkeletalBase.Analytics.TelemetryTrends.hql" />
+    <None Include="ProvisionScript\upload\hive\SkeletalBase.Transform.KinectLocations.hql" />
+    <None Include="ProvisionScript\upload\hive\SkeletalRaw.Transform.SkeletalBase.hql" />
+    <None Include="ProvisionScript\upload\telemetry\demographics\Demographics-2015033084fec0a0-8748-4546-bd73-28e4742e1c2c.dem" />
+    <None Include="ProvisionScript\upload\telemetry\interactions\ItemInteraction-20150330049cbbf0-a10b-41d2-862a-0fa98715ae51.int" />
+    <None Include="ProvisionScript\upload\telemetry\skeletal\SkeletonTrack-2015033165a671b4-368e-48c8-b713-93bcb2a2b67e.skl" />
+    <None Include="ProvisionScript\upload\telemetry\skeletal\SkeletonTrack-201503319fac2fd3-735b-43c0-9413-ac0412b4427f.skl" />
+    <None Include="ProvisionScript\utils\Constants.ps1" />
+    <None Include="ProvisionScript\utils\Utils_ASA.ps1" />
+    <None Include="ProvisionScript\utils\Utils_DF.ps1" />
+    <None Include="ProvisionScript\utils\Utils_EH.ps1" />
+    <None Include="ProvisionScript\utils\Utils_HDI.ps1" />
+    <None Include="ProvisionScript\utils\Utils_Shared.ps1" />
+    <None Include="ProvisionScript\utils\Utils_Storage.ps1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="BuildTools\Microsoft.TeamFoundation.Build.Controls.dll" />
+    <Content Include="BuildTools\TF.exe" />
+    <Content Include="ProvisionScript\bin\ASAHelper\.nuget\NuGet.exe" />
+    <Content Include="ProvisionScript\bin\ASAHelper\ASAHelper.sln" />
+    <Content Include="ProvisionScript\bin\ASAHelper\ASAHelper\ASAHelper.csproj" />
+    <Content Include="ProvisionScript\bin\ASAHelper\ASAHelper\ASAHelper.csproj.user" />
+    <Content Include="ProvisionScript\bin\ASAHelper\ASAHelper\bin\Debug\ASAHelper.exe" />
+    <Content Include="ProvisionScript\bin\ASAHelper\ASAHelper\bin\Debug\ASAHelper.pdb" />
+    <Content Include="ProvisionScript\bin\ASAHelper\ASAHelper\bin\Debug\ASAHelper.vshost.exe" />
+    <Content Include="ProvisionScript\bin\ASAHelper\ASAHelper\bin\Debug\Hyak.Common.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\ASAHelper\bin\Debug\Hyak.Common.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\ASAHelper\bin\Debug\Microsoft.Azure.Common.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\ASAHelper\bin\Debug\Microsoft.Azure.Common.NetFramework.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\ASAHelper\bin\Debug\Microsoft.Azure.Common.NetFramework.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\ASAHelper\bin\Debug\Microsoft.Azure.Common.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\ASAHelper\bin\Debug\Microsoft.Azure.Management.StreamAnalytics.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\ASAHelper\bin\Debug\Microsoft.Azure.Management.StreamAnalytics.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\ASAHelper\bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\ASAHelper\bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.WindowsForms.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\ASAHelper\bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\ASAHelper\bin\Debug\Microsoft.Threading.Tasks.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\ASAHelper\bin\Debug\Microsoft.Threading.Tasks.Extensions.Desktop.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\ASAHelper\bin\Debug\Microsoft.Threading.Tasks.Extensions.Desktop.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\ASAHelper\bin\Debug\Microsoft.Threading.Tasks.Extensions.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\ASAHelper\bin\Debug\Microsoft.Threading.Tasks.Extensions.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\ASAHelper\bin\Debug\Microsoft.Threading.Tasks.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\ASAHelper\bin\Debug\Newtonsoft.Json.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\ASAHelper\bin\Debug\Newtonsoft.Json.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\ASAHelper\bin\Debug\System.Net.Http.Extensions.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\ASAHelper\bin\Debug\System.Net.Http.Extensions.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\ASAHelper\bin\Debug\System.Net.Http.Primitives.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\ASAHelper\bin\Debug\System.Net.Http.Primitives.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\ASAHelper\obj\Debug\ASAHelper.csproj.FileListAbsolute.txt" />
+    <Content Include="ProvisionScript\bin\ASAHelper\ASAHelper\obj\Debug\ASAHelper.exe" />
+    <Content Include="ProvisionScript\bin\ASAHelper\ASAHelper\obj\Debug\ASAHelper.pdb" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Hyak.Common.1.0.2\lib\net40\Hyak.Common.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Hyak.Common.1.0.2\lib\net40\Hyak.Common.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Hyak.Common.1.0.2\lib\net45\Hyak.Common.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Hyak.Common.1.0.2\lib\net45\Hyak.Common.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Hyak.Common.1.0.2\lib\portable-net403+win+wpa81\Hyak.Common.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Hyak.Common.1.0.2\lib\portable-net403+win+wpa81\Hyak.Common.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Azure.Common.2.0.4\lib\net40\Microsoft.Azure.Common.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Azure.Common.2.0.4\lib\net40\Microsoft.Azure.Common.NetFramework.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Azure.Common.2.0.4\lib\net40\Microsoft.Azure.Common.NetFramework.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Azure.Common.2.0.4\lib\net40\Microsoft.Azure.Common.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Azure.Common.2.0.4\lib\net45\Microsoft.Azure.Common.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Azure.Common.2.0.4\lib\net45\Microsoft.Azure.Common.NetFramework.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Azure.Common.2.0.4\lib\net45\Microsoft.Azure.Common.NetFramework.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Azure.Common.2.0.4\lib\net45\Microsoft.Azure.Common.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Azure.Common.2.0.4\lib\portable-net45+wp8+wpa81+win\Microsoft.Azure.Common.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Azure.Common.2.0.4\lib\portable-net45+wp8+wpa81+win\Microsoft.Azure.Common.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Azure.Management.StreamAnalytics.0.17.0-preview\lib\net40\Microsoft.Azure.Management.StreamAnalytics.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Azure.Management.StreamAnalytics.0.17.0-preview\lib\net40\Microsoft.Azure.Management.StreamAnalytics.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Azure.Management.StreamAnalytics.0.17.0-preview\lib\portable-net45+wp8+wpa81+win\Microsoft.Azure.Management.StreamAnalytics.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Azure.Management.StreamAnalytics.0.17.0-preview\lib\portable-net45+wp8+wpa81+win\Microsoft.Azure.Management.StreamAnalytics.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\net40\ensureRedirect.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\net40\System.IO.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\net40\System.IO.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\net40\System.Runtime.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\net40\System.Runtime.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\net40\System.Threading.Tasks.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\net40\System.Threading.Tasks.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\portable-net40+sl4+win8+wp71+wpa81\ensureRedirect.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\portable-net40+sl4+win8+wp71+wpa81\System.IO.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\portable-net40+sl4+win8+wp71+wpa81\System.IO.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\portable-net40+sl4+win8+wp71+wpa81\System.Runtime.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\portable-net40+sl4+win8+wp71+wpa81\System.Runtime.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\portable-net40+sl4+win8+wp71+wpa81\System.Threading.Tasks.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\portable-net40+sl4+win8+wp71+wpa81\System.Threading.Tasks.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\portable-net40+sl4+win8+wp8+wpa81\ensureRedirect.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\portable-net40+sl4+win8+wp8+wpa81\System.IO.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\portable-net40+sl4+win8+wp8+wpa81\System.IO.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\portable-net40+sl4+win8+wp8+wpa81\System.Runtime.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\portable-net40+sl4+win8+wp8+wpa81\System.Runtime.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\portable-net40+sl4+win8+wp8+wpa81\System.Threading.Tasks.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\portable-net40+sl4+win8+wp8+wpa81\System.Threading.Tasks.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\portable-net40+sl4+win8\ensureRedirect.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\portable-net40+sl4+win8\System.IO.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\portable-net40+sl4+win8\System.IO.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\portable-net40+sl4+win8\System.Runtime.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\portable-net40+sl4+win8\System.Runtime.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\portable-net40+sl4+win8\System.Threading.Tasks.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\portable-net40+sl4+win8\System.Threading.Tasks.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\portable-net40+sl5+win8+wp8+wpa81\ensureRedirect.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\portable-net40+sl5+win8+wp8+wpa81\System.IO.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\portable-net40+sl5+win8+wp8+wpa81\System.IO.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\portable-net40+sl5+win8+wp8+wpa81\System.Runtime.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\portable-net40+sl5+win8+wp8+wpa81\System.Runtime.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\portable-net40+sl5+win8+wp8+wpa81\System.Threading.Tasks.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\portable-net40+sl5+win8+wp8+wpa81\System.Threading.Tasks.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\portable-net40+win8+wp8+wpa81\ensureRedirect.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\portable-net40+win8+wp8+wpa81\System.IO.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\portable-net40+win8+wp8+wpa81\System.IO.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\portable-net40+win8+wp8+wpa81\System.Runtime.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\portable-net40+win8+wp8+wpa81\System.Runtime.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\portable-net40+win8+wp8+wpa81\System.Threading.Tasks.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\portable-net40+win8+wp8+wpa81\System.Threading.Tasks.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\portable-net40+win8\ensureRedirect.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\portable-net40+win8\System.IO.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\portable-net40+win8\System.IO.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\portable-net40+win8\System.Runtime.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\portable-net40+win8\System.Runtime.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\portable-net40+win8\System.Threading.Tasks.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\portable-net40+win8\System.Threading.Tasks.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\sl4-windowsphone71\ensureRedirect.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\sl4-windowsphone71\System.IO.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\sl4-windowsphone71\System.IO.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\sl4-windowsphone71\System.Runtime.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\sl4-windowsphone71\System.Runtime.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\sl4-windowsphone71\System.Threading.Tasks.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\sl4-windowsphone71\System.Threading.Tasks.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\sl4\System.IO.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\sl4\System.IO.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\sl4\System.Runtime.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\sl4\System.Runtime.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\sl4\System.Threading.Tasks.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\sl4\System.Threading.Tasks.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\sl5\System.IO.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\sl5\System.IO.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\sl5\System.Runtime.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\sl5\System.Runtime.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\sl5\System.Threading.Tasks.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.1.1.9\lib\sl5\System.Threading.Tasks.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.Desktop.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.Desktop.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Async.1.0.168\lib\portable-net40+sl4+win8+wp71+wpa81\Microsoft.Threading.Tasks.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Async.1.0.168\lib\portable-net40+sl4+win8+wp71+wpa81\Microsoft.Threading.Tasks.Extensions.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Async.1.0.168\lib\portable-net40+sl4+win8+wp71+wpa81\Microsoft.Threading.Tasks.Extensions.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Async.1.0.168\lib\portable-net40+sl4+win8+wp71+wpa81\Microsoft.Threading.Tasks.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Async.1.0.168\lib\portable-net45+win8+wp8+wpa81\Microsoft.Threading.Tasks.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Async.1.0.168\lib\portable-net45+win8+wp8+wpa81\Microsoft.Threading.Tasks.Extensions.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Async.1.0.168\lib\portable-net45+win8+wp8+wpa81\Microsoft.Threading.Tasks.Extensions.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Async.1.0.168\lib\portable-net45+win8+wp8+wpa81\Microsoft.Threading.Tasks.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Async.1.0.168\lib\portable-net45+win8+wpa81\Microsoft.Threading.Tasks.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Async.1.0.168\lib\portable-net45+win8+wpa81\Microsoft.Threading.Tasks.Extensions.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Async.1.0.168\lib\portable-net45+win8+wpa81\Microsoft.Threading.Tasks.Extensions.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Async.1.0.168\lib\portable-net45+win8+wpa81\Microsoft.Threading.Tasks.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Async.1.0.168\lib\sl4-windowsphone71\Microsoft.Threading.Tasks.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Async.1.0.168\lib\sl4-windowsphone71\Microsoft.Threading.Tasks.Extensions.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Async.1.0.168\lib\sl4-windowsphone71\Microsoft.Threading.Tasks.Extensions.Phone.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Async.1.0.168\lib\sl4-windowsphone71\Microsoft.Threading.Tasks.Extensions.Phone.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Async.1.0.168\lib\sl4-windowsphone71\Microsoft.Threading.Tasks.Extensions.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Async.1.0.168\lib\sl4-windowsphone71\Microsoft.Threading.Tasks.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Async.1.0.168\lib\sl4\Microsoft.Threading.Tasks.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Async.1.0.168\lib\sl4\Microsoft.Threading.Tasks.Extensions.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Async.1.0.168\lib\sl4\Microsoft.Threading.Tasks.Extensions.Silverlight.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Async.1.0.168\lib\sl4\Microsoft.Threading.Tasks.Extensions.Silverlight.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Async.1.0.168\lib\sl4\Microsoft.Threading.Tasks.Extensions.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Async.1.0.168\lib\sl4\Microsoft.Threading.Tasks.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Async.1.0.168\lib\win8\Microsoft.Threading.Tasks.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Async.1.0.168\lib\win8\Microsoft.Threading.Tasks.Extensions.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Async.1.0.168\lib\win8\Microsoft.Threading.Tasks.Extensions.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Async.1.0.168\lib\win8\Microsoft.Threading.Tasks.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Async.1.0.168\lib\wp8\Microsoft.Threading.Tasks.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Async.1.0.168\lib\wp8\Microsoft.Threading.Tasks.Extensions.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Async.1.0.168\lib\wp8\Microsoft.Threading.Tasks.Extensions.Phone.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Async.1.0.168\lib\wp8\Microsoft.Threading.Tasks.Extensions.Phone.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Async.1.0.168\lib\wp8\Microsoft.Threading.Tasks.Extensions.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Async.1.0.168\lib\wp8\Microsoft.Threading.Tasks.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Async.1.0.168\lib\wpa81\Microsoft.Threading.Tasks.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Async.1.0.168\lib\wpa81\Microsoft.Threading.Tasks.Extensions.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Async.1.0.168\lib\wpa81\Microsoft.Threading.Tasks.Extensions.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Async.1.0.168\lib\wpa81\Microsoft.Threading.Tasks.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.Tasks.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.IdentityModel.Clients.ActiveDirectory.2.15.204151539\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.IdentityModel.Clients.ActiveDirectory.2.15.204151539\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.WindowsForms.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.IdentityModel.Clients.ActiveDirectory.2.15.204151539\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.XML" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.IdentityModel.Clients.ActiveDirectory.2.15.204151539\lib\netcore45\Microsoft.IdentityModel.Clients.ActiveDirectory.XML" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.IdentityModel.Clients.ActiveDirectory.2.15.204151539\lib\wpa\Microsoft.IdentityModel.Clients.ActiveDirectory.XML" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.IdentityModel.Clients.ActiveDirectory.2.15.204151539\lib\wp\Microsoft.IdentityModel.Clients.ActiveDirectory.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.IdentityModel.Clients.ActiveDirectory.2.15.204151539\lib\wp\Microsoft.IdentityModel.Clients.ActiveDirectory.XML" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Net.Http.2.2.22\lib\monoandroid\System.Net.Http.Extensions.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Net.Http.2.2.22\lib\monoandroid\System.Net.Http.Extensions.XML" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Net.Http.2.2.22\lib\monoandroid\System.Net.Http.Primitives.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Net.Http.2.2.22\lib\monoandroid\System.Net.Http.Primitives.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Net.Http.2.2.22\lib\monotouch\System.Net.Http.Extensions.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Net.Http.2.2.22\lib\monotouch\System.Net.Http.Extensions.XML" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Net.Http.2.2.22\lib\monotouch\System.Net.Http.Primitives.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Net.Http.2.2.22\lib\monotouch\System.Net.Http.Primitives.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Net.Http.2.2.22\lib\net40\ensureRedirect.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Net.Http.2.2.22\lib\net40\System.Net.Http.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Net.Http.2.2.22\lib\net40\System.Net.Http.Extensions.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Net.Http.2.2.22\lib\net40\System.Net.Http.Extensions.XML" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Net.Http.2.2.22\lib\net40\System.Net.Http.Primitives.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Net.Http.2.2.22\lib\net40\System.Net.Http.Primitives.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Net.Http.2.2.22\lib\net40\System.Net.Http.WebRequest.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Net.Http.2.2.22\lib\net40\System.Net.Http.WebRequest.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Net.Http.2.2.22\lib\net40\System.Net.Http.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Net.Http.2.2.22\lib\net45\ensureRedirect.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Net.Http.2.2.22\lib\net45\System.Net.Http.Extensions.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Net.Http.2.2.22\lib\net45\System.Net.Http.Extensions.XML" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Net.Http.2.2.22\lib\net45\System.Net.Http.Primitives.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Net.Http.2.2.22\lib\net45\System.Net.Http.Primitives.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Net.Http.2.2.22\lib\portable-net40+sl4+win8+wp71+wpa81\ensureRedirect.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Net.Http.2.2.22\lib\portable-net40+sl4+win8+wp71+wpa81\System.Net.Http.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Net.Http.2.2.22\lib\portable-net40+sl4+win8+wp71+wpa81\System.Net.Http.Extensions.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Net.Http.2.2.22\lib\portable-net40+sl4+win8+wp71+wpa81\System.Net.Http.Extensions.XML" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Net.Http.2.2.22\lib\portable-net40+sl4+win8+wp71+wpa81\System.Net.Http.Primitives.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Net.Http.2.2.22\lib\portable-net40+sl4+win8+wp71+wpa81\System.Net.Http.Primitives.XML" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Net.Http.2.2.22\lib\portable-net40+sl4+win8+wp71+wpa81\System.Net.Http.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Net.Http.2.2.22\lib\portable-net45+win8+wpa81\ensureRedirect.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Net.Http.2.2.22\lib\portable-net45+win8+wpa81\System.Net.Http.Extensions.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Net.Http.2.2.22\lib\portable-net45+win8+wpa81\System.Net.Http.Extensions.XML" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Net.Http.2.2.22\lib\portable-net45+win8+wpa81\System.Net.Http.Primitives.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Net.Http.2.2.22\lib\portable-net45+win8+wpa81\System.Net.Http.Primitives.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Net.Http.2.2.22\lib\portable-net45+win8\ensureRedirect.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Net.Http.2.2.22\lib\portable-net45+win8\System.Net.Http.Extensions.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Net.Http.2.2.22\lib\portable-net45+win8\System.Net.Http.Extensions.XML" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Net.Http.2.2.22\lib\portable-net45+win8\System.Net.Http.Primitives.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Net.Http.2.2.22\lib\portable-net45+win8\System.Net.Http.Primitives.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Net.Http.2.2.22\lib\sl4-windowsphone71\System.Net.Http.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Net.Http.2.2.22\lib\sl4-windowsphone71\System.Net.Http.Extensions.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Net.Http.2.2.22\lib\sl4-windowsphone71\System.Net.Http.Extensions.XML" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Net.Http.2.2.22\lib\sl4-windowsphone71\System.Net.Http.Primitives.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Net.Http.2.2.22\lib\sl4-windowsphone71\System.Net.Http.Primitives.XML" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Net.Http.2.2.22\lib\sl4-windowsphone71\System.Net.Http.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Net.Http.2.2.22\lib\win8\System.Net.Http.Extensions.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Net.Http.2.2.22\lib\win8\System.Net.Http.Extensions.XML" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Net.Http.2.2.22\lib\win8\System.Net.Http.Primitives.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Net.Http.2.2.22\lib\win8\System.Net.Http.Primitives.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Net.Http.2.2.22\lib\wpa81\System.Net.Http.Extensions.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Net.Http.2.2.22\lib\wpa81\System.Net.Http.Extensions.XML" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Net.Http.2.2.22\lib\wpa81\System.Net.Http.Primitives.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Microsoft.Net.Http.2.2.22\lib\wpa81\System.Net.Http.Primitives.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Newtonsoft.Json.6.0.4\lib\net20\Newtonsoft.Json.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Newtonsoft.Json.6.0.4\lib\net20\Newtonsoft.Json.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Newtonsoft.Json.6.0.4\lib\net35\Newtonsoft.Json.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Newtonsoft.Json.6.0.4\lib\net35\Newtonsoft.Json.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Newtonsoft.Json.6.0.4\lib\net40\Newtonsoft.Json.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Newtonsoft.Json.6.0.4\lib\net40\Newtonsoft.Json.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Newtonsoft.Json.6.0.4\lib\netcore45\Newtonsoft.Json.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Newtonsoft.Json.6.0.4\lib\netcore45\Newtonsoft.Json.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Newtonsoft.Json.6.0.4\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Newtonsoft.Json.6.0.4\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.xml" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Newtonsoft.Json.6.0.4\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll" />
+    <Content Include="ProvisionScript\bin\ASAHelper\packages\Newtonsoft.Json.6.0.4\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.xml" />
+    <Content Include="ProvisionScript\conf\appSettings.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="ProvisionScript\diagrams\ASA.jpg" />
+    <Content Include="ProvisionScript\diagrams\DF.jpg" />
+    <Content Include="ProvisionScript\diagrams\HighLevel.jpg" />
+    <Content Include="ProvisionScript\diagrams\SB.jpg" />
+    <Content Include="ProvisionScript\diagrams\Storage.jpg" />
+    <Content Include="ProvisionScript\upload\serde\json-serde-1.1.9.3-SNAPSHOT-jar-with-dependencies.jar" />
+    <Content Include="ProvisionScript\upload\serde\json-serde-1.1.9.3-SNAPSHOT.jar" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="ProvisionScript\bin\ASAHelper\ASAHelper\ASAHelper.cs" />
+    <Compile Include="ProvisionScript\bin\ASAHelper\ASAHelper\obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="ProvisionScript\bin\ASAHelper\ASAHelper\obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="ProvisionScript\bin\ASAHelper\ASAHelper\obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="ProvisionScript\bin\ASAHelper\ASAHelper\Program.cs" />
+    <Compile Include="ProvisionScript\bin\ASAHelper\ASAHelper\Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Hyak.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Hyak.Common.1.0.2\lib\net45\Hyak.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Azure.Common, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Azure.Common.2.0.4\lib\net45\Microsoft.Azure.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Azure.Common.NetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Azure.Common.2.0.4\lib\net45\Microsoft.Azure.Common.NetFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Azure.Management.StreamAnalytics, Version=0.9.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Azure.Management.StreamAnalytics.0.17.0-preview\lib\net40\Microsoft.Azure.Management.StreamAnalytics.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory.Platform, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Clients.ActiveDirectory.3.1.203031538-alpha\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions.Desktop, Version=1.0.168.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.Desktop.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Management.Automation, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Windows\assembly\GAC_MSIL\System.Management.Automation\1.0.0.0__31bf3856ad364e35\System.Management.Automation.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http, Version=2.2.22.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System.Net.Http.Extensions, Version=2.2.22.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.22\lib\net45\System.Net.Http.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives, Version=4.2.22.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.22\lib\net45\System.Net.Http.Primitives.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest, Version=2.2.22.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ProvisionScript\bin\ASAHelper\ASAHelper\obj\Debug\TempPE\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
+    <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
