@@ -322,7 +322,7 @@ namespace KAIT.Kiosk.Services
             var activePlayer = (from body in _bodies where body.TrackingId == _bodyTrackingService.ActiveBodyId select body).FirstOrDefault();
             KioskStates newState;
 
-            if (activePlayer.IsTracked && activePlayer.TrackingId != 0)
+            if (activePlayer != null && activePlayer.IsTracked && activePlayer.TrackingId != 0)
             {
                 newState = KioskStates.Tracking;
                 int count = 0;

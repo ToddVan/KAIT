@@ -1,5 +1,5 @@
 {
-  "RootContentDirectory": "C:\\Kiosk",
+  "RootContentDirectory": "DefaultContent",
   "ShowJpgFiles": true,
   "ShowPngFiles": true,
   "ShowGifFiles": true,

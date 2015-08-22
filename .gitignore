@@ -178,6 +178,8 @@ UpgradeLog*.htm
 #NEC Files
 dependencies/
 **dependencies/
+docs/
+**docs/
 
 # Business Intelligence projects
 *.rdl.data
