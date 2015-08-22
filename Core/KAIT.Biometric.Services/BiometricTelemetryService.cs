@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 using KAIT.Common.Interfaces;
 using GalaSoft.MvvmLight.Ioc;
 using NEC.NeoFace.Engage;
+
 //using System.Windows.Media.Imaging;
 
 namespace KAIT.Biometric.Services
@@ -35,6 +36,8 @@ namespace KAIT.Biometric.Services
         private ITelemetryService _dataBroker;
         private int _overSamplingThreshold = 1;
         private bool _IsNECInFaultCondition = false;
+
+        private bool _shutdown = false;
 
         private EventHubMessageSender _eventHub;
 
@@ -106,6 +109,10 @@ namespace KAIT.Biometric.Services
             _lostTrackingPolling.Start();
         }
 
+        public void Shutdown()
+        {
+            _shutdown = true;
+        }
         private PlayerBiometrics _activePlayerBiometricData;
 
         private Dictionary<ulong, PlayerBiometrics> _playerBiometrics = new Dictionary<ulong,PlayerBiometrics>();
@@ -409,7 +416,7 @@ namespace KAIT.Biometric.Services
                 }
 
                 Thread.Sleep(1000);
-            } while (true);
+            } while (!_shutdown);
         }
 
         /// <summary>
@@ -561,7 +568,7 @@ namespace KAIT.Biometric.Services
 
         public void EnrollFace(string FaceID, Bitmap FaceImage)
         {
-            throw new NotImplementedException();
+            //NEC.NeoFace.Engage.FaceAnalyser.EnrollFace(FaceID, FaceImage, ExtractionType.Both);
         }
     }
 

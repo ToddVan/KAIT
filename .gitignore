@@ -175,6 +175,10 @@ UpgradeLog*.htm
 *.mdf
 *.ldf
 
+#NEC Files
+dependencies/
+**dependencies/
+
 # Business Intelligence projects
 *.rdl.data
 *.bim.layout

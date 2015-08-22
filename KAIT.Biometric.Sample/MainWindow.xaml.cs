@@ -73,6 +73,8 @@ namespace Kinect.Biometric
         /// </summary>
         private string statusText = null;
 
+        private Bitmap _currentPlayImage;
+
         
         /// <summary>
         /// Initializes a new instance of the MainWindow class.
@@ -111,7 +113,11 @@ namespace Kinect.Biometric
                 textLog.Text += output;
 
                 if(e.FaceImage != null)
+                {
+                    _currentPlayImage = e.FaceImage;
                     face.Source = ToBitmapImage(e.FaceImage);
+                }
+                
             });
         }
 
@@ -120,12 +126,19 @@ namespace Kinect.Biometric
 
             _demographicsService = new BiometricTelemetryService(ConfigurationManager.AppSettings["Azure.Hub.Biometric"]);
             _demographicsService.DemographicsReceived += _demographicsService_DemographicsReceived;
+
+            _demographicsService.DemographicsProcessingFailure += _demographicsService_DemographicsProcessingFailure;
             
             _sensorService = new KinectSensorService(_demographicsService);
             _sensorService.Open();     
 
 
 
+        }
+
+        void _demographicsService_DemographicsProcessingFailure(object sender, string e)
+        {
+            throw new NotImplementedException();
         }
 
         void _demographicsService_DemographicsReceived(object sender, BiometricData e)
@@ -144,7 +157,10 @@ namespace Kinect.Biometric
 
 
                 if (e.FaceImage != null)
+                {
+                    _currentPlayImage = e.FaceImage;
                     face.Source = ToBitmapImage(e.FaceImage);
+                }
             });
         }
 
@@ -259,29 +275,16 @@ namespace Kinect.Biometric
         }
   
       
-        void SaveImage(string filename, BitmapSource bitmap)
-        {
-            if (filename != string.Empty)
-            {
-                using (FileStream stream5 = new FileStream(filename, FileMode.Create))
-                {
-                    PngBitmapEncoder encoder5 = new PngBitmapEncoder();
-                    encoder5.Frames.Add(BitmapFrame.Create(bitmap));
-                    encoder5.Save(stream5);
-                    stream5.Close();
-                }
-            }
-        }
-
 
    
    
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            WriteableBitmap bm = (WriteableBitmap)this.face.Source;
-
-            var png = CreateBitmap( bm);
-            png.Save("C:\\TEMP\\" + UserID.Text + ".png", System.Drawing.Imaging.ImageFormat.Png);
+            if(!string.IsNullOrEmpty(UserID.Text))
+            {
+                _demographicsService.EnrollFace(UserID.Text, _currentPlayImage);
+            }
+            
         }
     }
 }

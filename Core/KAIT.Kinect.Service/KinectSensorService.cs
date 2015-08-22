@@ -618,6 +618,8 @@ namespace KAIT.Common.Sensor
                             this.faceFrameSources[i] = null;
                         }
                     }
+                    this.Sensor.IsAvailableChanged -= Sensor_IsAvailableChanged;
+                    _biometricTelemetry.Shutdown();
 
                     this.Sensor.Close();
                 }
