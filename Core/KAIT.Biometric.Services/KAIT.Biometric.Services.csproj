@@ -21,7 +21,7 @@
     </SccProvider>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
-    <NuGetPackageImportStamp>d1024b43</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>6faaf8f1</NuGetPackageImportStamp>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -66,7 +66,7 @@
       <HintPath>..\..\..\..\..\Program Files (x86)\Microsoft SDKs\Speech\v11.0\Assembly\Microsoft.Speech.dll</HintPath>
     </Reference>
     <Reference Include="NEC.NeoFace.Engage">
-      <HintPath>..\..\packages\NEC.NeoFace.Engage.1.0.1\lib\NEC.NeoFace.Engage.dll</HintPath>
+      <HintPath>..\..\packages\NEC.NeoFace.Engage.1.0.3\lib\net45\NEC.NeoFace.Engage.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -125,7 +125,7 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
-    <Error Condition="!Exists('..\..\packages\NEC.NeoFace.Engage.1.0.1\build\NEC.NeoFace.Engage.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\NEC.NeoFace.Engage.1.0.1\build\NEC.NeoFace.Engage.targets'))" />
+    <Error Condition="!Exists('..\..\packages\NEC.NeoFace.Engage.1.0.3\build\NEC.NeoFace.Engage.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\NEC.NeoFace.Engage.1.0.3\build\NEC.NeoFace.Engage.targets'))" />
   </Target>
   <PropertyGroup>
     <PostBuildEvent>xcopy /s /y "$(SolutionDir)packages\NeoFace.1.0.0\NativeBinaries" "$(TargetDir)"
@@ -135,7 +135,7 @@ REM If you see this in Visual Studio's Error List window, check the Output windo
 ECHO Creating NuGet package in Post-Build event...
 PowerShell -NoProfile -ExecutionPolicy Bypass -Command "&amp; '$(ProjectDir)_CreateNewNuGetPackage\DoNotModify\CreateNuGetPackage.ps1' -ProjectFilePath '$(ProjectPath)' -OutputDirectory '$(TargetDir)' -BuildConfiguration '$(ConfigurationName)' -BuildPlatform '$(PlatformName)'"</PostBuildEvent>
   </PropertyGroup>
-  <Import Project="..\..\packages\NEC.NeoFace.Engage.1.0.1\build\NEC.NeoFace.Engage.targets" Condition="Exists('..\..\packages\NEC.NeoFace.Engage.1.0.1\build\NEC.NeoFace.Engage.targets')" />
+  <Import Project="..\..\packages\NEC.NeoFace.Engage.1.0.3\build\NEC.NeoFace.Engage.targets" Condition="Exists('..\..\packages\NEC.NeoFace.Engage.1.0.3\build\NEC.NeoFace.Engage.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
