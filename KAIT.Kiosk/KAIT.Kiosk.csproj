@@ -40,7 +40,7 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <TargetFrameworkProfile />
-    <NuGetPackageImportStamp>ef205d94</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>67ccc563</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>x64</PlatformTarget>
@@ -108,6 +108,10 @@
     <Reference Include="Microsoft.WindowsAzure.Storage, Version=4.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\WindowsAzure.Storage.4.3.0\lib\net40\Microsoft.WindowsAzure.Storage.dll</HintPath>
+    </Reference>
+    <Reference Include="NEC.NeoFace.Engage, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NEC.NeoFace.Engage.1.0.5\lib\net45\NEC.NeoFace.Engage.dll</HintPath>
     </Reference>
     <Reference Include="NEC.NeoFace.Interop, Version=1.0.5383.23520, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
@@ -498,22 +502,6 @@
     <Content Include="DefaultContent\ActiveAttract\4.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Resource Include="DefaultContent\ActiveAttract\female\0\Female Under 24.png" />
-    <Resource Include="DefaultContent\ActiveAttract\female\25\Female 25-39.png" />
-    <Resource Include="DefaultContent\ActiveAttract\female\40\Female 40-54.png" />
-    <Resource Include="DefaultContent\ActiveAttract\female\55\Female 55+.png" />
-    <Content Include="DefaultContent\ActiveAttract\male\0\Male Under 24.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DefaultContent\ActiveAttract\male\25\Male 25-39.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DefaultContent\ActiveAttract\male\40\Male 40-54.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DefaultContent\ActiveAttract\male\55\Male 55+.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="DefaultContent\ActiveEngage\female\0\Female Under 24.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -574,30 +562,6 @@
     <Content Include="DefaultContent\PassiveAttract\aa.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="DefaultContent\PassiveAttract\female\0\Female Under 24.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DefaultContent\PassiveAttract\female\25\Female 25-39.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DefaultContent\PassiveAttract\female\40\Female 40-54.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DefaultContent\PassiveAttract\female\55\Female 55+.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DefaultContent\PassiveAttract\male\0\Male Under 24.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DefaultContent\PassiveAttract\male\25\Male 25-39.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DefaultContent\PassiveAttract\male\40\Male 40-54.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DefaultContent\PassiveAttract\male\55\Male 55+.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="DefaultContent\PassiveEngage\female\0\Female Under 24.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -636,7 +600,9 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+    <Error Condition="!Exists('..\packages\NEC.NeoFace.Engage.1.0.5\build\NEC.NeoFace.Engage.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NEC.NeoFace.Engage.1.0.5\build\NEC.NeoFace.Engage.targets'))" />
   </Target>
+  <Import Project="..\packages\NEC.NeoFace.Engage.1.0.5\build\NEC.NeoFace.Engage.targets" Condition="Exists('..\packages\NEC.NeoFace.Engage.1.0.5\build\NEC.NeoFace.Engage.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
