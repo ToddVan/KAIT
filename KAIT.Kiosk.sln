@@ -10,10 +10,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{C9AE43
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{29D432A9-9F89-47C8-921F-722AC34325AA}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inception.BodyTracking.Test", "Tests\Inception.BodyTracking.Test\Inception.BodyTracking.Test.csproj", "{976A62BF-08C4-4BCA-A013-49D21CDB2E9B}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KAIT.Kiosk", "KAIT.Kiosk\KAIT.Kiosk.csproj", "{61F39FE3-8E38-4AD3-AEF6-953CB774475A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KAIT.Biometric.Services", "Core\KAIT.Biometric.Services\KAIT.Biometric.Services.csproj", "{021A6988-292D-45A7-95EF-E50EDBDBCD34}"
@@ -26,14 +22,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KAIT.Kinect.Service", "Core
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KAIT.ObjectDetection", "Core\KAIT.ObjectDetection\KAIT.ObjectDetection.csproj", "{400B02C5-3BBB-458E-80C7-B2911168612A}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "KAIT.NotificationApp.Shared", "KAIT.NotificationApp\KAIT.NotificationApp.Shared\KAIT.NotificationApp.Shared.shproj", "{431EAC29-ABE0-4F71-89A7-C9D993C806BD}"
-EndProject
-Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "KAIT.NotificationServices", "KAIT.NotificationServices\KAIT.NotificationServices.ccproj", "{E36E97C8-6E12-401D-8FA9-79ED360952FB}"
-EndProject
 Global
-	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		KAIT.NotificationApp\KAIT.NotificationApp.Shared\Inception.NotificationApp.Shared.projitems*{431eac29-abe0-4f71-89a7-c9d993c806bd}*SharedItemsImports = 13
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|ARM = Debug|ARM
@@ -45,17 +34,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{976A62BF-08C4-4BCA-A013-49D21CDB2E9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{976A62BF-08C4-4BCA-A013-49D21CDB2E9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{976A62BF-08C4-4BCA-A013-49D21CDB2E9B}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{976A62BF-08C4-4BCA-A013-49D21CDB2E9B}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{976A62BF-08C4-4BCA-A013-49D21CDB2E9B}.Debug|x64.Build.0 = Debug|Any CPU
-		{976A62BF-08C4-4BCA-A013-49D21CDB2E9B}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{976A62BF-08C4-4BCA-A013-49D21CDB2E9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{976A62BF-08C4-4BCA-A013-49D21CDB2E9B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{976A62BF-08C4-4BCA-A013-49D21CDB2E9B}.Release|ARM.ActiveCfg = Release|Any CPU
-		{976A62BF-08C4-4BCA-A013-49D21CDB2E9B}.Release|x64.ActiveCfg = Release|Any CPU
-		{976A62BF-08C4-4BCA-A013-49D21CDB2E9B}.Release|x86.ActiveCfg = Release|Any CPU
 		{61F39FE3-8E38-4AD3-AEF6-953CB774475A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{61F39FE3-8E38-4AD3-AEF6-953CB774475A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61F39FE3-8E38-4AD3-AEF6-953CB774475A}.Debug|ARM.ActiveCfg = Debug|Any CPU
@@ -116,21 +94,8 @@ Global
 		{400B02C5-3BBB-458E-80C7-B2911168612A}.Release|ARM.ActiveCfg = Release|Any CPU
 		{400B02C5-3BBB-458E-80C7-B2911168612A}.Release|x64.ActiveCfg = Release|Any CPU
 		{400B02C5-3BBB-458E-80C7-B2911168612A}.Release|x86.ActiveCfg = Release|Any CPU
-		{E36E97C8-6E12-401D-8FA9-79ED360952FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E36E97C8-6E12-401D-8FA9-79ED360952FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E36E97C8-6E12-401D-8FA9-79ED360952FB}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{E36E97C8-6E12-401D-8FA9-79ED360952FB}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{E36E97C8-6E12-401D-8FA9-79ED360952FB}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{E36E97C8-6E12-401D-8FA9-79ED360952FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E36E97C8-6E12-401D-8FA9-79ED360952FB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E36E97C8-6E12-401D-8FA9-79ED360952FB}.Release|ARM.ActiveCfg = Release|Any CPU
-		{E36E97C8-6E12-401D-8FA9-79ED360952FB}.Release|x64.ActiveCfg = Release|Any CPU
-		{E36E97C8-6E12-401D-8FA9-79ED360952FB}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{976A62BF-08C4-4BCA-A013-49D21CDB2E9B} = {29D432A9-9F89-47C8-921F-722AC34325AA}
 	EndGlobalSection
 EndGlobal
