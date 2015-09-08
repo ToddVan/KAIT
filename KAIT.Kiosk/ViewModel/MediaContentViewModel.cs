@@ -19,6 +19,8 @@ namespace KAIT.Kiosk.ViewModel
 
         bool _missingDemographicData;
         ulong _missingUsersTrackingID;
+        ulong _currentUserTrackingID = 0;
+
         const string NOTRACK = "NoTrack";
         string _currentZone = NOTRACK;
         BiometricData _demographics;
@@ -106,7 +108,7 @@ namespace KAIT.Kiosk.ViewModel
             ConfigurationProvider cp = new ConfigurationProvider();
             IConfigSettings cs = cp.Load();
             EnableDiagnostics = cs.EnableDiagnostics;
-            //ClosestZone = cs.ZoneDefinitions.Where(x => x.MaximumRange == cs.ZoneDefinitions.Min(o => o.MaximumRange)).First().Name;
+            
         }
 
         void _demographicsService_DemographicsProcessingFailure(object sender, string e)
@@ -116,6 +118,7 @@ namespace KAIT.Kiosk.ViewModel
 
         void _demographicsService_DemographicsReceived(object sender, BiometricData e)
         {
+            Debug.Print("Demographics Received " + e.Age.ToString());
             if (_missingDemographicData)
             {
                 if (e.TrackingId == _missingUsersTrackingID)
@@ -125,12 +128,18 @@ namespace KAIT.Kiosk.ViewModel
             }
         }
 
-
+        string tmp = "";
         public void MoveNext()
         {
             IFileMetaData metaData = _contentManagement.MoveNext();
             if (metaData != null)
             {
+                if (tmp == metaData.ContentPath)
+                {
+                    
+                }
+
+                tmp = metaData.ContentPath;
                 MediaSource = metaData.ContentPath;
                 ErrorMessage = String.Empty;
             }
@@ -145,16 +154,19 @@ namespace KAIT.Kiosk.ViewModel
             }
             
         }
-
+        
         void _interactionService_KioskStateChanged(object sender, KioskStateEventArgs e)
         {
             if (e.KioskState == "Tracking")
             {
-                Debug.Print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Media Content Kiosk State Change " + e.CurrentZone);
-                if (_currentZone != e.CurrentZone)
+             
+                if (_currentZone != e.CurrentZone || _currentUserTrackingID != e.TrackingID)
                 {
-                    if (_currentZone == NOTRACK) IsVideoPlaying = false;
+                 
+                    //remember the last state we had before selecting content.
                     _currentZone = e.CurrentZone;
+                    _currentUserTrackingID = e.TrackingID;
+
                     DisplayZoneName = _currentZone;
                     if (e.Demographics == null)
                     {
@@ -167,7 +179,7 @@ namespace KAIT.Kiosk.ViewModel
                     }
 
                     if (e.Demographics != null)
-                        Debug.Print("Demographics during Kiosk State Change" + e.Demographics.Gender.ToString());
+                        Debug.Print("Demographics during Kiosk State Change " + e.Demographics.Gender.ToString());
 
                     _demographics = e.Demographics;
                     SelectContentBasedOnDemographics(e.Demographics);

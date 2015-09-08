@@ -256,7 +256,14 @@ namespace KAIT.ContentMetaData
             if (filter != null)
             {
                 IEnumerable<ZoneFileMetaData> metaList = _allZoneContentList.Where(x => x.ContentFolder.ToLower() == contentFolder.ToLower());
+                //Get the targeted content
                 fileMetaList = metaList.Where(filter);
+
+                //get the default content
+                var defaultContent = _defaultZoneContentList.Where(x => x.ContentFolder.ToLower() == contentFolder.ToLower());
+                
+                //Here we add the default content to the targeted content.
+                fileMetaList = fileMetaList.Concat(defaultContent);
             }
 
             if (fileMetaList.ToList().Count == 0)

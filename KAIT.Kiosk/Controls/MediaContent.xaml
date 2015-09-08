@@ -28,7 +28,7 @@
 
 
     <Grid>
-        <MediaElement x:Name="Video" Source="{Binding MediaSource}"  LoadedBehavior="Manual"  />
+        <MediaElement x:Name="Video" Source="{Binding MediaSource}"  LoadedBehavior="Manual" />
         <TextBlock Text="{Binding DisplayZoneName}" HorizontalAlignment="Center" VerticalAlignment="Top" TextWrapping="Wrap" FontSize="36" Foreground="Blue" 
                    Visibility="{Binding EnableDiagnostics, Converter={StaticResource BooleanVisibilityConverter}}"/>
         <TextBlock Text="{Binding ErrorMessage}" HorizontalAlignment="Left" VerticalAlignment="Bottom" TextWrapping="Wrap" FontSize="24" Foreground="Red" Margin="0,20,0,30"/>

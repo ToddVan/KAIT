@@ -70,7 +70,8 @@ namespace KAIT.Kiosk.Controls
             {
                 _viewModel = this.DataContext as MediaContentViewModel;
                 _viewModel.IsVideoPlaying = false;
-                Debug.WriteLine("FADEOUT Complete - is playing = false");
+               
+                _viewModel.MediaSource = "blank.bmp";
                 _viewModel.MoveNext();
             }
             catch (Exception ex)
@@ -82,9 +83,9 @@ namespace KAIT.Kiosk.Controls
             {
                 _viewModel = this.DataContext as MediaContentViewModel;
                 _viewModel.IsVideoPlaying = true;
-                Debug.WriteLine("FADEIN Begin - is playing = true");
+              
                 _fadeIn.Begin();
-                //_timer.Start();
+               
             });
         }
 
@@ -94,19 +95,17 @@ namespace KAIT.Kiosk.Controls
             if (Video.NaturalDuration.HasTimeSpan)
                 DispatcherHelper.UIDispatcher.Invoke(() =>
                 {
-                    //_viewModel = this.DataContext as MediaContentViewModel;
-                    //_viewModel.IsVideoPlaying = false;
-                    Debug.WriteLine("FADEOUT Begin - is playing = ? -> " + _viewModel.IsVideoPlaying.ToString());
+                 
                     _fadeOut.Begin();
                 });
         }
 
         void Video_MediaOpened(object sender, RoutedEventArgs e)
         {
-            Debug.WriteLine("MEDIA OPENED");
+          
             if (!Video.NaturalDuration.HasTimeSpan)
             {
-                Debug.WriteLine("TIMER START - is playing = ? -> " + _viewModel.IsVideoPlaying.ToString());
+              
                 _timer.Start();
             }
         }
@@ -114,34 +113,26 @@ namespace KAIT.Kiosk.Controls
         void _timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             _timer.Stop();
-            //_viewModel.IsVideoPlaying = false;
-            Debug.WriteLine("TIMER ELAPSED - isPlaying = false");
+           
             DispatcherHelper.UIDispatcher.Invoke(() =>
             {
-                //_viewModel = this.DataContext as MediaContentViewModel;
-                //_viewModel.IsVideoPlaying = false;
-                //Debug.WriteLine("FADEOUT Begin - is playing = ? -> " + _viewModel.IsVideoPlaying.ToString());
                 _fadeOut.Begin();
             });
         }
 
         void _viewModel_Deactivated(object sender, EventArgs e)
         {
-            Debug.WriteLine("DEACTIVATED - isPlaying = false");
-
-            //_viewModel = this.DataContext as MediaContentViewModel;
-            //_viewModel.IsVideoPlaying = false;
+          
 
             _timer.Stop();
-            //_viewModel.IsVideoPlaying = false;
+          
             Video.LoadedBehavior = MediaState.Manual;
             Video.Pause();
         }
 
         void _viewModel_Activated(object sender, EventArgs e)
         {
-            Debug.WriteLine("ACTIVATED - is playing = true");
-            //_viewModel.IsVideoPlaying = true;
+ 
             Video.Play();
         }
 

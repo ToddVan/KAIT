@@ -80,7 +80,7 @@ namespace KAIT.EventHub.Messaging
                     }
                 }
 
-                Trace.TraceInformation("Applying custom serialization settings to object");
+                //Trace.TraceInformation("Applying custom serialization settings to object");
                 var serializationSettings = new JsonSerializerSettings();
 
                 serializationSettings.Converters.Add(new StringEnumConverter() { AllowIntegerValues = false, CamelCaseText = false });
@@ -94,7 +94,7 @@ namespace KAIT.EventHub.Messaging
 
                 string JSonSerializedMessage = ConvertMessageToJSon(Message, serializationSettings);
 
-                Trace.TraceInformation("JSON Message:\r\n{0}\r\n", JSonSerializedMessage);
+                //Trace.TraceInformation("JSON Message:\r\n{0}\r\n", JSonSerializedMessage);
                 EventHubMessageSenderClient.SendAsync(new EventData(Encoding.UTF8.GetBytes(JSonSerializedMessage)));
             }
             catch (Exception ex)

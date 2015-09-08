@@ -92,6 +92,7 @@ namespace KAIT.Biometric.Services
         public BiometricTelemetryService()
         {
             ConfigureOverSampling();
+            Init();
         }
         
         public string EventHubConnectionString
@@ -127,7 +128,7 @@ namespace KAIT.Biometric.Services
             //this will occur as this process is happening on a paralle thread and we could be behind
             if (!IsNewPlayer(trackingId))
             {
-                Debug.Print("Bypassed: " + trackingId);
+               // Debug.Print("Bypassed: " + trackingId);
                 return true;
             }
 
@@ -143,9 +144,7 @@ namespace KAIT.Biometric.Services
               
                 List<NEC.NeoFace.Engage.Face> result;
 
-                //if (DebugImages)
-                //    bmp.Save("C:\\TEMP\\REJECTED\\" + trackingId + ".png", System.Drawing.Imaging.ImageFormat.Png);
-
+               
                 if (!TestMode)
                     result = NEC.NeoFace.Engage.NECLabs.DetectFace(bmp);
                 else
@@ -153,7 +152,7 @@ namespace KAIT.Biometric.Services
 
 
                 Debug.Print("Evaluate Demographics ");                                              //Male                             //Female
-                if (TestMode || (result != null && result.Count > 0 && (result[0].GenderConfidence > .7 || result[0].GenderConfidence < .3) && result[0].GenderConfidence != -1.0))
+                if (TestMode || (result != null && result.Count > 0 && (result[0].GenderConfidence > .7 || result[0].GenderConfidence < .47) && result[0].GenderConfidence != -1.0))
                 {
                     Debug.Print("Get Demographcis ");
                     var current = GetDemographics(trackingId, result);
@@ -287,20 +286,20 @@ namespace KAIT.Biometric.Services
            
             if (activePlayerBiometricData == null)
             {
-                Debug.Print("IsNewPlayer: True " + TrackingID.ToString());
+               // Debug.Print("IsNewPlayer: True " + TrackingID.ToString());
                 return true;
             }                                                         //Set things so we continue to see if we can identify this player...
             else if (activePlayerBiometricData.SamplingCount < _overSamplingThreshold || (IsPrimaryRoleBiometricID && activePlayerBiometricData.FilteredBiometricData.FaceID == ""))
             {
                 activePlayerBiometricData.LastSeen = DateTime.Now;
-                Debug.Print("IsNewPlayer: Sample " + TrackingID.ToString());
+               // Debug.Print("IsNewPlayer: Sample " + TrackingID.ToString());
                 return true;
             }
             else
             {
                 activePlayerBiometricData.LastSeen = DateTime.Now;
                 var t = activePlayerBiometricData.FaceID;
-                Debug.Print("IsNewPlayer: False " + TrackingID.ToString());
+               // Debug.Print("IsNewPlayer: False " + TrackingID.ToString());
                 return false;
             }
                 
