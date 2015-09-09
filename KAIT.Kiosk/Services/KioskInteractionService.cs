@@ -1,4 +1,19 @@
-﻿using Microsoft.Kinect;
+﻿//----------------------------------------------------------------------------------------------
+//    Copyright 2014 Microsoft Corporation
+//
+//    Licensed under the Apache License, Version 2.0 (the "License");
+//    you may not use this file except in compliance with the License.
+//    You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+//    Unless required by applicable law or agreed to in writing, software
+//    distributed under the License is distributed on an "AS IS" BASIS,
+//    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//    See the License for the specific language governing permissions and
+//    limitations under the License.
+
+using Microsoft.Kinect;
 using System;
 using System.Configuration;
 using System.Diagnostics;
@@ -11,7 +26,6 @@ using KAIT.EventHub.Messaging;
 using System.Collections.Concurrent;
 using System.Reactive.Concurrency;
 using System.Reactive.Linq;
-using KAIT.Kinect.Service;
 
 namespace KAIT.Kiosk.Services
 {    
@@ -37,12 +51,14 @@ namespace KAIT.Kiosk.Services
         IDemographicsService _demographicService;
         IItemInteractionService _itemInteractionService;
         IConfigurationProvider _configurationProvider;
+       
         IBodyTrackingService _bodyTrackingService { get; set; }
         
         BlockingCollection<KioskStateEventArgs> _interactionProcessingQueue;
         private ContentInteraction _lastContentInteraction = new ContentInteraction();
         
         CoordinateMapper _coordinateMapper;
+        
         private EventHubMessageSender _eventHub;
         BodyFrameReader _bodyFrameReader;
 
@@ -102,8 +118,7 @@ namespace KAIT.Kiosk.Services
             _eventHub = new EventHubMessageSender(ConfigurationManager.AppSettings["Azure.Hub.Kiosk"]);
             
             _sensorService = sensorService;
-          //  _telemetryService = telemetryService;
-
+        
             _itemInteractionService = itemInteractionService;
             _itemInteractionService.ItemInteraction += _itemInteractionService_ItemInteraction;
             _coordinateMapper = _sensorService.Sensor.CoordinateMapper;
@@ -113,12 +128,14 @@ namespace KAIT.Kiosk.Services
             GetConfig();
 
             _sensorService.StatusChanged += _sensorService_StatusChanged;
+        
             _bodyFrameReader = _sensorService.Sensor.BodyFrameSource.OpenReader();
             if (_bodyFrameReader != null)
                 _bodyFrameReader.FrameArrived += _bodyFrameReader_FrameArrived;
           
             _sensorService.Open();
             
+            // Telemetry processing routine done on a seperate background thread via queues
             _interactionProcessingQueue = new BlockingCollection<KioskStateEventArgs>();
             {
                 IObservable<KioskStateEventArgs> ob = _interactionProcessingQueue.
@@ -127,11 +144,11 @@ namespace KAIT.Kiosk.Services
 
                 ob.Subscribe(p =>
                 {
-                    //var temp = Thread.CurrentThread.ManagedThreadId;
+            
                     // This handler will get called whenever 
                     // anything appears on myQueue in the future.
                     this.SendIteraction(p);
-                    //Debug.Write("Consuming: {0}\n", p);
+            
                 });
             }
 
@@ -150,7 +167,6 @@ namespace KAIT.Kiosk.Services
         {
             if (e.ItemState != ManipulationStates.NoTrack)
             {
-                Debug.Print("Sending Object Interaction Event: " + e.ItemSelected);
                 var kioskEvent = new KioskStateEventArgs() { TrackingID = _bodyTrackingService.ActiveBodyId, KioskState = CurrentState.ToString(), CurrentZone = CurrentZone };
                 kioskEvent.ItemState = e.ItemState;
                 kioskEvent.ItemSelected = e.ItemSelected;
@@ -168,7 +184,6 @@ namespace KAIT.Kiosk.Services
             switch (e.Status)
             {
                 case SensorStatus.Ready:
-                    //CurrentState = KioskStates.Ready;
                     CurrentState = KioskStates.Tracking;
                     break;
                 case SensorStatus.NoSensor:
@@ -199,7 +214,6 @@ namespace KAIT.Kiosk.Services
                 #region this code calls the Advanced Body Tracking Code
                 _bodyTrackingService.TrackBodies(this._bodies);
                 
-                //System.Diagnostics.Debug.Print("Body Tracking Active Body TrackingId:{0}, CorrelationId:{1}", _bodyTrackingService.ActiveBodyId, _bodyTrackingService.ActiveBodyCorrelationId);                               
                 var activeBodyId = _bodyTrackingService.SetActivePlayer(this._bodies);
                 if (activeBodyId != _itemInteractionService.ActivePlayerId)
                 {
@@ -255,9 +269,7 @@ namespace KAIT.Kiosk.Services
         
         private void SendIteraction(KioskStateEventArgs args)
         {
-          //  Debug.Print("Send Interactions........");
-          //  return;
-
+          
             var contentInteraction = new ContentInteraction();
 
             if (args.ContentAction == ContentAction.Exit)
@@ -305,7 +317,7 @@ namespace KAIT.Kiosk.Services
             if (_lastContentInteraction.InteractionZone != contentInteraction.InteractionZone || _lastContentInteraction.DeviceSelectionState != contentInteraction.DeviceSelectionState)
             {
                 _lastContentInteraction = contentInteraction;
-                System.Diagnostics.Debug.Print("**** SendInteraction ****, TrackingId{0}, Zone{1}, SelectionState{2}, Timestamp{3}", contentInteraction.TrackingId, contentInteraction.InteractionZone, contentInteraction.DeviceSelectionState, contentInteraction.TimeStamp);
+                
                 _eventHub.SendMessageToEventHub(contentInteraction);
             }
         }

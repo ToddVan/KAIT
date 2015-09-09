@@ -1,11 +1,26 @@
-﻿using GalaSoft.MvvmLight;
+﻿//----------------------------------------------------------------------------------------------
+//    Copyright 2014 Microsoft Corporation
+//
+//    Licensed under the Apache License, Version 2.0 (the "License");
+//    you may not use this file except in compliance with the License.
+//    You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+//    Unless required by applicable law or agreed to in writing, software
+//    distributed under the License is distributed on an "AS IS" BASIS,
+//    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//    See the License for the specific language governing permissions and
+//    limitations under the License.
+
+
+using GalaSoft.MvvmLight;
 using KAIT.Common;
 using KAIT.Common.Interfaces;
 using KAIT.Common.Services.Messages;
 using KAIT.ContentMetaData;
 using System;
 using System.Diagnostics;
-using System.Linq;
 using System.Windows;
 
 namespace KAIT.Kiosk.ViewModel
@@ -118,7 +133,7 @@ namespace KAIT.Kiosk.ViewModel
 
         void _demographicsService_DemographicsReceived(object sender, BiometricData e)
         {
-            Debug.Print("Demographics Received " + e.Age.ToString());
+           
             if (_missingDemographicData)
             {
                 if (e.TrackingId == _missingUsersTrackingID)
@@ -201,7 +216,7 @@ namespace KAIT.Kiosk.ViewModel
         {
             if (e.ItemState != ManipulationStates.NoTrack && e.ItemState != ItemState)
             {
-                    Debug.Print("@@@ITEM STATE: " + e.ItemState.ToString());
+              
                     DisplayZoneName = _currentZone + ", " + e.ItemState.ToString();
                     ItemState = e.ItemState;
 
@@ -221,7 +236,6 @@ namespace KAIT.Kiosk.ViewModel
 
 		                default:    // released/replaced
                             SelectContentBasedOnDemographics(_demographics);
-                            //SelectContentBasedOnItem(e.ItemSelected, ManipulationStates.Released);
                             break;
 	                }
 

@@ -1,4 +1,19 @@
-﻿using KAIT.Biometric.Services;
+﻿//----------------------------------------------------------------------------------------------
+//    Copyright 2014 Microsoft Corporation
+//
+//    Licensed under the Apache License, Version 2.0 (the "License");
+//    you may not use this file except in compliance with the License.
+//    You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+//    Unless required by applicable law or agreed to in writing, software
+//    distributed under the License is distributed on an "AS IS" BASIS,
+//    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//    See the License for the specific language governing permissions and
+//    limitations under the License.
+
+using KAIT.Biometric.Services;
 using Microsoft.Kinect;
 using Microsoft.Kinect.Face;
 using System;
@@ -7,10 +22,8 @@ using System.Configuration;
 using System.Reactive.Concurrency;
 using System.Threading.Tasks;
 using System.Reactive.Linq;
-using System.Reactive.Threading;
 using System.Windows;
 using System.Windows.Media.Imaging;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using Extensions;
@@ -239,11 +252,7 @@ namespace KAIT.Common.Sensor
             ColorFrame colorFrame = null;
             InfraredFrame infraredFrame = null;
 
-            //// Retrieve multisource frame reference
-            //MultiSourceFrameReference multiRef = e.FrameReference;
-
-            //MultiSourceFrame multiSourceFrame = multiRef.AcquireFrame();
-
+            
             if (e == null) return;
 
             try
@@ -257,12 +266,7 @@ namespace KAIT.Common.Sensor
                     return;
                 }
 
-                //ColorFrame 
-                //using (colorFrame)
-                //{
-                //    RenderColorFrame(colorFrame);
-                //}
-
+               
                  //ColorFrame 
                 using (colorFrame)
                 {
@@ -323,10 +327,10 @@ namespace KAIT.Common.Sensor
                     for (int i = 0; i < this.bodyCount; i++)
                     {
                         var body = this.bodies[i];
-                        //_messageSender.TrackSkeleton(body, this._sensorService.Sensor.UniqueKinectId);
+                       
                         _SkeletonTrackingProcessingQueue.Add(body);
 
-                        //    // check if a valid face is tracked in this face source
+                         // check if a valid face is tracked in this face source
                         if (this.faceFrameSources[i].IsTrackingIdValid)
                         {
                             // check if we have valid face frame results
@@ -362,14 +366,11 @@ namespace KAIT.Common.Sensor
                                                                                     this.faceFrameResults[i].FaceBoundingBoxInColorSpace.Width() + 100,
                                                                                     this.faceFrameResults[i].FaceBoundingBoxInColorSpace.Height() + 140));
 
-                                       // Debug.Print("Thread " + Thread.CurrentThread.ManagedThreadId.ToString());
-
-                                        //  this.face.Source = faceImage;
+                                      
 
                                        
                                         var sample = new ProcessFaceData() { TrackingID = this.faceFrameResults[i].TrackingId, PlayersFace = CreateBitmap(faceImage.Clone()) };
 
-                                        Debug.Print("Dispatch Image for Processing {0} =======================================", sample.TrackingID);
                                         _BiometricProcessingQueue.Add(sample);
 
                                     }
@@ -601,7 +602,7 @@ namespace KAIT.Common.Sensor
             {
                 if (this.Sensor.IsOpen)
                 {
-
+                    
                     for (int i = 0; i < this.bodyCount; i++)
                     {
                         if (this.faceFrameReaders[i] != null)

@@ -668,7 +668,7 @@ namespace KAIT.ObjectDetection
                                 //TopView use this Depth value which represents the actual top left depth of the object(FindTopOfObject will change this index to be the top left of the buffer boundary)
                                 var objectActualTopLeftDepthPointer = NewObject.DepthArrayPointer;                                
 
-                                //System.Diagnostics.Debug.Print("ObjectDepth:{0} = frameData[objectActualTopLeftDepthPointer{1}]", frameData[objectActualTopLeftDepthPointer], objectActualTopLeftDepthPointer);
+                             
 
                                 NewObject.DepthArrayPointer = FindTopOfObject(NewObject.DepthArrayPointer, NewObject.Width, ref NewObject.Height, MissingDataTolerance, ObjectDetectionDepthThreshold, minDepthTolerance, frameData);
 
@@ -850,8 +850,7 @@ namespace KAIT.ObjectDetection
 
                 if (st != ManipulationStates.NoTrack)
                 {
-                    Debug.Print(st.ToString());
-
+                 
                     OnItemInteraction(trackedObj, st);
 
                     if (!IsCalibrating)
@@ -893,9 +892,7 @@ namespace KAIT.ObjectDetection
             var objectCenterIndex = BoundBoxStart + (BoundBoxWidth / 2);
             var objectCenterDepth = frameData[objectCenterIndex];
 
-            //bool writeOutput = false;            
-            //if(writeOutput)
-            //    System.Diagnostics.Debug.Print("********** objectTopBoundaryCenterDepth:{0} **********", objectTopBoundaryCenterDepth);
+            
 
             if (!IsCalibrating && trackedObject.TrackedPixels.Count > 0)
             {                
@@ -903,12 +900,10 @@ namespace KAIT.ObjectDetection
                 {
                     var test = frameData[tp.PixelIndexInDepthFrame];
 
-                    //if (writeOutput)
-                    //    System.Diagnostics.Debug.Print("**TrackedPixel OrginalDepthValue:{0}, PixelIndexInDepthFrame:{1} Depth:{2} - ", tp.OrginalDepthValue, tp.PixelIndexInDepthFrame, test);
-
+                   
                     if (IsZeroDepth)
                     {
-                        //var zeroDepthMaxValue = MaxValue * 4;
+                       
 
                         if (frameData[tp.PixelIndexInDepthFrame] > 0 && frameData[tp.PixelIndexInDepthFrame] < MaxValue * 4 && tp.OrginalDepthValue > MaxValue * 4)
                         {
@@ -1073,13 +1068,7 @@ namespace KAIT.ObjectDetection
             int existReadCnt = 0;
             int notExistsReadCnt = 0;
 
-            
-            //if (false)
-            //{
-            //    System.Diagnostics.Debug.Print("w{0} = (trackedObject.DepthArrayPointer{1} + (512 * 10))", w, trackedObject.DepthArrayPointer);
-            //    System.Diagnostics.Debug.Print("********** depth maxValue:{0} **********", MaxValue);                
-            //    System.Diagnostics.Debug.Print("********** objectCenterDepth:{0} **********", objectCenterDepth);
-            //}
+          
 
             //Scan the object space looking for any signs the object is still there...
             for (int Y = 0; Y < trackedObject.Height / 4; Y++)
@@ -1088,8 +1077,7 @@ namespace KAIT.ObjectDetection
                 {
                     ushort depth = frameData[currentIndex + X];
 
-                    //if(writeOutput)
-                    //    System.Diagnostics.Debug.Print("********** Object Space Depth frameData[{0}]:{1} **********",currentIndex + X, depth);
+                   
 
                     if (IsZeroDepth)
                     {
@@ -1103,9 +1091,6 @@ namespace KAIT.ObjectDetection
                     }
                     else
                     {
-
-                        //if (writeOutput)
-                        //    System.Diagnostics.Debug.Print("********** Object Space Depth frameData[{0}]:{1}, MaxValue:{2} **********", currentIndex + X, depth, MaxValue);
 
                         if (depth > 0 && depth <= MaxValue)
                         {
@@ -1124,7 +1109,7 @@ namespace KAIT.ObjectDetection
                         }
                     }
 
-                    //System.Diagnostics.Debug.Print("Object Depth: frameData[currentIndex{0} + X{1}]: {2}, existsReadCnt{3}, notExistsReadCnt{4}", currentIndex, X, depth, existReadCnt, notExistsReadCnt);
+                    
                 }
                 currentIndex = w + (512 * Y);                
             }
@@ -1140,8 +1125,7 @@ namespace KAIT.ObjectDetection
                 DeviceIsPresent = false;
             }
 
-            //System.Diagnostics.Debug.Print("DeviceIsPresent: {0}, res: {1}, numberOfPixelsPerObject {2}", DeviceIsPresent, res, numberOfPixelsPerObject);
-
+          
             //Try to confirm action by evaluating how many times we've seen this state
             if (IsZeroDepth)
             {
@@ -1230,7 +1214,7 @@ namespace KAIT.ObjectDetection
                 for (int X = 0; X < trackedObject.Width; X++)
                 {
                     ushort depth = frameData[currentIndex + X];
-                    Debug.Print(X.ToString() + " " + depth.ToString());
+                   
                     if (depth <= MaxValue)
                     {
                         existReadCnt++;
@@ -1261,17 +1245,10 @@ namespace KAIT.ObjectDetection
             if (IsZeroDepth)
             {
 
-                //if (writeOutput)
-                //    System.Diagnostics.Debug.Print("GetTargetWidth Start:{0}, Reach:{1}", Start, Reach);
+               
 
                 for (int i = Start; i < Reach; i++)
                 {
-                    //if (writeOutput)
-                    //{
-                    //    var depth = frameData[i];
-                    //    System.Diagnostics.Debug.Print("GetTargetWidth frameData[{0}]:{1}", i, frameData[i]);
-                    //}
-
                     StreamLength++;
                     if (frameData[i] == 0)
                     {
@@ -1288,17 +1265,12 @@ namespace KAIT.ObjectDetection
             }
             else
             {
-                //if (writeOutput)
-                //    System.Diagnostics.Debug.Print("GetTargetWidth Start:{0}, Reach:{1}", Start, Reach);
+                
 
                 for (int i = Start; i < Reach; i++)
                 {
 
-                    //if (writeOutput)
-                    //{
-                    //    var depth = frameData[i];
-                    //    System.Diagnostics.Debug.Print("GetTargetWidth frameData[{0}]:{1}", i, frameData[i]);
-                    //}
+                    
 
                     StreamLength++;
                     if (frameData[i] <= MaxValue && frameData[i] >= MinValue)

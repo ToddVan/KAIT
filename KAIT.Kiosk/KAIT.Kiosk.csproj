@@ -40,7 +40,7 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <TargetFrameworkProfile />
-    <NuGetPackageImportStamp>67ccc563</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>9722531c</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>x64</PlatformTarget>
@@ -109,13 +109,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\WindowsAzure.Storage.4.3.0\lib\net40\Microsoft.WindowsAzure.Storage.dll</HintPath>
     </Reference>
-    <Reference Include="NEC.NeoFace.Engage, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\NEC.NeoFace.Engage.1.0.5\lib\net45\NEC.NeoFace.Engage.dll</HintPath>
-    </Reference>
-    <Reference Include="NEC.NeoFace.Interop, Version=1.0.5383.23520, Culture=neutral, processorArchitecture=AMD64">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\BiometricRework\Kinect.Biometrics\Biometrics\NEC.Biometrics\Dependencies\NEC.NeoFace.Interop.dll</HintPath>
+    <Reference Include="NEC.NeoFace.Engage">
+      <HintPath>..\packages\NEC.NeoFace.Engage.1.0.6\lib\net45\NEC.NeoFace.Engage.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -157,9 +152,6 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="Zen.Barcode.Core">
-      <HintPath>..\packages\Zen.Barcode.Rendering.Framework.3.1.10729.1\lib\Zen.Barcode.Core.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -170,26 +162,16 @@
       <DependentUpon>TouchScreenControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\BooleanVisibilityConverter.cs" />
-    <Compile Include="Controls\Photo.xaml.cs">
-      <DependentUpon>Photo.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Kiosk\KinectNoBackgroundView.cs" />
     <Compile Include="MediaContentConfiguration.xaml.cs">
       <DependentUpon>MediaContentConfiguration.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Services\DemographicsTestService.cs" />
     <Compile Include="Services\FileContentManagementService.cs" />
     <Compile Include="Services\FileMetaData.cs" />
-    <Compile Include="Services\IBarcodeGenerator.cs" />
     <Compile Include="Services\IContentManagement.cs" />
     <None Include="config.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <Compile Include="Services\KioskInteractionService.cs" />
-    <Compile Include="Services\TestInteractionService.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Services\TestTelemetryService.cs" />
     <Compile Include="ViewModel\MediaContentConfigurationViewModel.cs" />
     <Compile Include="ViewModel\TouchScreenViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -203,10 +185,6 @@
     <Page Include="Controls\MediaContent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\Photo.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -385,15 +363,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\SpeechGrammar.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Images\DefaultContent.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\ScreenshotHover.png" />
-    <Resource Include="Images\ScreenshotNormal.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\KAIT.Biometric.Services\KAIT.Biometric.Services.csproj">
@@ -600,9 +569,9 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
-    <Error Condition="!Exists('..\packages\NEC.NeoFace.Engage.1.0.5\build\NEC.NeoFace.Engage.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NEC.NeoFace.Engage.1.0.5\build\NEC.NeoFace.Engage.targets'))" />
+    <Error Condition="!Exists('..\packages\NEC.NeoFace.Engage.1.0.6\build\NEC.NeoFace.Engage.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NEC.NeoFace.Engage.1.0.6\build\NEC.NeoFace.Engage.targets'))" />
   </Target>
-  <Import Project="..\packages\NEC.NeoFace.Engage.1.0.5\build\NEC.NeoFace.Engage.targets" Condition="Exists('..\packages\NEC.NeoFace.Engage.1.0.5\build\NEC.NeoFace.Engage.targets')" />
+  <Import Project="..\packages\NEC.NeoFace.Engage.1.0.6\build\NEC.NeoFace.Engage.targets" Condition="Exists('..\packages\NEC.NeoFace.Engage.1.0.6\build\NEC.NeoFace.Engage.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -83,7 +83,6 @@
 
         <StackPanel Orientation="Horizontal" Visibility="{Binding EnableDiagnostics, Converter={StaticResource BooleanVisibilityConverter}}">
             <Button x:Name="button" Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Click="button_Click"/>
-            <Button x:Name="button_Copy" Content="Demographic" HorizontalAlignment="Left" VerticalAlignment="Top" Width="95" Click="button_Copy_Click"/>
             <Button Grid.Row="0" Content="Object Detection" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0.5,100,0.5" Command="{Binding OpenObjectDetection}" />
         </StackPanel>
 
@@ -102,7 +101,7 @@
         <Grid x:Name="NoSensorGrid" Grid.RowSpan="3" Background="Gray" Visibility="Collapsed">
             <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="No Sensor Present" VerticalAlignment="Center" FontSize="29.333"/>
         </Grid>
-        <KAIT.Kiosk:Photo x:Name="photo" Grid.Row="1" Visibility="Collapsed" DataContext="{Binding Photo, Mode=OneWay, Source={StaticResource Locator}}" Grid.RowSpan="2"/>
+        
         <Grid x:Name="CylonBar" Grid.RowSpan="2" Grid.Row="2" Background="#FF363636">
             <Ellipse x:Name="ActivePlayer" HorizontalAlignment="Left" Height="10" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.5,0.5" >
                 <Ellipse.RenderTransform>

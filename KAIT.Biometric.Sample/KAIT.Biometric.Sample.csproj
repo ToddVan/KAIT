@@ -12,7 +12,7 @@
     <SccProvider>SAK</SccProvider>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
-    <NuGetPackageImportStamp>e218c2b8</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>bf35cd79</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Images\Kinect.ico</ApplicationIcon>
@@ -60,9 +60,9 @@
     <Reference Include="Microsoft.Kinect.Face, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=AMD64">
       <HintPath>..\packages\Microsoft.Kinect.Face.x64.2.0.1410.19000\lib\net45\Microsoft.Kinect.Face.dll</HintPath>
     </Reference>
-    <Reference Include="NEC.NeoFace.Engage, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="NEC.NeoFace.Engage, Version=1.0.6.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\NEC.NeoFace.Engage.1.0.5\lib\net45\NEC.NeoFace.Engage.dll</HintPath>
+      <HintPath>..\packages\NEC.NeoFace.Engage.1.0.6\lib\net45\NEC.NeoFace.Engage.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -348,9 +348,9 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
-    <Error Condition="!Exists('..\packages\NEC.NeoFace.Engage.1.0.5\build\NEC.NeoFace.Engage.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NEC.NeoFace.Engage.1.0.5\build\NEC.NeoFace.Engage.targets'))" />
+    <Error Condition="!Exists('..\packages\NEC.NeoFace.Engage.1.0.6\build\NEC.NeoFace.Engage.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NEC.NeoFace.Engage.1.0.6\build\NEC.NeoFace.Engage.targets'))" />
   </Target>
-  <Import Project="..\packages\NEC.NeoFace.Engage.1.0.5\build\NEC.NeoFace.Engage.targets" Condition="Exists('..\packages\NEC.NeoFace.Engage.1.0.5\build\NEC.NeoFace.Engage.targets')" />
+  <Import Project="..\packages\NEC.NeoFace.Engage.1.0.6\build\NEC.NeoFace.Engage.targets" Condition="Exists('..\packages\NEC.NeoFace.Engage.1.0.6\build\NEC.NeoFace.Engage.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

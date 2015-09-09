@@ -82,7 +82,6 @@
     <Compile Include="Interfaces\IBodyTrackingService.cs" />
     <Compile Include="Interfaces\IDemographicsService.cs" />
     <Compile Include="Interfaces\IDepthService.cs" />
-    <Compile Include="Interfaces\IFaceFindingService.cs" />
     <Compile Include="Interfaces\IImageService.cs" />
     <Compile Include="Interfaces\IKioskInteractionService.cs" />
     <Compile Include="Interfaces\ISpeechService.cs" />

@@ -1,25 +1,25 @@
-﻿using GalaSoft.MvvmLight.Ioc;
+﻿//----------------------------------------------------------------------------------------------
+//    Copyright 2014 Microsoft Corporation
+//
+//    Licensed under the Apache License, Version 2.0 (the "License");
+//    you may not use this file except in compliance with the License.
+//    You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+//    Unless required by applicable law or agreed to in writing, software
+//    distributed under the License is distributed on an "AS IS" BASIS,
+//    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//    See the License for the specific language governing permissions and
+//    limitations under the License.
+
+
 using GalaSoft.MvvmLight.Threading;
 using KAIT.Kiosk.ViewModel;
-using KAIT.Kiosk.Kiosk;
-using KAIT.Kiosk.Services;
-using KAIT.Kiosk.ViewModel;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 
 namespace KAIT.Kiosk
@@ -31,10 +31,7 @@ namespace KAIT.Kiosk
 
     public partial class MainWindow : Window
     {
-        //t
-
-      
-        //KinectServices _kinect;
+        
         public MainWindow()
         {
          
@@ -63,33 +60,9 @@ namespace KAIT.Kiosk
         {
             var vm = this.DataContext as MainViewModel;
 
-           // vm.KioskState = "ActiveEngage";
+        
            vm.StartCal();
-            //switch (count)
-            //{
-            //    case 0:
-            //        vm.KioskState = "PassiveAttract";
-          //  VisualStateManager.GoToElementState(mainGrid, "ActiveEngage", true);
-            //        break;
-            //    case 1:
-            //        //VisualStateManager.GoToElementState(mainGrid, "ActiveAttract", true);
-            //        break;
-            //    case 2:
-            //        //VisualStateManager.GoToElementState(mainGrid, "PassiveEngage", true);
-            //        break;
-            //    case 3:
-            //        //VisualStateManager.GoToElementState(mainGrid, "PassiveAttract", true);
-            //        break;
-            //    default:
-            //        break;
-            //}
-            //count++;
-        }
-
-        private void button_Copy_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            //var service = SimpleIoc.Default.GetInstance<IDemographicsService>();
-            //service.Listen(null);
+       
         }
 
 
@@ -97,21 +70,11 @@ namespace KAIT.Kiosk
         {
             var vm = this.DataContext as MainViewModel;
 
-            //Window target = (Window)sender;
-            //target.Close();
-
             // Launch the console app
             if (e.Key == Key.Escape)
             {
                 vm.StartCal();
-                //ProcessStartInfo pInfo = new ProcessStartInfo("KAIT.ConfigSettingsConsole.exe");
-                //Process.Start(pInfo);
-
-                //var mainWindow = Application.Current.Windows.Cast<Window>().SingleOrDefault(w => w.Name == "KAIT.Kiosk2MainWindow");
-                //if (mainWindow == null)
-                //    mainWindow = new KAIT.Kiosk2.MainWindow();
-
-                //mainWindow.Show();
+               
             }
             else if (e.Key == Key.C && Keyboard.Modifiers == ModifierKeys.Control)
             {

@@ -1,4 +1,19 @@
-﻿using KAIT.EventHub.Messaging;
+﻿//----------------------------------------------------------------------------------------------
+//    Copyright 2014 Microsoft Corporation
+//
+//    Licensed under the Apache License, Version 2.0 (the "License");
+//    you may not use this file except in compliance with the License.
+//    You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+//    Unless required by applicable law or agreed to in writing, software
+//    distributed under the License is distributed on an "AS IS" BASIS,
+//    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//    See the License for the specific language governing permissions and
+//    limitations under the License.
+
+using KAIT.EventHub.Messaging;
 using KAIT.Common.Services.Communication;
 using KAIT.Common.Services.Messages;
 using System;
@@ -8,16 +23,12 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
-using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using KAIT.Common.Interfaces;
 using GalaSoft.MvvmLight.Ioc;
 using NEC.NeoFace.Engage;
-
-//using System.Windows.Media.Imaging;
 
 namespace KAIT.Biometric.Services
 {
@@ -32,9 +43,8 @@ namespace KAIT.Biometric.Services
 
         private Thread _lostTrackingPolling;
 
-       
-        private ITelemetryService _dataBroker;
         private int _overSamplingThreshold = 1;
+
         private bool _IsNECInFaultCondition = false;
 
         private bool _shutdown = false;
@@ -43,7 +53,6 @@ namespace KAIT.Biometric.Services
 
         List<UserExperienceContext> _userExperiences = new List<UserExperienceContext>();
 
-        bool _cloudConnectionFailure = false;
 
         public bool TestMode { get; set; }
 
@@ -128,12 +137,8 @@ namespace KAIT.Biometric.Services
             //this will occur as this process is happening on a paralle thread and we could be behind
             if (!IsNewPlayer(trackingId))
             {
-               // Debug.Print("Bypassed: " + trackingId);
                 return true;
             }
-
-            System.Drawing.Bitmap bmp = bitmap;// CreateBitmap(trackingId, bitmap);
-            Debug.Print("------------------------------------------------------------------------------------------------Process Face ");
 
             //Jump out if we're in a fault condition
             if (_IsNECInFaultCondition)
@@ -146,15 +151,15 @@ namespace KAIT.Biometric.Services
 
                
                 if (!TestMode)
-                    result = NEC.NeoFace.Engage.NECLabs.DetectFace(bmp);
+                    result = NEC.NeoFace.Engage.NECLabs.DetectFace(bitmap);
                 else
                     result = null;
 
 
-                Debug.Print("Evaluate Demographics ");                                              //Male                             //Female
+                                                                                                 //Male                             //Female
                 if (TestMode || (result != null && result.Count > 0 && (result[0].GenderConfidence > .7 || result[0].GenderConfidence < .47) && result[0].GenderConfidence != -1.0))
                 {
-                    Debug.Print("Get Demographcis ");
+                   
                     var current = GetDemographics(trackingId, result);
 
                     //This is implemented this way to maximize performance and avoid extra loops since it will only happen ONCE for every new user
@@ -176,7 +181,7 @@ namespace KAIT.Biometric.Services
                             && _activePlayerBiometricData.SamplingCount >= _overSamplingThreshold
                             && _activePlayerBiometricData.Transmitted && current.FaceMatch)
                         {
-                            Debug.Print("Update base on Biometric Auth. Resetting profile " + current.TrackingId.ToString());
+                          
                             _activePlayerBiometricData.ResetBiometricSamples();
                             _activePlayerBiometricData.Transmitted = false;
                             _activePlayerBiometricData.Add(current);
@@ -186,13 +191,13 @@ namespace KAIT.Biometric.Services
                         {
                             if (_activePlayerBiometricData == null)
                             {
-                                Debug.Print("Added New Player " + current.TrackingId.ToString() + " " + Thread.CurrentThread.ManagedThreadId);
+                          
                                 _activePlayerBiometricData = new PlayerBiometrics(current);
                                 _playerBiometrics.Add(_activePlayerBiometricData.TrackingID, _activePlayerBiometricData);
                             }
                             else if (_activePlayerBiometricData.SamplingCount < _overSamplingThreshold)
                             {
-                                Debug.Print("Added New Sample " + current.TrackingId.ToString());
+                          
                                 _activePlayerBiometricData.Add(current);
 
 
@@ -202,12 +207,11 @@ namespace KAIT.Biometric.Services
                                    && _activePlayerBiometricData.SamplingCount >= _overSamplingThreshold
                                    && !IsNewUserAContinuation(_activePlayerBiometricData))
                             {
-                                Debug.Print("Returned Demographics " + current.TrackingId.ToString());
-
+                          
                                 var PlaysTrueBiometrics = _activePlayerBiometricData.FilteredBiometricData;
 
                                 PlaysTrueBiometrics.TrackingState = BiometricTrackingState.TrackingStarted;
-                                PlaysTrueBiometrics.FaceImage = bmp;
+                                PlaysTrueBiometrics.FaceImage = bitmap;
 
                                 RaiseDemographicsEvent(PlaysTrueBiometrics);
 
@@ -226,8 +230,7 @@ namespace KAIT.Biometric.Services
                 else
                 {
                     Debug.Print("Quality Issue Rejecting Image");
-                    //if (DebugImages)
-                    //    bmp.Save("C:\\TEMP\\REJECTED" + trackingId + ".png", System.Drawing.Imaging.ImageFormat.Png);
+                   
                 }
 
                 return true;
@@ -254,14 +257,9 @@ namespace KAIT.Biometric.Services
                 var playersBiometrics = lostPlayer.FilteredBiometricData;
                 
                 if (lostPlayer.FaceID == "")
-                {
-                    
+                {                  
 
                     playersBiometrics.TrackingState = BiometricTrackingState.TrackingLost;
-
-                 
-                   
-                    
 
                     _playerBiometrics.Remove(lostPlayer.TrackingID);
                 }
@@ -271,13 +269,14 @@ namespace KAIT.Biometric.Services
          
 
         }
+        
         public bool IsNewPlayer(ulong TrackingID)
         {
 
             PlayerBiometrics activePlayerBiometricData;
             try
             { 
-                activePlayerBiometricData = _playerBiometrics[TrackingID];// (from player in _playerBiometrics where player.TrackingID == TrackingID select player).FirstOrDefault();
+                activePlayerBiometricData = _playerBiometrics[TrackingID];
             }
             catch
             {
@@ -286,20 +285,20 @@ namespace KAIT.Biometric.Services
            
             if (activePlayerBiometricData == null)
             {
-               // Debug.Print("IsNewPlayer: True " + TrackingID.ToString());
                 return true;
             }                                                         //Set things so we continue to see if we can identify this player...
             else if (activePlayerBiometricData.SamplingCount < _overSamplingThreshold || (IsPrimaryRoleBiometricID && activePlayerBiometricData.FilteredBiometricData.FaceID == ""))
             {
+                //Update our local state so we remember we've seen them again
                 activePlayerBiometricData.LastSeen = DateTime.Now;
-               // Debug.Print("IsNewPlayer: Sample " + TrackingID.ToString());
+               
                 return true;
             }
             else
             {
                 activePlayerBiometricData.LastSeen = DateTime.Now;
                 var t = activePlayerBiometricData.FaceID;
-               // Debug.Print("IsNewPlayer: False " + TrackingID.ToString());
+               
                 return false;
             }
                 
@@ -418,6 +417,7 @@ namespace KAIT.Biometric.Services
             } while (!_shutdown);
         }
 
+#region Image Enhancement Services for Processing IR Images for Biometrics if desired
         /// <summary>
 
         /// Resize the image to the specified width and height.
@@ -508,7 +508,9 @@ namespace KAIT.Biometric.Services
             return adjustedImage;
         }
 
-     
+#endregion
+
+
         private void RaiseDemographicsEvent(BiometricData payload)
         {
             var handler = this.DemographicsReceived;
@@ -567,6 +569,7 @@ namespace KAIT.Biometric.Services
 
         public void EnrollFace(string FaceID, Bitmap FaceImage)
         {
+            //Put code here to enrole a face in face recognition services
             //NEC.NeoFace.Engage.FaceAnalyser.EnrollFace(FaceID, FaceImage, ExtractionType.Both);
         }
     }
@@ -685,7 +688,7 @@ namespace KAIT.Biometric.Services
 
                 if (val > .7)
                     _gender = Gender.Male;
-                else if (val < .3)
+                else if (val < .45)
                     _gender = Gender.Female;
                 else
                     _gender = Gender.Unknown;

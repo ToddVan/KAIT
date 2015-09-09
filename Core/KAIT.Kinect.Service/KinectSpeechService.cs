@@ -1,4 +1,19 @@
-﻿using KAIT.Common.Interfaces;
+﻿//----------------------------------------------------------------------------------------------
+//    Copyright 2014 Microsoft Corporation
+//
+//    Licensed under the Apache License, Version 2.0 (the "License");
+//    you may not use this file except in compliance with the License.
+//    You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+//    Unless required by applicable law or agreed to in writing, software
+//    distributed under the License is distributed on an "AS IS" BASIS,
+//    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//    See the License for the specific language governing permissions and
+//    limitations under the License.
+
+using KAIT.Common.Interfaces;
 using KAIT.Common.Sensor;
 using Microsoft.Kinect;
 using System;
@@ -18,8 +33,7 @@ namespace KAIT.Kinect.Service
         KinectAudioStream _convertStream;
         RecognizerInfo _ri;
         SpeechRecognitionEngine _speechEngine;
-        //SpeechSynthesizer _speechSynthesizer;
-
+     
         public event EventHandler<Microsoft.Speech.Recognition.SpeechRecognizedEventArgs> SpeechRecognized;
 
         public event EventHandler<Microsoft.Speech.Recognition.SpeechRecognitionRejectedEventArgs> SpeechRejected;
@@ -27,8 +41,7 @@ namespace KAIT.Kinect.Service
         public KinectSpeechService(ISensorService<KinectSensor> sensorService)
         {
             _sensorService = sensorService;
-            // _speechSynthesizer = new SpeechSynthesizer();
-
+     
             IReadOnlyList<AudioBeam> audioBeamList = _sensorService.Sensor.AudioSource.AudioBeams;
             System.IO.Stream audioStream = audioBeamList[0].OpenInputStream();
 
@@ -57,18 +70,13 @@ namespace KAIT.Kinect.Service
                 // let the convertStream know speech is going active
                 _convertStream.SpeechActive = true;
 
-                // For long recognition sessions (a few hours or more), it may be beneficial to turn off adaptation of the acoustic model. 
-                // This will prevent recognition accuracy from degrading over time.
-                ////speechEngine.UpdateRecognizerSetting("AdaptationOn", 0);
-
+     
                 _speechEngine.SetInputToAudioStream(
                     _convertStream, new SpeechAudioFormatInfo(EncodingFormat.Pcm, 16000, 16, 1, 32000, 2, null));
                 _speechEngine.RecognizeAsync(RecognizeMode.Multiple);
 
-                //_isInTrainingMode = true;
+     
             }
-            //else
-            //    throw new InvalidOperationException("RecognizerInfo cannot be null");
         }
 
         void _speechEngine_SpeechRecognitionRejected(object sender, SpeechRecognitionRejectedEventArgs e)

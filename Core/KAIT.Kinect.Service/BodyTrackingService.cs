@@ -1,10 +1,24 @@
-﻿using System;
+﻿//----------------------------------------------------------------------------------------------
+//    Copyright 2014 Microsoft Corporation
+//
+//    Licensed under the Apache License, Version 2.0 (the "License");
+//    you may not use this file except in compliance with the License.
+//    You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+//    Unless required by applicable law or agreed to in writing, software
+//    distributed under the License is distributed on an "AS IS" BASIS,
+//    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//    See the License for the specific language governing permissions and
+//    limitations under the License.
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using KAIT.Common.Interfaces;
 using System.Configuration;
 using Microsoft.Kinect;
-using System.ComponentModel;
 using System.IO;
 using Newtonsoft.Json;
 
@@ -215,7 +229,7 @@ namespace KAIT.Kinect.Service
                     fs.Close();
                 }
                 _bodyTrackingConfiguration = (BodyTrackingConfiguration)JsonConvert.DeserializeObject(config, typeof(BodyTrackingConfiguration));
-                //OnPropertyChanged("BodyTrackingConfiguration");
+
             }
             catch
             {
@@ -310,7 +324,6 @@ namespace KAIT.Kinect.Service
                     ActiveBody = null;
                 }
 
-                //System.Diagnostics.Debug.Print("GetNextPlayer returned ActiveBodyId: {0}", ActiveBodyId);
 
                 return ActiveBodyId;
             }
@@ -526,36 +539,11 @@ namespace KAIT.Kinect.Service
 
             #region clean up Missing Bodies
 
-            #region debug output
-            //#if DEBUG
-            //                    {
-            //                        if (writeOutput)
-            //                        {
-            //                            System.Diagnostics.Debug.Print("TrackedMissingBody Count before Removing expired missing bodies {0}", TrackedBodiesMissing.Count());
-            //                            System.Diagnostics.Debug.Print("TrackedMissingBodies Count to be removed:{0}", TrackedBodiesMissing.Where(tb => tb.TimeWentMissing.Value.AddSeconds(+_missingBodyExpiredTimeLimit) < DateTime.Now).Count());
-
-            //                            foreach (var trackedMissingBody in TrackedBodiesMissing.Where(tb => tb.TimeWentMissing.Value.AddSeconds(+_missingBodyExpiredTimeLimit) < DateTime.Now))
-            //                                System.Diagnostics.Debug.Print("MissingBody to be Removed - Missing Body CorrelatedPlayerId:{0}, CurrentPlayerId:{1}", trackedMissingBody.CorrelationPlayerId, trackedMissingBody.CurrentPlayerTrackingId);
-            //                        }
-            //                    }
-            //#endif
-            #endregion debug output
+          
 
             CleanupMissingBodies();
 
-            #region debug output
-            //#if DEBUG
-            //                    {
-            //                        if (writeOutput)
-            //                        {
-            //                            System.Diagnostics.Debug.Print("TrackedMissingBody Count after Removing expired missing bodies {0}", TrackedBodiesMissing.Count());
-
-            //                            if (TrackedBodiesCount != TrackedBodies.Where(tb => tb.Key.CurrentPlayerTrackingId != 0).Count())
-            //                                System.Diagnostics.Debug.Print("TrackedBodyCount changed from {0} to {1}", TrackedBodiesCount, TrackedBodies.Where(tb => tb.Key.CurrentPlayerTrackingId != 0).Count());
-            //                        }
-            //                    }
-            //#endif
-            #endregion debug output
+        
             #endregion clean up Missing Bodies
         }
 
@@ -580,9 +568,7 @@ namespace KAIT.Kinect.Service
 
             if (hijackedBodies != null && hijackedBodies.Count() > 0)
             {
-                if (writeOutput)
-                    System.Diagnostics.Debug.Print("Body Hijack Detected for BodyTrackingId:{0}", hijackedBodies.First().Value.TrackingId);
-
+               
                 foreach (var hijackedBody in hijackedBodies)
                 {
                     if (!_trackedBodiesHijacked.Contains(hijackedBody.Key))
@@ -673,9 +659,7 @@ namespace KAIT.Kinect.Service
                         closestMissingBody = GetClosestTrackedBody(this._trackedBodiesMissing, newBody.Value);
                     }
 
-                    if (writeOutput)
-                        System.Diagnostics.Debug.Print("******** New Body is Missing Body ********** - BodyTrackingId:{0}, Missing Body CorrelationPlayerId:{1}", newBody.Value.TrackingId, closestMissingBody.CorrelationPlayerId);
-
+            
                     //Update the newBody.PlayerTrackingIds to be the Missing Body's PlayerTrackingIds + the new body TrackingId
                     newBody.Key.PlayerTrackingIds = closestMissingBody.PlayerTrackingIds;
 
@@ -720,9 +704,7 @@ namespace KAIT.Kinect.Service
                         closestHijackedBody = GetClosestTrackedBody(this._trackedBodiesHijacked, newBody.Value);
                     }
 
-                    if (writeOutput)
-                        System.Diagnostics.Debug.Print("******** New Body is Hijacked Body ********** - BodyTrackingId:{0}, Hijacked Body CorrelationPlayerId:{1}", newBody.Value.TrackingId, closestHijackedBody.CorrelationPlayerId);
-
+                
                     //Update the newBody.PlayerTrackingIds to be the Hijacked Body's PlayerTrackingIds + the new body TrackingId
                     newBody.Key.PlayerTrackingIds = closestHijackedBody.PlayerTrackingIds;
 
@@ -833,14 +815,7 @@ namespace KAIT.Kinect.Service
             if ((newBodyPosition.Z > 0.0f && BodyPosition.Z > 0.0f) && (newBodyPosition.Z < BodyPosition.Z - jumpTolerance || newBodyPosition.Z > BodyPosition.Z + jumpTolerance))
                 isBodyHijacked = true;
 
-            bool writeOutput = false;
-            if (writeOutput)
-            {
-                System.Diagnostics.Debug.Print("DetectBodyHijack - isBodyHijacked:{0}", isBodyHijacked);
-                System.Diagnostics.Debug.Print("DetectBodyHijack - Jump Tolerance Used:{0}", jumpTolerance);
-                System.Diagnostics.Debug.Print("DetectBodyHijack - newBodyPosition X{0} Y{1} Z{2}", newBodyPosition.X, newBodyPosition.Y, newBodyPosition.Z);
-                System.Diagnostics.Debug.Print("DetectBodyHijack - BodyPosition X{0} Y{1} Z{2}", BodyPosition.X, BodyPosition.Y, BodyPosition.Z);
-            }
+           
             return isBodyHijacked;
         }
 
