@@ -1,7 +1,7 @@
 {
-    "AzurePrefix": "KAIT",
-	"AzureSubscriptionId": "GUID ID HERE",
-	"AzureTenantId": "yoursubscriptionatazure.onmicrosoft.com",
+    "AzurePrefix": "<yourPrefix>",
+	"AzureSubscriptionId": "<yourAzureSubscriptionId>",
+	"AzureTenantId": "<yourDirectory.onmicrosoft.com>",
     "AppSettingsXmlOutputLocation": "conf\\appSettings.xml",
     "Storage": [
         {
@@ -317,7 +317,8 @@ HAVING COUNT(*) > 3;"
 							 "type":"Microsoft.Storage/Blob",
 							 "properties":{
 								"blobPathPrefix":"skeletal",
-								"container":"telemetry",
+                "container": "telemetry",
+                "pathPattern": "",
 								"storageAccounts":[
 								   {
 									  "accountName":"data",
@@ -343,6 +344,7 @@ HAVING COUNT(*) > 3;"
 							 "properties":{
 								"blobPathPrefix":"interactions",
 								"container":"telemetry",
+                "pathPattern": "",
 								"storageAccounts":[
 								   {
 									  "accountName":"data",
@@ -368,6 +370,7 @@ HAVING COUNT(*) > 3;"
 							 "properties":{
 								"blobPathPrefix":"demographics",
 								"container":"telemetry",
+                "pathPattern": "",
 								"storageAccounts":[
 								   {
 									  "accountName":"data",
@@ -393,6 +396,7 @@ HAVING COUNT(*) > 3;"
 							 "properties":{
 								"blobPathPrefix":"dwellnotifications",
 								"container":"telemetry",
+                "pathPattern": "",
 								"storageAccounts":[
 								   {
 									  "accountName":"data",
@@ -436,429 +440,449 @@ HAVING COUNT(*) > 3;"
 		"StartProcessingMinutes": 5,
         "DataSets": [
             {
-                "name": "SkeletalRaw",
-                "properties": {
-                    "location": {
-                        "type": "AzureBlobLocation",
-                        "folderPath": "telemetry/skeletal",
-                        "linkedServiceName": "TelemetryDataLinkedService"
-                    },
-                    "availability": {
-                        "frequency": "Hour",
-                        "interval": 8,
-                        "waitOnExternal": { }
-                    }
-                }
-            },
+  "name": "SkeletalRaw",
+  "properties": {
+    "type": "AzureBlob",
+    "linkedServiceName": "TelemetryDataLinkedService",
+    "typeProperties": {
+      "folderPath": "telemetry/skeletal"
+    },
+    "external": true,
+    "availability": {
+      "frequency": "Hour",
+      "interval": 8
+    }
+  }
+},
             {
-                "name": "SkeletalBase",
-                "properties": {
-                    "location": {
-                        "type": "AzureBlobLocation",
-                        "folderPath": "telemetry/skeletal",
-                        "linkedServiceName": "TelemetryDataLinkedService"
-                    },
-                    "availability": {
-                        "frequency": "Hour",
-                        "interval": 8,
-                        "waitOnExternal": null
-                    }
-                }
-            },
+  "name": "SkeletalBase",
+  "properties": {
+    "type": "AzureBlob",
+    "linkedServiceName": "TelemetryDataLinkedService",
+    "typeProperties": {
+      "folderPath": "telemetry/skeletal"
+    },
+    "availability": {
+      "frequency": "Hour",
+      "interval": 8
+    }
+  }
+},
 			{
-                "name": "DemographicsRaw",
-                "properties": {
-                    "location": {
-                        "type": "AzureBlobLocation",
-                        "folderPath": "telemetry/demographics",
-                        "linkedServiceName": "TelemetryDataLinkedService"
-                    },
-                    "availability": {
-                        "frequency": "Hour",
-                        "interval": 8,
-                        "waitOnExternal": { }
-                    }
-                }
-            },
+  "name": "DemographicsRaw",
+  "properties": {
+    "type": "AzureBlob",
+    "linkedServiceName": "TelemetryDataLinkedService",
+    "typeProperties": {
+      "folderPath": "telemetry/demographics"
+    },
+    "external": true,
+    "availability": {
+      "frequency": "Hour",
+      "interval": 8
+    }
+  }
+},
             {
-                "name": "DemographicsBase",
-                "properties": {
-                    "location": {
-                        "type": "AzureBlobLocation",
-                        "folderPath": "telemetry/demographics",
-                        "linkedServiceName": "TelemetryDataLinkedService"
-                    },
-                    "availability": {
-                        "frequency": "Hour",
-                        "interval": 8,
-                        "waitOnExternal": null
-                    }
-                }
-            },
+  "name": "DemographicsBase",
+  "properties": {
+    "type": "AzureBlob",
+    "linkedServiceName": "TelemetryDataLinkedService",
+    "typeProperties": {
+      "folderPath": "telemetry/demographics"
+    },
+    "availability": {
+      "frequency": "Hour",
+      "interval": 8
+    }
+  }
+},
 			{
-                "name": "InteractionsRaw",
-                "properties": {
-                    "location": {
-                        "type": "AzureBlobLocation",
-                        "folderPath": "telemetry/interactions",
-                        "linkedServiceName": "TelemetryDataLinkedService"
-                    },
-                    "availability": {
-                        "frequency": "Hour",
-                        "interval": 8,
-                        "waitOnExternal": { }
-                    }
-                }
-            },
+  "name": "InteractionsRaw",
+  "properties": {
+    "type": "AzureBlob",
+    "linkedServiceName": "TelemetryDataLinkedService",
+    "typeProperties": {
+      "folderPath": "telemetry/interactions"
+    },
+    "external": true,
+    "availability": {
+      "frequency": "Hour",
+      "interval": 8
+    }
+  }
+},
             {
-                "name": "InteractionsBase",
-                "properties": {
-                    "location": {
-                        "type": "AzureBlobLocation",
-                        "folderPath": "telemetry/interactions",
-                        "linkedServiceName": "TelemetryDataLinkedService"
-                    },
-                    "availability": {
-                        "frequency": "Hour",
-                        "interval": 8,
-                        "waitOnExternal": null
-                    }
-                }
-            },
+  "name": "InteractionsBase",
+  "properties": {
+    "type": "AzureBlob",
+    "linkedServiceName": "TelemetryDataLinkedService",
+    "typeProperties": {
+      "folderPath": "telemetry/interactions"
+    },
+    "availability": {
+      "frequency": "Hour",
+      "interval": 8
+    }
+  }
+},
             {
-                "name": "InteractionsFull",
-                "properties": {
-                    "location": {
-                        "type": "AzureBlobLocation",
-                        "folderPath": "telemetry/interactions",
-                        "linkedServiceName": "TelemetryDataLinkedService"
-                    },
-                    "availability": {
-                        "frequency": "Hour",
-                        "interval": 8,
-                        "waitOnExternal": null
-                    }
-                }
-            },
+  "name": "InteractionsFull",
+  "properties": {
+    "type": "AzureBlob",
+    "linkedServiceName": "TelemetryDataLinkedService",
+    "typeProperties": {
+      "folderPath": "telemetry/interactions"
+    },
+    "availability": {
+      "frequency": "Hour",
+      "interval": 8
+    }
+  }
+},
 			{
-                "name": "KinectLocations",
-                "properties": {
-                    "location": {
-                        "type": "AzureBlobLocation",
-                        "folderPath": "telemetry/skeletal",
-                        "linkedServiceName": "TelemetryDataLinkedService"
-                    },
-                    "availability": {
-                        "frequency": "Hour",
-                        "interval": 8,
-                        "waitOnExternal": null
-                    }
-                }
-            },
+  "name": "KinectLocations",
+  "properties": {
+    "type": "AzureBlob",
+    "linkedServiceName": "TelemetryDataLinkedService",
+    "typeProperties": {
+      "folderPath": "telemetry/skeletal"
+    },
+    "availability": {
+      "frequency": "Hour",
+      "interval": 8
+    }
+  }
+},
 			{
-				"name": "InteractionsWithinOneMetersView",
-				"properties": {
-					"location": {
-						"type": "AzureBlobLocation",
-						"folderPath": "telemetry/interactions",
-						"linkedServiceName": "TelemetryDataLinkedService"
-					},
-					"availability": {
-						"frequency": "Hour",
-						"interval": 8,
-						"waitOnExternal": null
-					}
-				}
-			},
+  "name": "InteractionsWithinOneMetersView",
+  "properties": {
+    "type": "AzureBlob",
+    "linkedServiceName": "TelemetryDataLinkedService",
+    "typeProperties": {
+      "folderPath": "telemetry/interactions"
+    },
+    "availability": {
+      "frequency": "Hour",
+      "interval": 8
+    }
+  }
+},
 			{
-				"name": "InteractionsWithinTwoMetersView",
-				"properties": {
-					"location": {
-						"type": "AzureBlobLocation",
-						"folderPath": "telemetry/interactions",
-						"linkedServiceName": "TelemetryDataLinkedService"
-					},
-					"availability": {
-						"frequency": "Hour",
-						"interval": 8,
-						"waitOnExternal": null
-					}
-				}
-			},
+  "name": "InteractionsWithinTwoMetersView",
+  "properties": {
+    "type": "AzureBlob",
+    "linkedServiceName": "TelemetryDataLinkedService",
+    "typeProperties": {
+      "folderPath": "telemetry/interactions"
+    },
+    "availability": {
+      "frequency": "Hour",
+      "interval": 8
+    }
+  }
+},
 			{
-				"name": "InteractionsWithinThreeMetersView",
-				"properties": {
-					"location": {
-						"type": "AzureBlobLocation",
-						"folderPath": "telemetry/interactions",
-						"linkedServiceName": "TelemetryDataLinkedService"
-					},
-					"availability": {
-						"frequency": "Hour",
-						"interval": 8,
-						"waitOnExternal": null
-					}
-				}
-			},
+  "name": "InteractionsWithinThreeMetersView",
+  "properties": {
+    "type": "AzureBlob",
+    "linkedServiceName": "TelemetryDataLinkedService",
+    "typeProperties": {
+      "folderPath": "telemetry/interactions"
+    },
+    "availability": {
+      "frequency": "Hour",
+      "interval": 8
+    }
+  }
+},
 			{
-				"name": "InteractionsWithinFourMetersView",
-				"properties": {
-					"location": {
-						"type": "AzureBlobLocation",
-						"folderPath": "telemetry/interactions",
-						"linkedServiceName": "TelemetryDataLinkedService"
-					},
-					"availability": {
-						"frequency": "Hour",
-						"interval": 8,
-						"waitOnExternal": null
-					}
-				}
-			},
+  "name": "InteractionsWithinFourMetersView",
+  "properties": {
+    "type": "AzureBlob",
+    "linkedServiceName": "TelemetryDataLinkedService",
+    "typeProperties": {
+      "folderPath": "telemetry/interactions"
+    },
+    "availability": {
+      "frequency": "Hour",
+      "interval": 8
+    }
+  }
+},
 			{
-				"name": "SkeletonsLookingAtDisplayView",
-				"properties": {
-					"location": {
-						"type": "AzureBlobLocation",
-						"folderPath": "telemetry/skeletal",
-						"linkedServiceName": "TelemetryDataLinkedService"
-					},
-					"availability": {
-						"frequency": "Hour",
-						"interval": 8,
-						"waitOnExternal": null
-					}
-				}
-			}
+  "name": "SkeletonsLookingAtDisplayView",
+  "properties": {
+    "type": "AzureBlob",
+    "linkedServiceName": "TelemetryDataLinkedService",
+    "typeProperties": {
+      "folderPath": "telemetry/skeletal"
+    },
+    "availability": {
+      "frequency": "Hour",
+      "interval": 8
+    }
+  }
+}
         ],
         "LinkedServices": [
             {
-                "name": "HDInsightStorageLinkedService",
-                "properties": {
-                    "connectionString": "hdi",
-                    "type": "AzureStorageLinkedService"
-                }
-            },
+  "name": "HDInsightStorageLinkedService",
+  "properties": {
+    "type": "AzureStorage",
+    "typeProperties": {
+      "connectionString": "hdi"
+    }
+  }
+},
             {
-                "name": "TelemetryDataLinkedService",
-                "properties": {
-                    "connectionString": "data",
-                    "type": "AzureStorageLinkedService"
-                }
-            },
+  "name": "TelemetryDataLinkedService",
+  "properties": {
+    "type": "AzureStorage",
+    "typeProperties": {
+      "connectionString": "data"
+    }
+  }
+},
             {
-                "name": "HDInsightLinkedService",
-                "properties": {
-					"type": "HDInsightBYOCLinkedService",
-					"clusterUri": "HDInsight",
-					"userName": "<dynamic>",
-					"password": "<dynamic>",
-					"linkedServiceName": "HDInsightStorageLinkedService"
-                }
-            }
+  "name": "HDInsightLinkedService",
+  "properties": {
+    "type": "HDInsight",
+    "typeProperties": {
+      "clusterUri": "HDInsight",
+      "userName": "<dynamic>",
+      "password": "<dynamic>",
+      "linkedServiceName": "HDInsightStorageLinkedService"
+    }
+  }
+}
         ],
         "Pipelines": [
             {
-                "name": "TransformRawJsonPipeline",
-                "properties": {
-                    "description": "Converts raw json data into a flat Hive tables",
-					"start": "<dynamic>",
-					"end":"<dynamic>",
-                    "activities": [
-                        {
-                            "type": "HDInsightActivity",
-							"name": "TransformSkeletonTrack",							
-							"description": "Flattens out Skeleton Json",
-                            "linkedServiceName": "HDInsightLinkedService",
-                            "transformation": {
-                                "scriptPath": "hivequeries\\SkeletalRaw.Transform.SkeletalBase.hql",
-                                "scriptLinkedService": "HDInsightStorageLinkedService",
-                                "type": "Hive",
-								"extendedProperties": {
-									"RawDataStorageAccount":"data"
-								}
-                            },
-                            "inputs": [
-                                {
-                                    "name": "SkeletalRaw"
-                                }
-                            ],
-                            "outputs": [
-                                {
-                                    "name": "SkeletalBase"
-                                }
-                            ],
-                            "policy": {
-                                "timeout": "01:30:00",
-                                "concurrency": 1,
-                                "executionPriorityOrder": "NewestFirst",
-                                "retry": 3
-                            }
-                        },
-						{
-                            "type": "HDInsightActivity",
-							"name": "TransformDemographics",
-                            "description": "Flattens out Demographics Json",
-                            "linkedServiceName": "HDInsightLinkedService",
-                            "transformation": {
-                                "scriptPath": "hivequeries\\DemographicsRaw.Transform.DemographicsBase.hql",
-                                "scriptLinkedService": "HDInsightStorageLinkedService",
-                                "type": "Hive",
-								"extendedProperties": {
-									"RawDataStorageAccount":"data"
-								}
-                            },
-                            "inputs": [
-                                {
-                                    "name": "DemographicsRaw"
-                                }
-                            ],
-                            "outputs": [
-                                {
-                                    "name": "DemographicsBase"
-                                }
-                            ],
-                            "policy": {
-                                "timeout": "01:30:00",
-                                "concurrency": 1,
-                                "executionPriorityOrder": "NewestFirst",
-                                "retry": 3
-                            }
-                        },
-						{
-                            "type": "HDInsightActivity",
-							"name": "TransformInteractions",                          
-                            "description": "Flattens out Interactions Json",
-                            "linkedServiceName": "HDInsightLinkedService",
-                            "transformation": {
-                                "scriptPath": "hivequeries\\InteractionsRaw.Transform.InteractionsBase.hql",
-                                "scriptLinkedService": "HDInsightStorageLinkedService",
-                                "type": "Hive",
-								"extendedProperties": {
-									"RawDataStorageAccount":"data"
-								}
-                            },
-                            "inputs": [
-                                {
-                                    "name": "InteractionsRaw"
-                                }
-                            ],
-                            "outputs": [
-                                {
-                                    "name": "InteractionsBase"
-                                }
-                            ],
-                            "policy": {
-                                "timeout": "01:30:00",
-                                "concurrency": 1,
-                                "executionPriorityOrder": "NewestFirst",
-                                "retry": 3
-                            }
-                        }
-                    ]
-                }
-            },
+  "name": "TransformRawJsonPipeline",
+  "properties": {
+    "description": "Converts raw json data into a flat Hive tables",
+    "start": "<dynamic>",
+    "end": "<dynamic>",
+    "activities": [
+      {
+        "name": "TransformSkeletonTrack",
+        "description": "Flattens out Skeleton Json",
+        "linkedServiceName": "HDInsightLinkedService",
+        "type": "HDInsightHive",
+        "typeProperties": {
+          "scriptPath": "hivequeries\\SkeletalRaw.Transform.SkeletalBase.hql",
+          "scriptLinkedService": "HDInsightStorageLinkedService",
+          "defines": {
+            "RawDataStorageAccount": "data"
+          }
+        },
+        "inputs": [
+          {
+            "name": "SkeletalRaw"
+          }
+        ],
+        "outputs": [
+          {
+            "name": "SkeletalBase"
+          }
+        ],
+        "policy": {
+          "timeout": "01:30:00",
+          "concurrency": 1,
+          "executionPriorityOrder": "NewestFirst",
+          "retry": 3
+        }
+      },
+      {
+        "name": "TransformDemographics",
+        "description": "Flattens out Demographics Json",
+        "linkedServiceName": "HDInsightLinkedService",
+        "type": "HDInsightHive",
+        "typeProperties": {
+          "scriptPath": "hivequeries\\DemographicsRaw.Transform.DemographicsBase.hql",
+          "scriptLinkedService": "HDInsightStorageLinkedService",
+          "defines": {
+            "RawDataStorageAccount": "data"
+          }
+        },
+        "inputs": [
+          {
+            "name": "DemographicsRaw"
+          }
+        ],
+        "outputs": [
+          {
+            "name": "DemographicsBase"
+          }
+        ],
+        "policy": {
+          "timeout": "01:30:00",
+          "concurrency": 1,
+          "executionPriorityOrder": "NewestFirst",
+          "retry": 3
+        }
+      },
+      {
+        "name": "TransformInteractions",
+        "description": "Flattens out Interactions Json",
+        "linkedServiceName": "HDInsightLinkedService",
+        "type": "HDInsightHive",
+        "typeProperties": {
+          "scriptPath": "hivequeries\\InteractionsRaw.Transform.InteractionsBase.hql",
+          "scriptLinkedService": "HDInsightStorageLinkedService",
+          "defines": {
+            "RawDataStorageAccount": "data"
+          }
+        },
+        "inputs": [
+          {
+            "name": "InteractionsRaw"
+          }
+        ],
+        "outputs": [
+          {
+            "name": "InteractionsBase"
+          }
+        ],
+        "policy": {
+          "timeout": "01:30:00",
+          "concurrency": 1,
+          "executionPriorityOrder": "NewestFirst",
+          "retry": 3
+        }
+      }
+    ]
+  }
+},
 			{
-                "name": "AnalyzeTelemetryData",
-                "properties": {
-                    "description": "Runs hive scripts against base tables to build smaller tables used for analytics",
-					"start": "<dynamic>",
-					"end":"<dynamic>",
-                    "activities": [
-                        {
-                            "type": "HDInsightActivity",
-							"name": "CreateInteractionsFull",
-							"description": "Joins telemetry information from demographics, interactions, and skeletontrack",
-                            "linkedServiceName": "HDInsightLinkedService",
-                            "transformation": {
-                                "scriptPath": "hivequeries\\InteractionsBase.Transform.InteractionsFull.hql",
-                                "scriptLinkedService": "HDInsightStorageLinkedService",
-                                "type": "Hive",
-								"extendedProperties": {}
-                            },
-                            "inputs": [
-								{ "name": "InteractionsBase"},
-								{ "name": "DemographicsBase"},
-								{ "name": "SkeletalBase" }
-                            ],
-                            "outputs": [
-                                { "name": "InteractionsFull" }
-                            ],
-                            "policy": {
-                                "timeout": "01:30:00",
-                                "concurrency": 1,
-                                "executionPriorityOrder": "NewestFirst",
-                                "retry": 3
-                            }
-                        },
-						{
-                            "type": "HDInsightActivity",
-							"name": "CreateKinectLocations",
-							"description": "Creates a table with all store locations and device locations found in the skeletalbase",
-                            "linkedServiceName": "HDInsightLinkedService",
-                            "transformation": {
-                                "scriptPath": "hivequeries\\SkeletalBase.Transform.KinectLocations.hql",
-                                "scriptLinkedService": "HDInsightStorageLinkedService",
-                                "type": "Hive",
-								"extendedProperties": {}
-                            },
-                            "inputs": [
-								{ "name": "SkeletalBase" }
-                            ],
-                            "outputs": [
-                                { "name": "KinectLocations" }
-                            ],
-                            "policy": {
-                                "timeout": "01:30:00",
-                                "concurrency": 1,
-                                "executionPriorityOrder": "NewestFirst",
-                                "retry": 3
-                            }
-                        }
-                    ]
-                }
-            },
+  "name": "AnalyzeTelemetryData",
+  "properties": {
+    "description": "Runs hive scripts against base tables to build smaller tables used for analytics",
+    "start": "<dynamic>",
+    "end": "<dynamic>",
+    "activities": [
+      {
+        "name": "CreateInteractionsFull",
+        "description": "Joins telemetry information from demographics, interactions, and skeletontrack",
+        "linkedServiceName": "HDInsightLinkedService",
+        "type": "HDInsightHive",
+        "typeProperties": {
+          "scriptPath": "hivequeries\\InteractionsBase.Transform.InteractionsFull.hql",
+          "scriptLinkedService": "HDInsightStorageLinkedService",
+          "defines": {}
+        },
+        "inputs": [
+          {
+            "name": "InteractionsBase"
+          },
+          {
+            "name": "DemographicsBase"
+          },
+          {
+            "name": "SkeletalBase"
+          }
+        ],
+        "outputs": [
+          {
+            "name": "InteractionsFull"
+          }
+        ],
+        "policy": {
+          "timeout": "01:30:00",
+          "concurrency": 1,
+          "executionPriorityOrder": "NewestFirst",
+          "retry": 3
+        }
+      },
+      {
+        "name": "CreateKinectLocations",
+        "description": "Creates a table with all store locations and device locations found in the skeletalbase",
+        "linkedServiceName": "HDInsightLinkedService",
+        "type": "HDInsightHive",
+        "typeProperties": {
+          "scriptPath": "hivequeries\\SkeletalBase.Transform.KinectLocations.hql",
+          "scriptLinkedService": "HDInsightStorageLinkedService",
+          "defines": {}
+        },
+        "inputs": [
+          {
+            "name": "SkeletalBase"
+          }
+        ],
+        "outputs": [
+          {
+            "name": "KinectLocations"
+          }
+        ],
+        "policy": {
+          "timeout": "01:30:00",
+          "concurrency": 1,
+          "executionPriorityOrder": "NewestFirst",
+          "retry": 3
+        }
+      }
+    ]
+  }
+},
 			{
-                "name": "CreateViews",
-                "properties": {
-                    "description": "Creates views on larger tables to abstract query logic and simplfy data analyis",
-					"start": "<dynamic>",
-					"end":"<dynamic>",
-                    "activities": [
-                        {
-                            "type": "HDInsightActivity",
-							"name": "CreateViewsPipeline",
-							"description": "Creates views",
-                            "linkedServiceName": "HDInsightLinkedService",
-                            "transformation": {
-                                "scriptPath": "hivequeries\\CreateViews.hql",
-                                "scriptLinkedService": "HDInsightStorageLinkedService",
-                                "type": "Hive",
-								"extendedProperties": {}
-                            },
-                            "inputs": [
-								{ "name": "InteractionsFull" },
-								{ "name": "InteractionsBase"},
-								{ "name": "DemographicsBase"},
-								{ "name": "SkeletalBase" }
-                            ],
-                            "outputs": [
-								{ "name": "InteractionsWithinOneMetersView" },
-								{ "name": "InteractionsWithinTwoMetersView" },
-								{ "name": "InteractionsWithinThreeMetersView" },
-								{ "name": "InteractionsWithinFourMetersView" },
-								{ "name": "SkeletonsLookingAtDisplayView" }
-                            ],
-                            "policy": {
-                                "timeout": "01:30:00",
-                                "concurrency": 1,
-                                "executionPriorityOrder": "NewestFirst",
-                                "retry": 3
-                            }
-                        }
-					]
-				}
-			}			
+  "name": "CreateViews",
+  "properties": {
+    "description": "Creates views on larger tables to abstract query logic and simplfy data analyis",
+    "start": "<dynamic>",
+    "end": "<dynamic>",
+    "activities": [
+      {
+        "name": "CreateViewsPipeline",
+        "description": "Creates views",
+        "linkedServiceName": "HDInsightLinkedService",
+        "type": "HDInsightHive",
+        "typeProperties": {
+          "scriptPath": "hivequeries\\CreateViews.hql",
+          "scriptLinkedService": "HDInsightStorageLinkedService",
+          "defines": {}
+        },
+        "inputs": [
+          {
+            "name": "InteractionsFull"
+          },
+          {
+            "name": "InteractionsBase"
+          },
+          {
+            "name": "DemographicsBase"
+          },
+          {
+            "name": "SkeletalBase"
+          }
+        ],
+        "outputs": [
+          {
+            "name": "InteractionsWithinOneMetersView"
+          },
+          {
+            "name": "InteractionsWithinTwoMetersView"
+          },
+          {
+            "name": "InteractionsWithinThreeMetersView"
+          },
+          {
+            "name": "InteractionsWithinFourMetersView"
+          },
+          {
+            "name": "SkeletonsLookingAtDisplayView"
+          }
+        ],
+        "policy": {
+          "timeout": "01:30:00",
+          "concurrency": 1,
+          "executionPriorityOrder": "NewestFirst",
+          "retry": 3
+        }
+      }
+    ]
+  }
+}	
         ]
     }
 }
