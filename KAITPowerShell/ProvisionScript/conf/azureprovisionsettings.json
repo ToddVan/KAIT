@@ -1,7 +1,7 @@
 {
-    "AzurePrefix": "Inception",
-	"AzureSubscriptionId": "150072de-57c8-4397-9488-b4f8afe67065",
-	"AzureTenantId": "microsoft.onmicrosoft.com",
+    "AzurePrefix": "KAIT",
+	"AzureSubscriptionId": "GUID ID HERE",
+	"AzureTenantId": "yoursubscriptionatazure.onmicrosoft.com",
     "AppSettingsXmlOutputLocation": "conf\\appSettings.xml",
     "Storage": [
         {

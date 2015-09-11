@@ -228,7 +228,7 @@ namespace KAIT.Kiosk.ViewModel
                 this.BodyTrack[ii] = -75;
             }
 
-            for (int i = 0; i < e.BodyTrack.Length; i++)
+            for (int i = 0; i < this.BodyTrack.Count; i++)
             {
                 this.BodyTrack[i] = (e.BodyTrack[i] * this.RowWidth / DEPTH_WIDTH) - 37.5f;
             }

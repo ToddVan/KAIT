@@ -1,2 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<appSettings />
+<appSettings>
+  <add key="Microsoft.Azure.Storage.kaitdata" value="DefaultEndpointsProtocol=https;AccountName=kaitdata;AccountKey=mi0r7nUCSBuSvIuDT79niTwPhi0hRzC+M+OucTGWdSPhT2/mrht55Go67swqAtG+RqrnPPZ/+yIyg104Ju9BeQ==" />
+  <add key="Microsoft.Azure.Storage.kaithdi" value="DefaultEndpointsProtocol=https;AccountName=kaithdi;AccountKey=qcmxbmdFoKNC32L3BStHZdaXs5B9Yj4i03SFC6O9MG4pBgP+h5CbJ2TGzQqjlKmEKOxJyuv6UMNTaPtvHMv/NA==" />
+  <add key="Microsoft.Azure.Storage.kaitasamonitoring" value="DefaultEndpointsProtocol=https;AccountName=kaitasamonitoring;AccountKey=mLFOf3L1sZSrlJJ+DRjL27bxdQtLlmk1Eqo/FSwGkTAHTn88IkHBnVTlXeh7AFW94NIkN4D5u4sbHdRCT7mg7g==" />
+  <add key="KAIT.EventHub.Demographics.SendPolicy" value="Endpoint=sb://kaitingess-ns.servicebus.windows.net/;SharedAccessKeyName=SendPolicy;SharedAccessKey=zW8U3zxNUZOjBqHuS+1kIITE25F/Pewy4QgZ4HpFL3w=;EntityPath=demographics" />
+  <add key="KAIT.EventHub.Demographics.ListenPolicy" value="Endpoint=sb://kaitingess-ns.servicebus.windows.net/;SharedAccessKeyName=ListenPolicy;SharedAccessKey=zRJXgRiHCT3TAbLkjaudKyObU3ANl8NuQOtk/tZnG10=;EntityPath=demographics" />
+  <add key="KAIT.EventHub.Demographics.ASAManagePolicy" value="Endpoint=sb://kaitingess-ns.servicebus.windows.net/;SharedAccessKeyName=ASAManagePolicy;SharedAccessKey=1QzJ/S6R77lsBLTlkxv83jh3VTfwC8CqnRybgXAvV4Y=;EntityPath=demographics" />
+  <add key="KAIT.EventHub.Interactions.SendPolicy" value="Endpoint=sb://kaitingess-ns.servicebus.windows.net/;SharedAccessKeyName=SendPolicy;SharedAccessKey=EDYOhkqcIG+bhtSIb8L9a3zeVxqI8uaody20QOMkBaE=;EntityPath=interactions" />
+  <add key="KAIT.EventHub.Interactions.ListenPolicy" value="Endpoint=sb://kaitingess-ns.servicebus.windows.net/;SharedAccessKeyName=ListenPolicy;SharedAccessKey=nN00fk5bj5fS4G/5+D0nWEwCo773Ew6SzUnNRZfc2vs=;EntityPath=interactions" />
+  <add key="KAIT.EventHub.Interactions.ASAManagePolicy" value="Endpoint=sb://kaitingess-ns.servicebus.windows.net/;SharedAccessKeyName=ASAManagePolicy;SharedAccessKey=Yotsw6i3UjBDs4j8GXfSfvGDhDo5Xc7a0SzOlB97Pes=;EntityPath=interactions" />
+  <add key="KAIT.EventHub.Skeletal.SendPolicy" value="Endpoint=sb://kaitingess-ns.servicebus.windows.net/;SharedAccessKeyName=SendPolicy;SharedAccessKey=rwAAVMNsm3JG3NqEoYI57okJZYNuXTu9htAxry60T1A=;EntityPath=skeletal" />
+  <add key="KAIT.EventHub.Skeletal.ListenPolicy" value="Endpoint=sb://kaitingess-ns.servicebus.windows.net/;SharedAccessKeyName=ListenPolicy;SharedAccessKey=EnEYCDT9GOFtPAHydHZYljltanmG9zUXTJSXHRoYce0=;EntityPath=skeletal" />
+  <add key="KAIT.EventHub.Skeletal.ASAManagePolicy" value="Endpoint=sb://kaitingess-ns.servicebus.windows.net/;SharedAccessKeyName=ASAManagePolicy;SharedAccessKey=8Gra3eutHtgAYZoaYKsG7AAMaqu4kDefQ9YYGKIZB5U=;EntityPath=skeletal" />
+  <add key="KAIT.EventHub.Interactionsnotifications.SendPolicy" value="Endpoint=sb://kaitingess-ns.servicebus.windows.net/;SharedAccessKeyName=SendPolicy;SharedAccessKey=SxyBpLdDTzy/6ivAL2C1SRzaGwhcXTlzL2M+6KpmWWg=;EntityPath=interactionsnotifications" />
+  <add key="KAIT.EventHub.Interactionsnotifications.ListenPolicy" value="Endpoint=sb://kaitingess-ns.servicebus.windows.net/;SharedAccessKeyName=ListenPolicy;SharedAccessKey=G/7JHG05pHnUqScbr2acUK3WE/aeuvzwkTNDyHh623Q=;EntityPath=interactionsnotifications" />
+  <add key="KAIT.EventHub.Interactionsnotifications.ASAManagePolicy" value="Endpoint=sb://kaitingess-ns.servicebus.windows.net/;SharedAccessKeyName=ASAManagePolicy;SharedAccessKey=XFwfc2Vnz8FwEIuuN1TeF7YpL2BSzci/JMZViIRzfwM=;EntityPath=interactionsnotifications" />
+</appSettings>
