@@ -16,3 +16,5 @@ This all sounds very complex but "Don't Panic" KAIT contains all the scripts nee
 But we get ahead of ourselves!
 
 First things first. Let’s download and get KAIT working!
+
+Please review the "Kinect Ambient Inteligence Toolkit.pdf"
