@@ -22,6 +22,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using Microsoft.Speech.AudioFormat;
 using Microsoft.Speech.Recognition;
+using System.Speech.Synthesis;
 using System.Text;
 
 
@@ -33,6 +34,7 @@ namespace KAIT.Kinect.Service
         KinectAudioStream _convertStream;
         RecognizerInfo _ri;
         SpeechRecognitionEngine _speechEngine;
+        SpeechSynthesizer _speechSynthizer;
      
         public event EventHandler<Microsoft.Speech.Recognition.SpeechRecognizedEventArgs> SpeechRecognized;
 
@@ -41,7 +43,9 @@ namespace KAIT.Kinect.Service
         public KinectSpeechService(ISensorService<KinectSensor> sensorService)
         {
             _sensorService = sensorService;
-     
+
+            _speechSynthizer = new SpeechSynthesizer();
+
             IReadOnlyList<AudioBeam> audioBeamList = _sensorService.Sensor.AudioSource.AudioBeams;
             System.IO.Stream audioStream = audioBeamList[0].OpenInputStream();
 
@@ -103,7 +107,10 @@ namespace KAIT.Kinect.Service
         }
 
         public void Speak(string textToSpeak)
-        { }
+        {
+            if(_speechSynthizer != null)
+                _speechSynthizer.Speak(textToSpeak);
+        }
 
         public void Stop()
         {
