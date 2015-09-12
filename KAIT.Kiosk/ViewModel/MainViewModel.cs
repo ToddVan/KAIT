@@ -228,9 +228,10 @@ namespace KAIT.Kiosk.ViewModel
                 this.BodyTrack[ii] = -75;
             }
 
-            for (int i = 0; i < this.BodyTrack.Count; i++)
+            for (int i = 0; i < e.BodyTrack.Length; i++)
             {
-                this.BodyTrack[i] = (e.BodyTrack[i] * this.RowWidth / DEPTH_WIDTH) - 37.5f;
+                if(i <= this.BodyTrack.Count())
+                     this.BodyTrack[i] = (e.BodyTrack[i] * this.RowWidth / DEPTH_WIDTH) - 37.5f;
             }
         }
 
@@ -269,6 +270,7 @@ namespace KAIT.Kiosk.ViewModel
                 switch (e.Result.Semantics.Value.ToString())
                 {
                     case "START CALIBRATION":
+                        _speechService.Speak("Working on it Boss. Might I say myself that this is a great presentation!");
                         StartCalibration();
                         break;
               
