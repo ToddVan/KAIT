@@ -29,13 +29,17 @@ using System.IO;
 using Extensions;
 using System.Windows.Media;
 using KAIT.Common.Interfaces;
+using System.ComponentModel;
+
 
 namespace KAIT.Common.Sensor
 {
-    public class KinectSensorService : ISensorService<KinectSensor>
+    public class KinectSensorService : ISensorService<KinectSensor>, INotifyPropertyChanged
     {
 
         public event EventHandler<SensorStatusEventArgs> StatusChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public KinectSensor Sensor { get; private set; }
 
         /// <summary>
@@ -90,7 +94,22 @@ namespace KAIT.Common.Sensor
 
         private Double demographicsSamplingRange;
 
-        private WriteableBitmap colorBitmap = null;
+
+
+        WriteableBitmap _colorBitmap;
+        public WriteableBitmap colorBitmap
+        {
+            get { return _colorBitmap; }
+            set
+            {
+                if (_colorBitmap == value)
+                    return;
+                _colorBitmap = value;
+                RaisePropertyChanged("colorBitmap");
+            }
+        }
+
+       
 
         BlockingCollection<ProcessFaceData> _BiometricProcessingQueue;
 
@@ -233,7 +252,7 @@ namespace KAIT.Common.Sensor
             FrameDescription colorFrameDescription = this.Sensor.ColorFrameSource.CreateFrameDescription(ColorImageFormat.Bgra);
             this.colorBitmap = new WriteableBitmap(colorFrameDescription.Width, colorFrameDescription.Height, 96.0, 96.0, PixelFormats.Bgr32, null);
 
-
+            
             // get the color frame details
             FrameDescription frameDescription = this.Sensor.ColorFrameSource.FrameDescription;
 
@@ -259,6 +278,7 @@ namespace KAIT.Common.Sensor
             {
                 bodyFrame = e.BodyFrameReference.AcquireFrame();
                 colorFrame = e.ColorFrameReference.AcquireFrame();
+                
                 infraredFrame = e.InfraredFrameReference.AcquireFrame();
 
                 if ((bodyFrame == null) || (colorFrame == null) || (infraredFrame == null))
@@ -329,7 +349,7 @@ namespace KAIT.Common.Sensor
                         var body = this.bodies[i];
                        
                         _SkeletonTrackingProcessingQueue.Add(body);
-
+                        RenderColorFrame(colorFrame);
                          // check if a valid face is tracked in this face source
                         if (this.faceFrameSources[i].IsTrackingIdValid)
                         {
@@ -344,11 +364,11 @@ namespace KAIT.Common.Sensor
                                     {
                                         //Determine if need to render the color frame to extract the faces for this pass this is an optimization since we may have more than one player
                                         //present in this image so we don't want to process the same image up to 6 times per pass.
-                                        if (!_isColorFrameRenderedForPass)
-                                        {
-                                            RenderColorFrame(colorFrame);
-                                            _isColorFrameRenderedForPass = true;
-                                        }
+                                        //if (!_isColorFrameRenderedForPass)
+                                        //{
+                                        //    RenderColorFrame(colorFrame);
+                                        //    _isColorFrameRenderedForPass = true;
+                                        //}
                                         //
                                         //var convertedImage = BitmapFactory.ConvertToPbgra32Format(this.infraredBitmap);
                                         //int imageWidth = (this.faceFrameResults[i].FaceBoundingBoxInInfraredSpace.Left + this.faceFrameResults[i].FaceBoundingBoxInInfraredSpace.Width() + 40) > this.infraredFrameDescription.Width ? this.infraredFrameDescription.Width : (int)this.faceFrameResults[i].FaceBoundingBoxInInfraredSpace.Width() + 40;
@@ -627,6 +647,13 @@ namespace KAIT.Common.Sensor
                     
                 this.Sensor = null;
             }
+        }
+
+        private void RaisePropertyChanged(string propName)
+        {
+            var handler = this.PropertyChanged;
+            if (handler != null)
+                handler(this, new PropertyChangedEventArgs(propName));
         }
 
     }
