@@ -26,6 +26,7 @@ using KAIT.Common.Interfaces;
 using System.Linq;
 using GalaSoft.MvvmLight.CommandWpf;
 using KAIT.Common.Services.Messages;
+using KAIT.Common.Sensor;
 
 namespace KAIT.Kiosk.ViewModel
 {
@@ -104,6 +105,17 @@ namespace KAIT.Kiosk.ViewModel
             }
         }
 
+
+        public WriteableBitmap ColorBitmap
+        {
+            get {
+                if (_kioskInteractionService is KinectSensorService)
+                    return (_kioskInteractionService as KinectSensorService).colorBitmap;
+
+                return null;
+            }
+           
+        }
        
         public double RowWidth { get; set; }
 
@@ -125,6 +137,8 @@ namespace KAIT.Kiosk.ViewModel
         public RelayCommand OpenObjectDetection { get; private set; }
 
 
+
+
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
@@ -138,6 +152,7 @@ namespace KAIT.Kiosk.ViewModel
             _kioskInteractionService = interactionService;
             _kioskInteractionService.KioskStateChanged += _kioskInteractionService_KioskStateChanged;
             _kioskInteractionService.BodyTrackUpdate += _kioskInteractionService_BodyTrackUpdate;
+            
 
             BodyTrack = new ObservableCollection<double>() { -75, -75, -75, -75, -75, -75 };            
             

@@ -29,13 +29,16 @@ using System.IO;
 using Extensions;
 using System.Windows.Media;
 using KAIT.Common.Interfaces;
+using System.ComponentModel;
 
 namespace KAIT.Common.Sensor
 {
-    public class KinectSensorService : ISensorService<KinectSensor>
+    public class KinectSensorService : ISensorService<KinectSensor>, INotifyPropertyChanged
     {
 
         public event EventHandler<SensorStatusEventArgs> StatusChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public KinectSensor Sensor { get; private set; }
 
         /// <summary>
@@ -90,7 +93,22 @@ namespace KAIT.Common.Sensor
 
         private Double demographicsSamplingRange;
 
-        private WriteableBitmap colorBitmap = null;
+
+
+        WriteableBitmap _colorBitmap;
+        public WriteableBitmap colorBitmap
+        {
+            get { return _colorBitmap; }
+            set
+            {
+                if (_colorBitmap == value)
+                    return;
+                _colorBitmap = value;
+                RaisePropertyChanged("colorBitmap");
+            }
+        }
+
+       
 
         BlockingCollection<ProcessFaceData> _BiometricProcessingQueue;
 
@@ -233,7 +251,7 @@ namespace KAIT.Common.Sensor
             FrameDescription colorFrameDescription = this.Sensor.ColorFrameSource.CreateFrameDescription(ColorImageFormat.Bgra);
             this.colorBitmap = new WriteableBitmap(colorFrameDescription.Width, colorFrameDescription.Height, 96.0, 96.0, PixelFormats.Bgr32, null);
 
-
+            
             // get the color frame details
             FrameDescription frameDescription = this.Sensor.ColorFrameSource.FrameDescription;
 
@@ -259,6 +277,7 @@ namespace KAIT.Common.Sensor
             {
                 bodyFrame = e.BodyFrameReference.AcquireFrame();
                 colorFrame = e.ColorFrameReference.AcquireFrame();
+                
                 infraredFrame = e.InfraredFrameReference.AcquireFrame();
 
                 if ((bodyFrame == null) || (colorFrame == null) || (infraredFrame == null))
@@ -627,6 +646,13 @@ namespace KAIT.Common.Sensor
                     
                 this.Sensor = null;
             }
+        }
+
+        private void RaisePropertyChanged(string propName)
+        {
+            var handler = this.PropertyChanged;
+            if (handler != null)
+                handler(this, new PropertyChangedEventArgs(propName));
         }
 
     }
