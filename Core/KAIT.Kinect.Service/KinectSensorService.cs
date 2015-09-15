@@ -31,6 +31,7 @@ using System.Windows.Media;
 using KAIT.Common.Interfaces;
 using System.ComponentModel;
 
+
 namespace KAIT.Common.Sensor
 {
     public class KinectSensorService : ISensorService<KinectSensor>, INotifyPropertyChanged

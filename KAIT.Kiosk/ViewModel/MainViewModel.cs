@@ -116,6 +116,8 @@ namespace KAIT.Kiosk.ViewModel
             }
            
         }
+
+
        
         public double RowWidth { get; set; }
 
