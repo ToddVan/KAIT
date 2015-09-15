@@ -349,7 +349,7 @@ namespace KAIT.Common.Sensor
                         var body = this.bodies[i];
                        
                         _SkeletonTrackingProcessingQueue.Add(body);
-
+                        RenderColorFrame(colorFrame);
                          // check if a valid face is tracked in this face source
                         if (this.faceFrameSources[i].IsTrackingIdValid)
                         {
@@ -364,11 +364,11 @@ namespace KAIT.Common.Sensor
                                     {
                                         //Determine if need to render the color frame to extract the faces for this pass this is an optimization since we may have more than one player
                                         //present in this image so we don't want to process the same image up to 6 times per pass.
-                                        if (!_isColorFrameRenderedForPass)
-                                        {
-                                            RenderColorFrame(colorFrame);
-                                            _isColorFrameRenderedForPass = true;
-                                        }
+                                        //if (!_isColorFrameRenderedForPass)
+                                        //{
+                                        //    RenderColorFrame(colorFrame);
+                                        //    _isColorFrameRenderedForPass = true;
+                                        //}
                                         //
                                         //var convertedImage = BitmapFactory.ConvertToPbgra32Format(this.infraredBitmap);
                                         //int imageWidth = (this.faceFrameResults[i].FaceBoundingBoxInInfraredSpace.Left + this.faceFrameResults[i].FaceBoundingBoxInInfraredSpace.Width() + 40) > this.infraredFrameDescription.Width ? this.infraredFrameDescription.Width : (int)this.faceFrameResults[i].FaceBoundingBoxInInfraredSpace.Width() + 40;
