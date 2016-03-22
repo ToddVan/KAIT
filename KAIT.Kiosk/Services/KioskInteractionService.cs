@@ -26,6 +26,8 @@ using KAIT.EventHub.Messaging;
 using System.Collections.Concurrent;
 using System.Reactive.Concurrency;
 using System.Reactive.Linq;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace KAIT.Kiosk.Services
 {    
@@ -116,9 +118,11 @@ namespace KAIT.Kiosk.Services
             _demographicService = demographicsService;
 
             _eventHub = new EventHubMessageSender(ConfigurationManager.AppSettings["Azure.Hub.Kiosk"]);
-            
+
             _sensorService = sensorService;
-        
+
+            SendKioskReportConfigurationToAzure();
+
             _itemInteractionService = itemInteractionService;
             _itemInteractionService.ItemInteraction += _itemInteractionService_ItemInteraction;
             _coordinateMapper = _sensorService.Sensor.CoordinateMapper;
@@ -128,13 +132,13 @@ namespace KAIT.Kiosk.Services
             GetConfig();
 
             _sensorService.StatusChanged += _sensorService_StatusChanged;
-        
+
             _bodyFrameReader = _sensorService.Sensor.BodyFrameSource.OpenReader();
             if (_bodyFrameReader != null)
                 _bodyFrameReader.FrameArrived += _bodyFrameReader_FrameArrived;
-          
+
             _sensorService.Open();
-            
+
             // Telemetry processing routine done on a seperate background thread via queues
             _interactionProcessingQueue = new BlockingCollection<KioskStateEventArgs>();
             {
@@ -144,17 +148,33 @@ namespace KAIT.Kiosk.Services
 
                 ob.Subscribe(p =>
                 {
-            
+
                     // This handler will get called whenever 
                     // anything appears on myQueue in the future.
                     this.SendIteraction(p);
-            
+
                 });
             }
 
             _bodyTrackingService = bodyTrackingService;
 
             CurrentState = KioskStates.NoTrack;
+        }
+
+        private void SendKioskReportConfigurationToAzure()
+        {
+            //Send the KioskConfig to Azure for reporting purposes
+            KioskReportingConfig rptConfig;
+
+            using (StreamReader r = new StreamReader("KioskReportingConfig.json"))
+            {
+                string json = r.ReadToEnd();
+                rptConfig = JsonConvert.DeserializeObject<KioskReportingConfig>(json);
+
+            }
+            var id = _sensorService.Sensor.UniqueKinectId;
+            rptConfig.kinectID = id;
+            _eventHub.SendMessageToEventHub(rptConfig);
         }
 
         void _configurationProvider_ConfigurationSettingsChanged(object sender, KioskConfigSettingsEventArgs e)

@@ -288,7 +288,10 @@ namespace KAIT.Kiosk.ViewModel
                             //break;
 
 		                default:    // released/replaced
-                            _activeItems--;
+                            if(_activeItems == 2) //If we are coming back to just one item selected from a compare we need to force the system to reload the content and not auto cycle as the content may still be for the comparison
+                                IsVideoPlaying = false;
+
+                        _activeItems--;
                             
                             SelectContentBasedOnDemographics(_demographics);
                             MediaContentState = "Normal";

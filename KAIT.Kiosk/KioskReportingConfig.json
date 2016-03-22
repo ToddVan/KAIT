@@ -1,0 +1,12 @@
+﻿{
+  "location": "MSP",
+  "sub-location": "Alley",
+  "kinectID": "",
+  "applicationID": "KAIT",
+  "applicationVersion": 1.2,
+  "applicationProducts": [
+    "Fitbit Small",
+    "Microsoft Band",
+    "Fitbit Large"
+  ]
+}
