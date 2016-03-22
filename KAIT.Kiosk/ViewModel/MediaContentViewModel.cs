@@ -54,6 +54,32 @@ namespace KAIT.Kiosk.ViewModel
             }
         }
 
+        string _Prod1Content;
+        public string Prod1ComparisonContent
+        {
+            get { return _Prod1Content; }
+            set
+            {
+                _Prod1Content = value;
+                RaisePropertyChanged("Prod1ComparisonContent");
+            }
+        }
+
+        string _Prod2Content;
+        public string Prod2ComparisonContent
+        {
+            get { return _Prod2Content; }
+            set
+            {
+                _Prod2Content = value;
+                RaisePropertyChanged("Prod2ComparisonContent");
+            }
+        }
+
+        
+
+
+
         public ManipulationStates ItemState { get; set; }
 
         /// <summary>
@@ -100,8 +126,21 @@ namespace KAIT.Kiosk.ViewModel
             }
         }
 
+        private string _MediaContentState = "Normal";
+        public string MediaContentState
+        {
+            get { return _MediaContentState; }
+            set
+            {
+                if (_MediaContentState == value)
+                    return;
+                // _lastKioskState = _kioskState;
+                _MediaContentState = value;
+                RaisePropertyChanged("MediaContentState");
+            }
+        }
 
-        
+
         public MediaContentViewModel(IKioskInteractionService interactionService, 
                                      IDemographicsService demographicSrv, 
                                      IContentManagement<ZoneFileMetaData> contentManagement, 
@@ -212,31 +251,48 @@ namespace KAIT.Kiosk.ViewModel
                 OnDeactivated();
         }
 
+        int _activeItems = 0;
+        string lastItemSelected = "";
+
         void _itemInteractionService_ItemStateChanged(object sender, KioskStateEventArgs e)
         {
-            if (e.ItemState != ManipulationStates.NoTrack && e.ItemState != ItemState)
+            if (e.ItemState != ManipulationStates.NoTrack /*&& e.ItemState != ItemState*/)
             {
-              
-                    DisplayZoneName = _currentZone + ", " + e.ItemState.ToString();
+                Debug.Print(e.ItemSelected + " " + e.ItemState + " " + _activeItems.ToString());
+                DisplayZoneName = _currentZone + ", " + e.ItemState.ToString();
                     ItemState = e.ItemState;
 
-                    switch (e.ItemState)
-	                {
-                        case ManipulationStates.NoTrack:
-                                break;
+                switch (e.ItemState)
+                {
+                    case ManipulationStates.NoTrack:
+                        break;
 
-                        case ManipulationStates.Touched:
+                    case ManipulationStates.Touched:
+                        _activeItems++;
+                        if (_activeItems == 1)
+                        { 
                             IsVideoPlaying = false;     // when an item is touched, change to the item content immediately
                             SelectContentBasedOnItem(e.ItemSelected, ManipulationStates.Touched);
-                            break;
+                            lastItemSelected = e.ItemSelected;
+                        }
+                        else if(_activeItems == 2)
+                        {
+                            //Display comparisons
+                            SelectContentForComarison(lastItemSelected, e.ItemSelected);
+                        }
+
+                        break;
 
                         case ManipulationStates.Removed:
                             // Show something different
                             //break;
 
 		                default:    // released/replaced
+                            _activeItems--;
+                            
                             SelectContentBasedOnDemographics(_demographics);
-                            break;
+                            MediaContentState = "Normal";
+                        break;
 	                }
 
                     OnActivated();
@@ -244,14 +300,40 @@ namespace KAIT.Kiosk.ViewModel
 
         }
 
+        private void SelectContentForComarison(string item1, string item2)
+        {
+            bool item1hasContent = _contentManagement.LoadItemContents(item1, ManipulationStates.Compare);
+
+            if (item1hasContent)
+            {
+                Prod1ComparisonContent = _contentManagement.MoveNext().ContentPath;
+            }
+
+            bool item2hasContent = _contentManagement.LoadItemContents(item2, ManipulationStates.Compare);
+
+            if (item2hasContent)
+            {
+                Prod2ComparisonContent = _contentManagement.MoveNext().ContentPath;
+            }
+
+            if(item1hasContent && item2hasContent) // Turn on comparison view
+            {
+                MediaContentState = "Compare";
+            }
+            
+        }
+
         private void SelectContentBasedOnItem(string itemSelected, ManipulationStates state)
         {
+            
+
             bool hasContent = _contentManagement.LoadItemContents(itemSelected, state);
 
             if (hasContent)
             {
-                if (!IsVideoPlaying)
-                    MediaSource = _contentManagement.MoveNext().ContentPath;
+                 if (!IsVideoPlaying)
+                        MediaSource = _contentManagement.MoveNext().ContentPath;
+
             }
             else
             {

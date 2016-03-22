@@ -25,6 +25,10 @@ namespace KAIT.ContentMetaData
 
         bool LoadItemContents(string item, ManipulationStates itemState);
 
+        bool LoadComparisonContent(string item, string item2);
+
+
+
         IFileMetaData MoveNext();
 
     }

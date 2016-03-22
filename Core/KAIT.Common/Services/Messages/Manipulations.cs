@@ -33,6 +33,7 @@ namespace KAIT.Common.Services.Messages
         Touched,
         Released,
         Removed,
-        Replaced        
+        Replaced,
+        Compare      
     }
 }

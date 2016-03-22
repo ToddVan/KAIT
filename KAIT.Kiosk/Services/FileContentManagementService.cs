@@ -256,6 +256,25 @@ namespace KAIT.ContentMetaData
 
         }
 
+        public bool LoadComparisonContent(string item, string item2)
+        {
+           
+
+            _filteredContentList = null;
+            _filteredContentList = _allItemContentList.Where(x => x.ContentFolder.ToLower() == "Comparison" +  item.ToLower() + item2.ToLower());
+
+            // if _filteredContentList is null, return default content
+            if (_filteredContentList == null || _filteredContentList.Count() == 0)
+            {
+                _filteredContentList = _defaultItemContentList.Where(x => x.ContentFolder.ToLower() == item.ToLower());
+            }
+
+            if (_filteredContentList != null && _filteredContentList.Count() > 0)
+                return true;        // has content
+            else
+                return false;
+        }
+
         // return all files for the zone
         private IEnumerable<IFileMetaData> GetContent(string contentFolder, Func<ZoneFileMetaData, bool> filter = null)
         {
@@ -297,5 +316,6 @@ namespace KAIT.ContentMetaData
             return content;
         }
 
+       
     }
 }

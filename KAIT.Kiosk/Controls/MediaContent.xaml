@@ -5,33 +5,71 @@
              xmlns:diag="clr-namespace:System.Diagnostics;assembly=mscorlib"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:Converters="clr-namespace:KAIT.Kiosk.Converters"
+              xmlns:Helpers="clr-namespace:KAIT.Kiosk.ViewModel"    
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300" DataContext="{Binding MediaContent, Mode=OneWay, Source={StaticResource Locator}}">
 
-    
+
     <UserControl.Resources>
         <Converters:BooleanVisibilityConverter x:Key="BooleanVisibilityConverter"/>
-        
+
         <Storyboard x:Key="FadeOut">
-        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Video">
-        		<EasingDoubleKeyFrame KeyTime="0" Value="1"/>
-        		<EasingDoubleKeyFrame KeyTime="0:0:1" Value="0"/>
-        	</DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Video">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Key="FadeIn">
-        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Video">
-        		<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-        		<EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
-        	</DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Video">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
         </Storyboard>
     </UserControl.Resources>
 
 
-    <Grid>
-        <MediaElement x:Name="Video" Source="{Binding MediaSource}"  LoadedBehavior="Manual" />
+    <Grid  Helpers:VisualStateHelper.VisualState="{Binding MediaContentState}">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="KioskStates">
+                <VisualState x:Name="Normal">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="Video">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="MedComparisonProd1">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Collapsed}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="MedComparisonProd2">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Collapsed}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="Compare">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="Video">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Collapsed}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="MedComparisonProd1">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="MedComparisonProd2">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150*"/>
+            <ColumnDefinition Width="150*"/>
+        </Grid.ColumnDefinitions>
+        <MediaElement x:Name="Video" Source="{Binding MediaSource}"  LoadedBehavior="Manual" Grid.ColumnSpan="2" />
         <TextBlock Text="{Binding DisplayZoneName}" HorizontalAlignment="Center" VerticalAlignment="Top" TextWrapping="Wrap" FontSize="36" Foreground="Blue" 
-                   Visibility="{Binding EnableDiagnostics, Converter={StaticResource BooleanVisibilityConverter}}"/>
-        <TextBlock Text="{Binding ErrorMessage}" HorizontalAlignment="Left" VerticalAlignment="Bottom" TextWrapping="Wrap" FontSize="24" Foreground="Red" Margin="0,20,0,30"/>
+                   Visibility="{Binding EnableDiagnostics, Converter={StaticResource BooleanVisibilityConverter}}" Grid.Column="1" Margin="1,0,150,0"/>
+        <TextBlock Text="{Binding ErrorMessage}" HorizontalAlignment="Left" VerticalAlignment="Bottom" TextWrapping="Wrap" FontSize="24" Foreground="Red" Margin="0,0,0,30"/>
+        <MediaElement x:Name="MedComparisonProd1" Grid.Column="0" Margin="0" Source="{Binding Prod1ComparisonContent}" Visibility="Hidden"/>
+        <MediaElement x:Name="MedComparisonProd2" Grid.Column="1" Margin="0" Source="{Binding Prod2ComparisonContent}" Visibility="Hidden"/>
 
     </Grid>
 </UserControl>
