@@ -216,8 +216,9 @@ namespace KAIT.Kiosk.ViewModel
              
                 if (_currentZone != e.CurrentZone || _currentUserTrackingID != e.TrackingID)
                 {
-                 
+                   
                     //remember the last state we had before selecting content.
+                    MediaContentState = "Normal";
                     _currentZone = e.CurrentZone;
                     _currentUserTrackingID = e.TrackingID;
 
@@ -292,8 +293,14 @@ namespace KAIT.Kiosk.ViewModel
                                 IsVideoPlaying = false;
 
                         _activeItems--;
+
+                             if (MediaContentState == "Compare")
+                            {
+                                SelectContentBasedOnItem(lastItemSelected, ManipulationStates.Touched);
+                            }
+                                                         
                             
-                            SelectContentBasedOnDemographics(_demographics);
+                           
                             MediaContentState = "Normal";
                         break;
 	                }
