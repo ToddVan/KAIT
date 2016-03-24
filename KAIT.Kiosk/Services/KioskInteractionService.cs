@@ -61,7 +61,8 @@ namespace KAIT.Kiosk.Services
         
         CoordinateMapper _coordinateMapper;
         
-        private EventHubMessageSender _eventHub;
+        private EventHubMessageSender _InteractionEventHub;
+
         BodyFrameReader _bodyFrameReader;
 
         Body[] _bodies;
@@ -117,7 +118,7 @@ namespace KAIT.Kiosk.Services
             _currentZone = "NoTrack";
             _demographicService = demographicsService;
 
-            _eventHub = new EventHubMessageSender(ConfigurationManager.AppSettings["Azure.Hub.Kiosk"]);
+            _InteractionEventHub = new EventHubMessageSender(ConfigurationManager.AppSettings["Azure.Hub.Kiosk"]);
 
             _sensorService = sensorService;
 
@@ -166,6 +167,8 @@ namespace KAIT.Kiosk.Services
             //Send the KioskConfig to Azure for reporting purposes
             KioskReportingConfig rptConfig;
 
+            var configEventHub = new EventHubMessageSender(ConfigurationManager.AppSettings["Azure.Hub.KioskConfig"]);
+
             using (StreamReader r = new StreamReader("KioskReportingConfig.json"))
             {
                 string json = r.ReadToEnd();
@@ -174,7 +177,7 @@ namespace KAIT.Kiosk.Services
             }
             var id = _sensorService.Sensor.UniqueKinectId;
             rptConfig.kinectID = id;
-            _eventHub.SendMessageToEventHub(rptConfig);
+            configEventHub.SendMessageToEventHub(rptConfig);
         }
 
         void _configurationProvider_ConfigurationSettingsChanged(object sender, KioskConfigSettingsEventArgs e)
@@ -338,7 +341,7 @@ namespace KAIT.Kiosk.Services
             {
                 _lastContentInteraction = contentInteraction;
                 
-                _eventHub.SendMessageToEventHub(contentInteraction);
+                _InteractionEventHub.SendMessageToEventHub(contentInteraction);
             }
         }
 
